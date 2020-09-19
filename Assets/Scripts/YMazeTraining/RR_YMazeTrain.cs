@@ -20,11 +20,17 @@ public class RR_YMazeTrain : MonoBehaviour
     public float speedBool = 0;
     public float startBool = 0;
     private bool firstFlag = true;
+    private float theta_angle = 1f;
+    private float theta_pos = 1f;
+    private float h_max = 154.1421f;
+    private float radius = 20f;
+    private float h_thresh;
+    
 
     private static bool created = false;
     public void Awake()
     {
-
+        h_thresh = h_max - (float) Math.Sqrt(radius * radius / 2.0);
     }
 
     void Start()
@@ -53,9 +59,28 @@ public class RR_YMazeTrain : MonoBehaviour
         {
             pulses = int.Parse(_serialPort.ReadLine());
             //Debug.Log (pulses);
+            if (transform.position.z <= h_thresh) //140f)
+            {
+                theta_angle = 1f;
+                theta_pos = 1f;
+            }
+            else if ((transform.position.z>h_thresh) & (transform.position.z<h_max)) //((transform.position.z >140f) & (transform.position.z<154.1421) )
+            {
+                theta_angle = 1 - (transform.position.z - h_thresh) / (h_max - h_thresh); // 140f) / (14.1421f);
+                theta_pos =  1- (transform.position.z - h_thresh) / (h_max - h_thresh)/2f; //(transform.position.z - 140f) / (14.1421f)/2f;
+                Debug.Log("theta angle"); // theta_angle;
+            }
+            else
+            {
+                theta_angle = 0f;
+                theta_pos = .5f;
+            }
+
+            transform.eulerAngles = new Vector3(0.0f, theta_angle * -90.0f + (1.0f - theta_angle) * (-90 + (45.0f * sp.LR)), 0.0f); // -135.0f, 0.0f);
             true_delta_z = -1f * pulses * realSpeed;
             delta_z = -1f * startBool * speedBool * pulses * realSpeed;
-            Vector3 movement = new Vector3(0.0f, 0.0f, delta_z);
+            Vector3 movement = new Vector3(sp.LR*(1.0f-theta_pos)*delta_z, 0.0f, theta_pos*delta_z);
+            //Vector3 movement = new Vector3(0.0f, 0.0f, theta_pos * delta_z);
             transform.position = transform.position + movement;
 
         }
@@ -115,5 +140,13 @@ public class RR_YMazeTrain : MonoBehaviour
     {
         Disconnect();
     }
+
+
+    //IEnumerator MoveMouse(int LR)
+    //{ // -1 is a left trial , 1 is right trial
+
+
+
+    //}
 
 }

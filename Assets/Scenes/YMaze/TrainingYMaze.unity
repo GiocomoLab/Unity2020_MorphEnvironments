@@ -1422,6 +1422,7 @@ GameObject:
   - component: {fileID: 1170947061}
   - component: {fileID: 1170947060}
   - component: {fileID: 1170947059}
+  - component: {fileID: 1170947070}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1438,7 +1439,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1170947058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c10a1dd975aae4d97d2f07be9263d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6071b15c7d5e9f64d850319f58299a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scanning: 0
@@ -1457,7 +1458,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1170947058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b469034ed57d02348a4b597198b68c82, type: 3}
+  m_Script: {fileID: 11500000, guid: a2112e518358f0045807e24cf3246c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   port: COM6
@@ -1474,14 +1475,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1170947058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b53bf44da969145afee69c4433f5a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5142e131cf4714849876f9a1eebbd4fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM7
-  trash: 0
-  c_1: 0
-  r: 0
-  rflag: 1
+  cmd: 0
+  mRewardFlag: 0
+  tendFlag: 0
+  tstartFlag: 0
 --- !u!114 &1170947062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1491,13 +1491,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1170947058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd83a6a52efc1fb4fa5160f991ab1167, type: 3}
+  m_Script: {fileID: 11500000, guid: dc22a161c5b40614aad08b65bed0b1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cmd: 0
-  mRewardFlag: 0
-  tendFlag: 0
-  tstartFlag: 0
+  port: COM7
+  trash: 0
+  c_1: 0
+  r: 0
+  rflag: 1
 --- !u!81 &1170947063
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1593,22 +1594,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1170947058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ac0af4714f44b9459127bc4068499b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 2480c70a3d6756a4fb3498cb9d8651c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: 4444045.4
+  mouse: 
   AutoReward: 1
-  mrd: 50
-  ard: 0
+  mrd: 30
+  ard: 10
   fixedRewardSchedule: 0
-  MinTrainingDist: 50
+  MinTrainingDist: 10
   MaxTrainingDist: 300
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 20
-  maxRewards: 150
+  numTrialsTotal: 10
+  maxRewards: 100
+  LR: -1
   rDur: 2
   MultiReward: 1
   localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
@@ -1629,13 +1631,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170947058}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 6, z: 126.7}
+  m_LocalPosition: {x: 0, y: 6, z: -5}
   m_LocalScale: {x: 1, y: 5, z: 1}
   m_Children:
   - {fileID: 808630593}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1170947070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170947058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fdeacca9cacb1479299c46c29b5167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trialOrder: []
 --- !u!1 &1269788366
 GameObject:
   m_ObjectHideFlags: 0

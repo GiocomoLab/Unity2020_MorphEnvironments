@@ -26,6 +26,7 @@ public class SP_YMazeTrain : MonoBehaviour
     public int numTraversals = 0;
     public int numTrialsTotal;
     public int maxRewards = 100;
+    public float LR = -1; // default Left
 
     public float rDur = 2f; // timeout duration between available rewards
 
@@ -105,7 +106,7 @@ public class SP_YMazeTrain : MonoBehaviour
         _connection.Open();
         _command = _connection.CreateCommand();
         _command.CommandText = "create table data (time REAL, trialnum INT, pos REAL, dz REAL, lick INT, reward INT," +
-        "tstart INT, teleport INT, scanning INT, manrewards INT)";
+        "tstart INT, teleport INT, scanning INT, manrewards INT, LR INT)";
         _command.ExecuteNonQuery();
     }
 
@@ -113,9 +114,9 @@ public class SP_YMazeTrain : MonoBehaviour
     {
 
         _command.CommandText = "insert into data (time , trialnum, pos, dz, lick, reward," +
-        "tstart, teleport, scanning, manrewards) values (" + Time.realtimeSinceStartup + "," + numTraversals +
+        "tstart, teleport, scanning, manrewards, LR) values (" + Time.realtimeSinceStartup + "," + numTraversals +
         "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
-        ttls.scanning + "," + pc.mRewardFlag + ")";
+        ttls.scanning + "," + pc.mRewardFlag + "," + LR +  ")";
         //Debug.Log(_command.CommandText);
         _command.ExecuteNonQuery();
 

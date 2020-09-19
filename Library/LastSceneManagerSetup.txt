@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/YMaze/TrainingYMaze.unity
+- path: Assets/Scenes/Clean.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

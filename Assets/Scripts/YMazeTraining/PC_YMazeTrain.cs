@@ -52,13 +52,15 @@ public class PC_YMazeTrain : MonoBehaviour
         // put the mouse in the dark tunnel
         reward.transform.position = reward.transform.position + new Vector3(0.0f, 0.0f, sp.mrd + UnityEngine.Random.value * sp.ard); ;
         LastRewardTime = Time.realtimeSinceStartup;
+        transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
+        transform.position = initialPosition;
     }
 
 
     void Update()
     {
         // make sure rotation angle is 0
-        transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
+        //transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
 
         // end game after appropriate number of trials
         if (sp.numTraversals >= sp.numTrialsTotal | sp.numRewards >= sp.maxRewards)
@@ -102,6 +104,7 @@ public class PC_YMazeTrain : MonoBehaviour
             sp.numTraversals += 1;
             tendFlag = 1;
             transform.position = initialPosition;
+            transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
             reward.transform.position = new Vector3(0.0f, 0f, sp.mrd + UnityEngine.Random.value * sp.ard);
             LastRewardTime = Time.realtimeSinceStartup; // to avoid issues with teleports
         }
