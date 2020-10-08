@@ -31,10 +31,18 @@ public class TurnController_random : MonoBehaviour
     void Start()
     {
         trialOrder = new float[sp.numTrialsTotal+1];
-        for (int i=0; i<sp.numTrialsTotal/2; i++)
+        for (int i=0; i<sp.numTrialsTotal+1; i++)
         {
-            trialOrder[2 * i] = -1f;
-            trialOrder[2 * i + 1] = 1f;
+            if ((i % 2) == 0)
+            {
+                trialOrder[i] = -1f;
+            }
+            else
+            {
+                trialOrder[i] = 1f;
+            }
+            
+            
         }
         trialOrder = FisherYates(trialOrder);
     }

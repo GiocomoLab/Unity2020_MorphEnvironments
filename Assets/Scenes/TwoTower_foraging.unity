@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 484159955}
+  m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -260,7 +260,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a445cf5cf6a80004289af5efd5f9ce21, type: 2}
+  - {fileID: 2100000, guid: 9cf32c5b3fc6e46439682828f1b3c45e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -417,67 +417,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438613345}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!850595691 &484159955
-LightingSettings:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Settings.lighting
-  serializedVersion: 2
-  m_GIWorkflowMode: 1
-  m_EnableBakedLightmaps: 1
-  m_EnableRealtimeLightmaps: 1
-  m_RealtimeEnvironmentLighting: 1
-  m_BounceScale: 1
-  m_AlbedoBoost: 1
-  m_IndirectOutputScale: 1
-  m_UsingShadowmask: 1
-  m_BakeBackend: 0
-  m_LightmapMaxSize: 1024
-  m_BakeResolution: 40
-  m_Padding: 2
-  m_TextureCompression: 1
-  m_AO: 0
-  m_AOMaxDistance: 1
-  m_CompAOExponent: 1
-  m_CompAOExponentDirect: 0
-  m_ExtractAO: 0
-  m_MixedBakeMode: 2
-  m_LightmapsBakeMode: 1
-  m_FilterMode: 1
-  m_LightmapParameters: {fileID: 0}
-  m_ExportTrainingData: 0
-  m_TrainingDataDestination: TrainingData
-  m_RealtimeResolution: 2
-  m_ForceWhiteAlbedo: 0
-  m_ForceUpdates: 0
-  m_FinalGather: 0
-  m_FinalGatherRayCount: 256
-  m_FinalGatherFiltering: 1
-  m_PVRCulling: 1
-  m_PVRSampling: 1
-  m_PVRDirectSampleCount: 32
-  m_PVRSampleCount: 500
-  m_PVREnvironmentSampleCount: 500
-  m_PVREnvironmentReferencePointCount: 2048
-  m_LightProbeSampleCountMultiplier: 4
-  m_PVRBounces: 2
-  m_PVRRussianRouletteStartBounce: 2
-  m_PVREnvironmentMIS: 0
-  m_PVRFilteringMode: 2
-  m_PVRDenoiserTypeDirect: 0
-  m_PVRDenoiserTypeIndirect: 0
-  m_PVRDenoiserTypeAO: 0
-  m_PVRFilterTypeDirect: 0
-  m_PVRFilterTypeIndirect: 0
-  m_PVRFilterTypeAO: 0
-  m_PVRFilteringGaussRadiusDirect: 1
-  m_PVRFilteringGaussRadiusIndirect: 5
-  m_PVRFilteringGaussRadiusAO: 2
-  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
-  m_PVRFilteringAtrousPositionSigmaIndirect: 2
-  m_PVRFilteringAtrousPositionSigmaAO: 1
 --- !u!1 &493899938
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,10 +2942,8 @@ GameObject:
   - component: {fileID: 1842636314}
   - component: {fileID: 1842636313}
   - component: {fileID: 1842636312}
-  - component: {fileID: 1842636311}
   - component: {fileID: 1842636310}
   - component: {fileID: 1842636309}
-  - component: {fileID: 1842636308}
   - component: {fileID: 1842636307}
   - component: {fileID: 1842636306}
   - component: {fileID: 1842636302}
@@ -3063,14 +3000,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ForagingSkipTrialPcnt: 0.15
   ClickOn: 0
-  AutoReward: 0
+  AutoReward: 1
   BlockWalls: 0
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
   numTrialsTotal: 50
-  maxRewards: 175
+  maxRewards: 200
   morph: 0
   rDur: 2
   localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
@@ -3089,14 +3026,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1842636300}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 067e99d82e1516f4fbe845d68ba87749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   numBaselineTrials: 0
-  numTrainingTrials: 0
-  numTestTrials: 100
+  numTrainingTrials: 400
+  numTestTrials: 0
   morphPcnt: 0.4
   trialOrder: []
 --- !u!114 &1842636306
@@ -3138,18 +3075,6 @@ MonoBehaviour:
   toutzoneFlag: 0
   tendFlag: 0
   tstartFlag: 0
---- !u!114 &1842636308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842636300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a77c3ca9d52c51644a2e064243ea25f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1842636309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3177,18 +3102,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaade52fd42dd344e8de058a62ad4d24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1842636311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842636300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a77c3ca9d52c51644a2e064243ea25f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &1842636312
@@ -3281,8 +3194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: test
-  notes: rare
+  mouse: 4467975.5
+  notes: rare, STX3KO
   imaging_region: CA1
 --- !u!4 &1842636318
 Transform:
@@ -3370,7 +3283,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a445cf5cf6a80004289af5efd5f9ce21, type: 2}
+  - {fileID: 2100000, guid: b2fac58c8c53aa94d8f01c7cdb0fa5b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

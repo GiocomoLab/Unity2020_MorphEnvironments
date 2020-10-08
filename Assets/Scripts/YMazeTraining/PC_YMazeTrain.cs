@@ -1,24 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine;
+using System;
+using System.Collections;
 using System.IO;
 using System.IO.Ports;
 using System.Threading;
-using UnityEngine;
 
 public class PC_YMazeTrain : MonoBehaviour
 {
 
     private GameObject player;
-    private GameObject reward;
-    private GameObject panoCam;
+    private GameObject rewardL;
+    private GameObject rewardR;
+    
 
     private Rigidbody rb;
 
     private SP_YMazeTrain sp;
     private DL_YMazeTrain dl;
-    private RR_YMazeTrain rotary;
-
-    private bool reward_dir;
+    private RR_YMazeTrain rr;
 
 
     private Vector3 initialPosition;
@@ -37,44 +36,36 @@ public class PC_YMazeTrain : MonoBehaviour
     {
         GameObject player = GameObject.Find("Player");
         sp = player.GetComponent<SP_YMazeTrain>();
-        rotary = player.GetComponent<RR_YMazeTrain>();
+        rr = player.GetComponent<RR_YMazeTrain>();
         dl = player.GetComponent<DL_YMazeTrain>();
-        panoCam = GameObject.Find("panoCamera");
-        panoCam.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
-        reward = GameObject.Find("Reward");
-        initialPosition = new Vector3(0f, 6f, -5.0f);
+        rewardL = GameObject.Find("RewardL");
+        rewardR = GameObject.Find("RewardR");
+
+        
     }
 
     void Start()
     {
 
         StartCoroutine(FlagCheck());
-        // put the mouse in the dark tunnel
-        reward.transform.position = reward.transform.position + new Vector3(0.0f, 0.0f, sp.mrd + UnityEngine.Random.value * sp.ard); ;
-        LastRewardTime = Time.realtimeSinceStartup;
-        transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
-        transform.position = initialPosition;
+        
     }
 
 
     void Update()
     {
-        // make sure rotation angle is 0
-        //transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
 
         // end game after appropriate number of trials
         if (sp.numTraversals >= sp.numTrialsTotal | sp.numRewards >= sp.maxRewards)
         {
             UnityEditor.EditorApplication.isPlaying = false;
-
-
         }
 
-        if (dl.r > 0) { StartCoroutine(DeliverReward(dl.r)); sp.numRewards++; dl.r = 0; }; // deliver appropriate reward
+        if (dl.r > 0) { StartCoroutine(DeliverReward(dl.r));  dl.r = 0; }; // deliver appropriate reward
 
         // manual rewards and punishments
         mRewardFlag = 0;
-        if (Input.GetKeyDown(KeyCode.Q) | Input.GetMouseButtonDown(0)) // reward left
+        if (Input.GetKeyDown(KeyCode.Q) | Input.GetMouseButtonDown(0)) 
         {
             mRewardFlag = 1;
             StartCoroutine(DeliverReward(4));
@@ -90,23 +81,17 @@ public class PC_YMazeTrain : MonoBehaviour
         {
             tstartFlag = 1;
         }
-
         else if (other.tag == "Reward")
         {
-
-            StartCoroutine(RewardSequence(transform.position.z));
-            // StartCoroutine(MoveReward());
-
+            StartCoroutine(RewardSequence(rr.t/rr.t2dist));
         }
         else if (other.tag == "Teleport")
         {
-            reward.SetActive(true);
+            rewardL.SetActive(true);
+            rewardR.SetActive(true);
             sp.numTraversals += 1;
             tendFlag = 1;
-            transform.position = initialPosition;
-            transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
-            reward.transform.position = new Vector3(0.0f, 0f, sp.mrd + UnityEngine.Random.value * sp.ard);
-            LastRewardTime = Time.realtimeSinceStartup; // to avoid issues with teleports
+            rr.t = rr.tvec[2];
         }
 
     }
@@ -123,33 +108,7 @@ public class PC_YMazeTrain : MonoBehaviour
 
     }
 
-    IEnumerator MoveReward()
-    {
-        float CurrRewardTime = Time.realtimeSinceStartup;
-        yield return new WaitForSeconds(.5f);
-        if (!sp.fixedRewardSchedule)
-        {
-
-            if (CurrRewardTime - LastRewardTime > 20.0f)
-            {
-                sp.mrd = Mathf.Max(sp.MinTrainingDist, sp.mrd + UnityEngine.Random.value * sp.ard - 10f);
-
-            }
-            else
-            {
-                sp.mrd = Mathf.Min(sp.MaxTrainingDist, sp.mrd + UnityEngine.Random.value * sp.ard + 10f);
-            }
-
-            if ((sp.mrd > 170f) & (sp.mrd < 310))
-            {
-                sp.mrd = 300;
-            }
-        }
-        //float zpos = (reward.transform.position.z + sp.mrd +sp.ard) % 330f;
-        reward.transform.position = reward.transform.position + new Vector3(0f, 0f, sp.mrd + UnityEngine.Random.value * sp.ard);
-        LastRewardTime = CurrRewardTime;
-        yield return null;
-    }
+    
 
     void OnApplicationQuit()
     {
@@ -160,54 +119,39 @@ public class PC_YMazeTrain : MonoBehaviour
     IEnumerator RewardSequence(float pos)
     {   // water reward
 
-        // Debug.Log("Reward");
-        // bool counted = true;
-        while ((transform.position.z <= pos + 75) & (transform.position.z > 0))
+
+        while (transform.position.z > 0)
         {
             Debug.Log(cmd);
-            cmd = 12;
-            if ((sp.AutoReward))// & (counted))
+            //cmd = 12;
+            if ((sp.AutoReward) & (rr.t/rr.t2dist > pos + 25))
             {
-                if (transform.position.z > pos + 30)
-                {
-                    cmd = 4;
-                    if (sp.MultiReward)
-                    {
-                        StartCoroutine(MoveReward());
-                    }
-                    sp.numRewards++;
-                    //counted = false;
-                    break; // if (sp.MultiReward) { break;  };
-                           //break;
+                
+                cmd = 4;
+                sp.numRewards++;
+                yield return new WaitForEndOfFrame();
+                break; 
 
-                }
+                
             }
-            else
-            {
-                cmd = 12;
-            }
+           
 
-            if ((dl.c_1 > 0))// & (counted))
+            if ((dl.c_1 > 0))
             {
-                if (sp.MultiReward)
-                {
-
-                    StartCoroutine(MoveReward());
-                }
-                else
-                {
-                    reward.SetActive(false);
-                }
-                //counted = false;
-                //if (sp.MultiReward) { break; };
+                cmd = 4;
+                sp.numRewards++;
+                yield return new WaitForEndOfFrame();
                 break;
+
             }
             yield return null;
         }
-        yield return new WaitForSeconds(.1f);
+        rewardL.SetActive(false);
+        rewardR.SetActive(false);
+
+        yield return new WaitForEndOfFrame();
         cmd = 2;
-        yield return new WaitForSeconds(.1f);
-        cmd = 0;
+        
 
     }
 
@@ -219,6 +163,7 @@ public class PC_YMazeTrain : MonoBehaviour
         {
             cmd = 4;
             yield return new WaitForSeconds(0.01f);
+            sp.numRewards++;
             cmd = 0;
         }
     }

@@ -13,11 +13,6 @@ public class SP_YMazeTrain : MonoBehaviour
     public string mouse;
 
     public bool AutoReward = true;
-    public float mrd = 30.0f; // minimum reward distance
-    public float ard = 10.0f; // additional reward distance
-    public bool fixedRewardSchedule = false; // proportion of trials with towers on both sides
-    public float MinTrainingDist = 10f;
-    public float MaxTrainingDist = 300f;
 
     public int numRewards = 0;
     public int numRewards_manual = 0;
@@ -27,10 +22,9 @@ public class SP_YMazeTrain : MonoBehaviour
     public int numTrialsTotal;
     public int maxRewards = 100;
     public float LR = -1; // default Left
+    public float skipTrialPcnt = .1f;
 
-    public float rDur = 2f; // timeout duration between available rewards
 
-    public bool MultiReward = true;
     // for saving data
     public string localDirectory_pre = "C:/Users/markp/VR_Data/TwoTower/";
     public string serverDirectory_pre = "G:/My Drive/VR_Data/TwoTower";
@@ -105,7 +99,7 @@ public class SP_YMazeTrain : MonoBehaviour
         _connection = (IDbConnection)new SqliteConnection(connectionString);
         _connection.Open();
         _command = _connection.CreateCommand();
-        _command.CommandText = "create table data (time REAL, trialnum INT, pos REAL, dz REAL, lick INT, reward INT," +
+        _command.CommandText = "create table data (time REAL, trialnum INT, t REAL, posx REAL, posz REAL, dz REAL, lick INT, reward INT," +
         "tstart INT, teleport INT, scanning INT, manrewards INT, LR INT)";
         _command.ExecuteNonQuery();
     }
@@ -113,9 +107,9 @@ public class SP_YMazeTrain : MonoBehaviour
     void LateUpdate()
     {
 
-        _command.CommandText = "insert into data (time , trialnum, pos, dz, lick, reward," +
-        "tstart, teleport, scanning, manrewards, LR) values (" + Time.realtimeSinceStartup + "," + numTraversals +
-        "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
+        _command.CommandText = "insert into data (time , trialnum, t, posx, posz, dz, lick, reward," +
+        "tstart, teleport, scanning, manrewards, LR) values (" + Time.time + "," + numTraversals +
+        "," + rr.t + "," + transform.position.x + "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
         ttls.scanning + "," + pc.mRewardFlag + "," + LR +  ")";
         //Debug.Log(_command.CommandText);
         _command.ExecuteNonQuery();

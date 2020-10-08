@@ -102,7 +102,7 @@ public class PC_TwoTower : MonoBehaviour
     void Start()
     {
         StartCoroutine(FlagCheck());
-        if (sp.sceneName != "SingleMorph")
+        if ((sp.sceneName != "SingleMorph") & (sp.sceneName != "SingleMorph_Reversal"))
         {
             Debug.Log("failed");
             towerJitter = .2f * (UnityEngine.Random.value - .5f);
@@ -164,7 +164,7 @@ public class PC_TwoTower : MonoBehaviour
         {
             //rflag = true;
 
-            if (sp.sceneName != "SingleMorph") 
+            if ((sp.sceneName != "SingleMorph") & (sp.sceneName != "SingleMorph_Reversal"))
             {
                 towerJitter = .2f * (UnityEngine.Random.value - .5f);
                 wallJitter = .2f * (UnityEngine.Random.value - .5f);
@@ -377,7 +377,7 @@ public class PC_TwoTower : MonoBehaviour
                 bckgndOn = true;
 
 
-                if (sp.sceneName != "SingleMorph")
+                if ((sp.sceneName != "SingleMorph") & (sp.sceneName != "SingleMorph_Reversal"))
                 {
                     towerJitter = .2f * (UnityEngine.Random.value - .5f);
                     wallJitter = .2f * (UnityEngine.Random.value - .5f);
