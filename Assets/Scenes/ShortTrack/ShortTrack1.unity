@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -369,7 +369,7 @@ Camera:
     width: 0.33333334
     height: 1
   near clip plane: 0.3
-  far clip plane: 30
+  far clip plane: 300
   field of view: 58.443115
   orthographic: 0
   orthographic size: 5
@@ -416,7 +416,7 @@ Transform:
   m_GameObject: {fileID: 272165401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.4, y: 0, z: 32.2}
-  m_LocalScale: {x: 30, y: 1, z: 30}
+  m_LocalScale: {x: 30, y: 1, z: 40}
   m_Children: []
   m_Father: {fileID: 600535764}
   m_RootOrder: 8
@@ -538,7 +538,7 @@ Camera:
     width: 0.33333334
     height: 1
   near clip plane: 0.3
-  far clip plane: 30
+  far clip plane: 300
   field of view: 58.443115
   orthographic: 0
   orthographic size: 5
@@ -690,7 +690,7 @@ Transform:
   - {fileID: 1412957739}
   - {fileID: 272165402}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &605610227
 GameObject:
@@ -998,16 +998,15 @@ GameObject:
   m_Component:
   - component: {fileID: 772926759}
   - component: {fileID: 772926758}
-  - component: {fileID: 772926757}
   - component: {fileID: 772926755}
   - component: {fileID: 772926754}
   - component: {fileID: 772926753}
   - component: {fileID: 772926752}
-  - component: {fileID: 772926751}
   - component: {fileID: 772926750}
   - component: {fileID: 772926749}
   - component: {fileID: 772926748}
   - component: {fileID: 772926747}
+  - component: {fileID: 772926746}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1015,7 +1014,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &772926747
+--- !u!114 &772926746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1024,7 +1023,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 772926745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 789655fb6b7670d4caf7f9bdae477a59, type: 3}
+  m_Script: {fileID: 11500000, guid: 763a96936279c1c4ba00b8a5c4f7720a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scanning: 0
@@ -1034,6 +1033,23 @@ MonoBehaviour:
   p2_x: 0
   p2_y: 0
   p2_z: 0
+--- !u!114 &772926747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772926745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08216f0a5a1476c49a71d884d9ac0956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  port: COM7
+  trash: 0
+  c_1: 0
+  r: 0
+  rflag: 1
 --- !u!114 &772926748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1043,7 +1059,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 772926745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 229074ae1c39cfd47a59d1a8feee7ee4, type: 3}
+  m_Script: {fileID: 11500000, guid: f363a4f2a7e4e154987af5f0fdfc65e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   port: COM6
@@ -1060,17 +1076,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 772926745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6687fd572b907d47a6e72a4143e2e79, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fb21e95fac09954da8b4f4d300ffb76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cmd: 0
-  bckgndOn: 1
-  towerJitter: 0
-  wallJitter: 0
-  bckgndJitter: 0
+  cmd: 2
   mRewardFlag: 0
   rzoneFlag: 0
-  toutzoneFlag: 0
   tendFlag: 0
   tstartFlag: 0
 --- !u!114 &772926750
@@ -1082,26 +1093,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 772926745}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c8a3eedf59e1f4e8f9fc2aaaeb6b73, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e62dbb517eeb7d4ca1ef7c4acdc812e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM7
-  trash: 0
-  c_1: 0
-  r: 0
-  rflag: 1
---- !u!114 &772926751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 772926745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaade52fd42dd344e8de058a62ad4d24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  skipTrialPcnt: 0.15
+  ClickOn: 0
+  AutoReward: 1
+  BlockWalls: 0
+  numRewards: 0
+  numRewards_manual: 0
+  rewardFlag: 0
+  numTraversals: 0
+  numTrialsTotal: 10
+  maxRewards: 30
+  rDur: 2
+  localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
+  serverDirectory_pre: G:\My Drive\VR_Data\TwoTower
+  localDirectory: 
+  serverDirectory: 
+  localPrefix: 
+  serverPrefix: 
+  sceneName: 
+  session: 1
+  scanning: 0
 --- !u!54 &772926752
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1125,7 +1139,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772926745}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1180,39 +1194,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772926745}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &772926757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 772926745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e065447cfa46709418c7e265ca7f1abd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ForagingSkipTrialPcnt: 0.15
-  ClickOn: 0
-  AutoReward: 1
-  BlockWalls: 0
-  numRewards: 0
-  numRewards_manual: 0
-  rewardFlag: 0
-  numTraversals: 0
-  numTrialsTotal: 50
-  maxRewards: 200
-  morph: 0
-  rDur: 2
-  localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
-  serverDirectory_pre: G:\My Drive\VR_Data\TwoTower\
-  localDirectory: 
-  serverDirectory: 
-  localPrefix: 
-  serverPrefix: 
-  sceneName: 
-  session: 1
-  scanning: 0
 --- !u!114 &772926758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1225,8 +1206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: 4467975.5
-  notes: rare, STX3KO
+  mouse: 4444045.3
+  notes: asap3 jrgeco
   imaging_region: CA1
 --- !u!4 &772926759
 Transform:
@@ -1236,12 +1217,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772926745}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 6, z: -25}
+  m_LocalPosition: {x: 0, y: 0.5, z: -25}
   m_LocalScale: {x: 1, y: 5, z: 1}
   m_Children:
   - {fileID: 1881773076}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1097771097
 GameObject:
@@ -1257,10 +1238,10 @@ GameObject:
   - component: {fileID: 1097771099}
   m_Layer: 0
   m_Name: Curtain
-  m_TagString: Untagged
+  m_TagString: Teleport
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1097771098
 Transform:
@@ -1270,8 +1251,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097771097}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 20, z: 200}
-  m_LocalScale: {x: 50, y: 40, z: 2}
+  m_LocalPosition: {x: 0, y: 20, z: 225}
+  m_LocalScale: {x: 50, y: 40, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1284,7 +1265,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097771097}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
