@@ -1,9 +1,9 @@
 #include <FastGPIO.h>
 
-const int lickport_pin = 7;
+#define lickport_pin 7
 int lickport_state = LOW;
 long lc = 0; // lick count
-const int reward_len = 100;
+#define reward_len 100
 long reward_timer = 0;
 int r = 0 ;
 //
@@ -19,12 +19,12 @@ volatile bool _EncoderBSet;
 volatile long _EncoderTicks = 0;
 
 
-const int solenoid_pin = 6;
+#define solenoid_pin 6
 int solenoid_pin_state = LOW;
 int solenoid_timer = 0;
 
-const int ttl_0_pin = 4;
-const int ttl_1_pin = 5;
+#define ttl_0_pin 4
+#define ttl_1_pin 5
 
 int cmd = 0;
 int incomingByte = 0;  // cmd coming in from Unity
@@ -128,7 +128,6 @@ void loop() {
   }
 
   // print to serial port
-  //if (encoder_pos!=0){
   if (Serial.available()>0) { // if new Unity frame
    
    
