@@ -84,6 +84,10 @@ void loop() {
     case 0: // just read rotary and licks
       break;
 
+    case 2: // reset reward flag
+      rflag = 0;
+      break;
+
     case 3: // reward lickport licks that are more than 3 sec apart
       if (lc>0 & rflag==0) {
         rflag = 1;
@@ -124,6 +128,19 @@ void loop() {
 
     case 9: // start collecting ttl0's for syncing
       scan_flag=1;
+
+    case 12: // reward if there's a lick
+      if (rflag == 0)
+      { // if reward not dispensed
+        if (lc > 0)  { // if lick 
+          rflag = 1;
+          solenoid_pin_state = HIGH;
+          digitalWrite(solenoid_pin,HIGH);
+          reward_timer = millis();
+          r=1; // reward
+        }
+      }    
+      break;
     
   }
 
