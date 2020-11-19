@@ -2077,6 +2077,7 @@ GameObject:
   - component: {fileID: 1722994735}
   - component: {fileID: 1722994734}
   - component: {fileID: 1722994733}
+  - component: {fileID: 1722994743}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2110,7 +2111,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722994732}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b469034ed57d02348a4b597198b68c82, type: 3}
   m_Name: 
@@ -2127,7 +2128,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722994732}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68b53bf44da969145afee69c4433f5a7, type: 3}
   m_Name: 
@@ -2276,6 +2277,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1722994732}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1722994743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722994732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83bdf10a1ffeba541a1db5a00e4de7ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  port: COM4
+  c_1: 0
+  r: 0
+  rflag: 1
+  delta_z: 0
+  true_delta_z: 0
+  speedBool: 0
+  startBool: 0
 --- !u!4 &1722994745
 Transform:
   m_ObjectHideFlags: 0

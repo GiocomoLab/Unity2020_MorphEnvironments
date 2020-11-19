@@ -31,7 +31,7 @@ public class SP_RunTrain : MonoBehaviour
 
     public bool MultiReward = true;
     // for saving data
-    public string localDirectory_pre = "C:/Users/markp/VR_Data/TwoTower/";
+    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/";
     public string serverDirectory_pre = "G:/My Drive/VR_Data/TwoTower";
     public string localDirectory;
     public string serverDirectory;
@@ -40,8 +40,8 @@ public class SP_RunTrain : MonoBehaviour
     public string sceneName;
 
     private GameObject player;
-    private RR_RunTrain rr;
-    private DL_RunTrain dl;
+    //private RR_RunTrain rr;
+    private SerialPort_RunTrain dl;
     private PC_RunTrain pc;
     private SbxTTLs_RunTrain ttls;
 
@@ -60,8 +60,8 @@ public class SP_RunTrain : MonoBehaviour
     {
 
         player = GameObject.Find("Player");
-        rr = player.GetComponent<RR_RunTrain>();
-        dl = player.GetComponent<DL_RunTrain>();
+        //rr = player.GetComponent<RR_RunTrain>();
+        dl = player.GetComponent<SerialPort_RunTrain>();
         pc = player.GetComponent<PC_RunTrain>();
         ttls = player.GetComponent<SbxTTLs_RunTrain>();
 
@@ -114,7 +114,7 @@ public class SP_RunTrain : MonoBehaviour
 
         _command.CommandText = "insert into data (time , trialnum, pos, dz, lick, reward," +
         "tstart, teleport, scanning, manrewards) values (" + Time.realtimeSinceStartup + "," + numTraversals +
-        "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
+        "," + transform.position.z + "," + dl.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
         ttls.scanning + "," + pc.mRewardFlag + ")";
         //Debug.Log(_command.CommandText);
         _command.ExecuteNonQuery();

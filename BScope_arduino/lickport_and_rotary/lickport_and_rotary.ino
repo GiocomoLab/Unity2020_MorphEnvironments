@@ -1,3 +1,5 @@
+#include <FastGPIO.h>
+
 const int lickport_pin = 7;
 int lickport_state = LOW;
 long lc = 0; // lick count
@@ -8,13 +10,16 @@ int r = 0 ;
 int rflag = 0;
 long start = 0;
 
-const int encoder_pinA = 11;
-const int encoder_pinB = 12;
-int encoder_pos = 0;
-int encoder_pinA_last = LOW;
-int encoder_pinA_state = LOW;
 
-const int solenoid_pin = 3;
+
+#define c_EncoderPinA 2
+#define c_EncoderPinB 11
+
+volatile bool _EncoderBSet;
+volatile long _EncoderTicks = 0;
+
+
+const int solenoid_pin = 6;
 int solenoid_pin_state = LOW;
 int solenoid_timer = 0;
 
@@ -30,20 +35,25 @@ int scan_flag = 0 ;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin (57600);
+  Serial.begin (115200);
 
   
-  pinMode (encoder_pinA,INPUT);
-  pinMode (encoder_pinB,INPUT);
+  FastGPIO::Pin<c_EncoderPinB>::setInputPulledUp();
+  attachInterrupt(digitalPinToInterrupt(c_EncoderPinA), HandleMotorInterruptA, RISING);
+
   pinMode (lickport_pin,INPUT);
-  pinMode (solenoid_pin,OUTPUT);
-  pinMode (ttl_0_pin,OUTPUT);
-  pinMode (ttl_1_pin,OUTPUT);
+  digitalWrite(lickport_pin,LOW);
   
+  pinMode (solenoid_pin,OUTPUT);
   digitalWrite(solenoid_pin,LOW);
+  
+  pinMode (ttl_0_pin,OUTPUT);
   digitalWrite(ttl_0_pin,LOW);
+  
+  pinMode (ttl_1_pin,OUTPUT);
   digitalWrite(ttl_1_pin,LOW);
   
+ 
   
   
 }
@@ -55,15 +65,6 @@ void loop() {
   lickport_state = digitalRead(lickport_pin);
   lc += lickport_state;
 
-  // read rotary
-   encoder_pinA_state = digitalRead(encoder_pinA);
-   if ((encoder_pinA_last == LOW) && (encoder_pinA_state == HIGH)) { // if pinA switches 
-     if (digitalRead(encoder_pinB) == LOW) { // if pinA leads pinB; going backwards
-       encoder_pos--;
-     } else { // else; going forwards
-       encoder_pos++;
-     }
-  }
 
   // make sure ttl_0 is low
   digitalWrite(ttl_0_pin,LOW); // make sure ttl0 is down
@@ -127,6 +128,7 @@ void loop() {
   }
 
   // print to serial port
+  //if (encoder_pos!=0){
   if (Serial.available()>0) { // if new Unity frame
    
    
@@ -140,13 +142,22 @@ void loop() {
     Serial.print("\t");
     Serial.print(r);
     Serial.print("\t");
-    Serial.print(encoder_pos);     
+    Serial.print(_EncoderTicks);     
     Serial.println("");
     lc = 0; // reset lick count
     r=0; // reset reward count
-    encoder_pos=0; // reset rotary encoder
+    _EncoderTicks=0; // reset rotary encoder
 
   }
   
-  encoder_pinA_last = encoder_pinA_state; // reset rotary pin value
+
+}
+
+void HandleMotorInterruptA()
+{
+  
+   _EncoderBSet = FastGPIO::Pin<c_EncoderPinB>::isInputHigh();
+  // and adjust counter + if A leads B 
+   _EncoderTicks += _EncoderBSet ? -1 : +1;
+  
 }

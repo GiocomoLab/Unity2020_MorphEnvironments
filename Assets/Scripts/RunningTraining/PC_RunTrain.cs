@@ -19,8 +19,8 @@ public class PC_RunTrain : MonoBehaviour
     private Rigidbody rb;
 
     private SP_RunTrain sp;
-    private DL_RunTrain dl;
-    private RR_RunTrain rotary;
+    private SerialPort_RunTrain dl;
+    //private RR_RunTrain rotary;
 
     private bool reward_dir;
 
@@ -41,8 +41,8 @@ public class PC_RunTrain : MonoBehaviour
     {
         GameObject player = GameObject.Find("Player");
         sp = player.GetComponent<SP_RunTrain>();
-        rotary = player.GetComponent<RR_RunTrain>();
-        dl = player.GetComponent<DL_RunTrain>();
+        //rotary = player.GetComponent<RR_RunTrain>();
+        dl = player.GetComponent<SerialPort_RunTrain>();
         panoCam = GameObject.Find("panoCamera");
         panoCam.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
         reward = GameObject.Find("Reward");
