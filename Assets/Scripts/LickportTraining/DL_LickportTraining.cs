@@ -11,7 +11,7 @@ public class DL_LickportTraining : MonoBehaviour
 {
 
 
-    public string port = "COM7";
+    public string port = "COM4";
     private SerialPort _serialPort;
     private int delay;
     private string lick_raw;
@@ -20,6 +20,9 @@ public class DL_LickportTraining : MonoBehaviour
     //public int pinValue;
     private int pinValue;
     public int c_1;
+    private int pulses;
+    private float realSpeed = 0.0447f;
+    public float true_delta_z;
 
     // for saving data
 
@@ -56,7 +59,8 @@ public class DL_LickportTraining : MonoBehaviour
             string[] lick_list = lick_raw.Split('\t');
             c_1 = int.Parse(lick_list[0]);
             r = int.Parse(lick_list[1]);
-
+            pulses = int.Parse(lick_list[2]);
+            true_delta_z = -1f * pulses * realSpeed;
 
         }
         catch (TimeoutException)

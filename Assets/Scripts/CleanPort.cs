@@ -9,7 +9,7 @@ using System.Threading;
 public class CleanPort : MonoBehaviour
 {
 
-    public string port = "COM7";
+    public string port = "COM4";
     private SerialPort _serialPort;
     private int delay;
     private int cmd = 5;

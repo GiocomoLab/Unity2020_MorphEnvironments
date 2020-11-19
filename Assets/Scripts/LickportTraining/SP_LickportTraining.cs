@@ -21,7 +21,7 @@ public class SP_LickportTraining : MonoBehaviour
 
 
     // for saving data
-    public string localDirectory_pre = "C:/Users/markp/VR_Data/TwoTower/";
+    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data";
     public string serverDirectory_pre = "G:/My Drive/VR_Data/TwoTower/";
     private string localDirectory;
     private string serverDirectory;
@@ -100,7 +100,7 @@ public class SP_LickportTraining : MonoBehaviour
     {
 
         _command.CommandText = "insert into data (time , dz, lick, reward, manrewards) values (" + Time.realtimeSinceStartup + "," +
-            rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.mRewardFlag + ")";
+            dl.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.mRewardFlag + ")";
         _command.ExecuteNonQuery();
 
 
