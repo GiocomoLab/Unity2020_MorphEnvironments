@@ -23,8 +23,9 @@ volatile long _EncoderTicks = 0;
 int solenoid_pin_state = LOW;
 int solenoid_timer = 0;
 
-#define ttl_0_pin 4
-#define ttl_1_pin 5
+#define ttl_0_pin 4 // frame times
+#define ttl_1_pin 12 // trigger microscope
+int ttl_1_state = LOW;
 
 int cmd = 0;
 int incomingByte = 0;  // cmd coming in from Unity
@@ -121,8 +122,15 @@ void loop() {
 
     case 8: // toggle microscope on or off
 
+      //if (ttl_1_state==LOW) {
       digitalWrite(ttl_1_pin, HIGH);
-      digitalWrite(ttl_1_pin,LOW);
+        //ttl_1_state==HIGH;
+      //} else {
+        //digitalWrite(ttl_1_pin,LOW);
+        //ttl_1_state=LOW;  
+      //}
+      
+      
       scan_flag = 0;
       break;
 
@@ -141,6 +149,9 @@ void loop() {
         }
       }    
       break;
+
+    case 13: // toggle microscope off
+      digitalWrite(ttl_1_pin, LOW);
     
   }
 
@@ -171,7 +182,7 @@ void loop() {
 
 void HandleMotorInterruptA()
 {
-  
+   // read B pin
    _EncoderBSet = FastGPIO::Pin<c_EncoderPinB>::isInputHigh();
   // and adjust counter + if A leads B 
    _EncoderTicks += _EncoderBSet ? -1 : +1;

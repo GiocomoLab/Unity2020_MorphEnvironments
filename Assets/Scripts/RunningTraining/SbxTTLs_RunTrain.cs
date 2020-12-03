@@ -17,6 +17,7 @@ public class SbxTTLs_RunTrain : MonoBehaviour
 
     private SP_RunTrain sp;
     public int scanning = 0;
+    private bool microscope_on = false;
 
     private static int localPort;
     private static string IP = "171.65.17.36";  // define in init
@@ -132,8 +133,19 @@ public class SbxTTLs_RunTrain : MonoBehaviour
 
     IEnumerator ScannerToggle()
     {
-        pc.cmd = 8;
-        yield return new WaitForSeconds(.01f);
+        if (microscope_on)
+        {
+            pc.cmd = 13;
+            microscope_on = false;
+        } else
+        {
+            pc.cmd = 8;
+            microscope_on = true;
+        }
+        
+        //yield return new WaitForSeconds(.01f);
+        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
         pc.cmd = 0;
     }
 

@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46da7f098a1c784fb90507aa7492286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: 4467975.3
+  mouse: test
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3326c40e459d8d04281b5d9f8bacfecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM4
+  port: COM6
   c_1: 0
   true_delta_z: 0
   r: 0

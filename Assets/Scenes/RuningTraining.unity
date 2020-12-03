@@ -274,7 +274,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 58.443115
+  field of view: 58.90039
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -613,7 +613,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 58.443115
+  field of view: 58.90039
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2074,8 +2074,6 @@ GameObject:
   - component: {fileID: 1722994739}
   - component: {fileID: 1722994738}
   - component: {fileID: 1722994736}
-  - component: {fileID: 1722994735}
-  - component: {fileID: 1722994734}
   - component: {fileID: 1722994733}
   - component: {fileID: 1722994743}
   m_Layer: 0
@@ -2104,40 +2102,6 @@ MonoBehaviour:
   p2_x: 0
   p2_y: 0
   p2_z: 0
---- !u!114 &1722994734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722994732}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b469034ed57d02348a4b597198b68c82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  port: COM6
-  delta_z: 0
-  true_delta_z: 0
-  speedBool: 0
-  startBool: 0
---- !u!114 &1722994735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722994732}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b53bf44da969145afee69c4433f5a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  port: COM7
-  trash: 0
-  c_1: 0
-  r: 0
-  rflag: 1
 --- !u!114 &1722994736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2166,22 +2130,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac0af4714f44b9459127bc4068499b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: 4467975.5
-  AutoReward: 1
+  mouse: GRABDA9
+  AutoReward: 0
   mrd: 300
   ard: 0
   fixedRewardSchedule: 0
-  MinTrainingDist: 150
+  MinTrainingDist: 100
   MaxTrainingDist: 300
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 200
-  maxRewards: 100
+  numTrialsTotal: 400
+  maxRewards: 200
   rDur: 2
   MultiReward: 1
-  localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
+  localDirectory_pre: C:\Users\thorlabs_vr_rig\VR_Data\
   serverDirectory_pre: G:/My Drive/VR_Data/TwoTower
   localDirectory: 
   serverDirectory: 
@@ -2289,8 +2253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83bdf10a1ffeba541a1db5a00e4de7ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM4
+  port: COM7
   c_1: 0
+  pulses: 0
   r: 0
   rflag: 1
   delta_z: 0
@@ -2368,7 +2333,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 58.443115
+  field of view: 58.90039
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
