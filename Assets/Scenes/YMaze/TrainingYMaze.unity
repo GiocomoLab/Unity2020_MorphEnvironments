@@ -949,6 +949,7 @@ GameObject:
   - component: {fileID: 1170947060}
   - component: {fileID: 1170947059}
   - component: {fileID: 1170947070}
+  - component: {fileID: 1170947071}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1130,18 +1131,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2480c70a3d6756a4fb3498cb9d8651c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: 4467975.5
-  AutoReward: 1
+  mouse: 4467333.1
+  AutoReward: 0
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 20
-  maxRewards: 200
+  numTrialsTotal: 400
+  maxRewards: 50
   LR: -1
   skipTrialPcnt: 0.1
   localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
-  serverDirectory_pre: G:/My Drive/VR_Data/TwoTower
+  serverDirectory_pre: G:/My Drive/VR_Data/TwoTower/
   localDirectory: 
   serverDirectory: 
   localPrefix: 
@@ -1178,6 +1179,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trialOrder: []
+--- !u!114 &1170947071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170947058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f221a9e01998ba4897105608da3ba8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1204515085
 GameObject:
   m_ObjectHideFlags: 0

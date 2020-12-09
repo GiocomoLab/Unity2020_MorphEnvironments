@@ -100,7 +100,7 @@ public class SP_YMazeTrain : MonoBehaviour
         _connection.Open();
         _command = _connection.CreateCommand();
         _command.CommandText = "create table data (time REAL, trialnum INT, t REAL, posx REAL, posz REAL, dz REAL, lick INT, reward INT," +
-        "tstart INT, teleport INT, scanning INT, manrewards INT, LR INT)";
+        "tstart INT, teleport INT, scanning INT, manrewards INT, LR INT, cmd INT)";
         _command.ExecuteNonQuery();
     }
 
@@ -108,9 +108,9 @@ public class SP_YMazeTrain : MonoBehaviour
     {
 
         _command.CommandText = "insert into data (time , trialnum, t, posx, posz, dz, lick, reward," +
-        "tstart, teleport, scanning, manrewards, LR) values (" + Time.time + "," + numTraversals +
+        "tstart, teleport, scanning, manrewards, LR, cmd) values (" + Time.time + "," + numTraversals +
         "," + rr.t + "," + transform.position.x + "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
-        ttls.scanning + "," + pc.mRewardFlag + "," + LR +  ")";
+        ttls.scanning + "," + pc.mRewardFlag + "," + LR +  "," + pc.cmd + ")";
         //Debug.Log(_command.CommandText);
         _command.ExecuteNonQuery();
 

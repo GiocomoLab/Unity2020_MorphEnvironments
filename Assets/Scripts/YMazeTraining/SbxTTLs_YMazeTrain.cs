@@ -19,7 +19,7 @@ public class SbxTTLs_YMazeTrain : MonoBehaviour
     public int scanning = 0;
 
     private static int localPort;
-    private static string IP = "171.65.17.36";  // define in init
+    private static string IP = "10.124.53.26";  // define in init
     private static int port = 7000;  // define in init
 
     // "connection" things

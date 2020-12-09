@@ -36,7 +36,7 @@ public class TrialController_LastDay: MonoBehaviour
     private int numTraversalsLocal = -1;
 
     private static int localPort;
-    private static string IP = "171.65.17.36";  // define in init
+    private static string IP = "10.124.53.26";  // define in init
     private static int port = 7000;  // define in init
 
 
@@ -193,15 +193,15 @@ public class TrialController_LastDay: MonoBehaviour
     IEnumerator InterBlockInterval()
     {
         rr.blockBool = 0f;
-        if (blankLaser) {
-            sendString("L0");
-        }
+        //if (blankLaser) {
+        sendString("L0");
+        //}
         
         yield return new WaitForSeconds(blockTimeout - 5f);
-        if (blankLaser)
-        {
-            sendString("L1");
-        }
+        //if (blankLaser)
+        //{
+        sendString("L1");
+        //}
         
         yield return new WaitForSeconds(5f);
 
