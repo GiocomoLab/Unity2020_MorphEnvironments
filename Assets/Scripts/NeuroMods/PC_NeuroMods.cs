@@ -78,12 +78,15 @@ public class PC_NeuroMods : MonoBehaviour
         rotary = player.GetComponent<RR_NeuroMods>();
         dl = player.GetComponent<DL_NeuroMods>();
         Debug.Log(sp.sceneName);
-        if ((sp.sceneName == "NeuroMods_LocationA") | (sp.sceneName == "NeuroMods_LocationB"))
+        if ((sp.sceneName == "NeuroMods_LocationA") )
         {
            
             reward = GameObject.Find("Reward");
         }
-        else
+        else if ((sp.sceneName == "NeuroMods_LocationB")) 
+        {
+            reward = GameObject.Find("Reward");
+        }
         {
             
             reward_a = GameObject.Find("Reward_A");
@@ -224,7 +227,7 @@ public class PC_NeuroMods : MonoBehaviour
         rzoneFlag = 1;
        
         
-        while ((transform.position.z <= pos + 75) & (transform.position.z > 100))
+        while ((transform.position.z <= pos + 75) )
         { 
             
             

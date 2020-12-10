@@ -30,13 +30,9 @@ public class RewardControl_NeuroMods_Days2to5 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (numTraversalsLocal != sp.numTraversals | morph != sp.morph)
+        if (numTraversalsLocal != sp.numTraversals )
         {
-            numTraversalsLocal = sp.numTraversals;
-
-            morph = sp.morph;
-
-            
+            numTraversalsLocal = sp.numTraversals;            
             if (UnityEngine.Random.value < sp.SkipTrialPcnt)
             {
                 reward.SetActive(false);
