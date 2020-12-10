@@ -6,73 +6,64 @@ using System.IO;
 using System.IO.Ports;
 using System.Threading;
 
-public class DL_NeuroMods : MonoBehaviour
+
+public class RR_NeuroMods : MonoBehaviour
 {
 
-
-    public string port = "COM3";
+    public string port = "COM6";
+    private int pulses;
     private SerialPort _serialPort;
     private int delay;
-    private string lick_raw;
-
-
-    //public int pinValue;
-    private int pinValue;
-    public int trash;
-    public int c_1;    
-
-    // for saving data
     private SP_NeuroMods sp;
-    private string lickFile;
-    private string serverLickFile;
-
-    public int r;
-    public int rflag = 1;
     private PC_NeuroMods pc;
-
-    private static bool created = false;
-
+    public float delta_z;
+    public float true_delta_z;
+    private float realSpeed = 0.0447f;
+    public float speedBool = 0; 
+    private float startBool = 0;
+    public float toutBool = 1;
     public void Awake()
     {
-        // for saving data
+        // set speed
+        speedBool = 0;
+
+        // connect to playerController script
         GameObject player = GameObject.Find("Player");
-        sp = player.GetComponent<SP_NeuroMods>();
         pc = player.GetComponent<PC_NeuroMods>();
+        sp = player.GetComponent<SP_NeuroMods>();
     }
 
     void Start()
     {
         // connect to Arduino uno serial port
         connect(port, 57600, true, 4);
-        Debug.Log("Connected to lick detector serial port");
+        //connect(port, 115200, true, 4);
+        Debug.Log("Connected to rotary encoder serial port");
 
+        
     }
 
-
-    void LateUpdate()
+    void Update()
     {
-        rflag = 0;
+        if (Input.GetKeyDown(KeyCode.G)) { startBool = 1; };
 
-        _serialPort.Write(pc.cmd.ToString() + ',');
+        // read quadrature encoder
+        _serialPort.Write("\n"); // write a blank line to indicate new frame
         try
         {
-            lick_raw = _serialPort.ReadLine();
-            string[] lick_list = lick_raw.Split('\t');
-            c_1 = int.Parse(lick_list[0]);
-            r = int.Parse(lick_list[1]);
+            pulses = int.Parse(_serialPort.ReadLine()); // read number of clicks from rotary encoder
+            true_delta_z = -1f*pulses * realSpeed; 
+            delta_z = -1f * speedBool * startBool  * toutBool * pulses * realSpeed; // convert to cm
+            Vector3 movement = new Vector3(0.0f, 0.0f, delta_z);
+            transform.position = transform.position + movement;
 
         }
         catch (TimeoutException)
         {
-            Debug.Log("lickport timeout");
+            Debug.Log("rotary timeout");
         }
-        
 
-    }
 
-    void OnApplicationQuit()
-    {
-        _serialPort.Write("8,");
     }
 
     private void connect(string serialPortName, Int32 baudRate, bool autoStart, int delay)

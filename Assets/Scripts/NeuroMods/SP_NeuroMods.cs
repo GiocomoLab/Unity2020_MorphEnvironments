@@ -16,6 +16,7 @@ public class SP_NeuroMods : MonoBehaviour
     public float SkipTrialPcnt = 0.0f;
 
     public bool AutoReward = false;
+    public bool BlankLaser = false;
 
 
     public int numRewards = 0;
