@@ -16,6 +16,7 @@ public class SP_NeuroMods : MonoBehaviour
     public float SkipTrialPcnt = 0.0f;
 
     public bool AutoReward = false;
+    private int _autoReward = 0;
     public bool BlankLaser = false;
 
 
@@ -46,7 +47,7 @@ public class SP_NeuroMods : MonoBehaviour
     private DateTime today;
     private GameObject player;
 
-    private TrialOrdering_NeuroMods tott;
+    //private TrialOrdering_NeuroMods tott;
     private RR_NeuroMods rr;
     private DL_NeuroMods dl;
     private PC_NeuroMods pc;
@@ -118,8 +119,7 @@ public class SP_NeuroMods : MonoBehaviour
         _connection.Open();
         _command = _connection.CreateCommand();
         _command.CommandText = "create table data (time REAL, morph REAL, trialnum INT, pos REAL, dz REAL, lick INT, reward INT," +
-        "tstart INT, teleport INT, rzone INT, toutzone INT, towerJitter REAL," +
-        " wallJitter REAL, bckgndJitter REAL, scanning NUMERIC, manrewards INT, cmd INT)";
+        "tstart INT, teleport INT, rzone INT, scanning NUMERIC, manrewards INT, autoreward INT, cmd INT)";
         
         _command.ExecuteNonQuery();
 
@@ -133,14 +133,22 @@ public class SP_NeuroMods : MonoBehaviour
     }
 
     void LateUpdate() {
+        if (AutoReward)
+        {
+            _autoReward = 1;
+        }
+        else
+        {
+            _autoReward = 0;
+        }
+        
 
-      _command.CommandText = "insert into data (time , morph , trialnum, pos, dz, lick, reward," +
-      "tstart, teleport, rzone , toutzone, towerJitter," +
-      " wallJitter , bckgndJitter , scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + morph + "," + numTraversals +
-      "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
-      pc.rzoneFlag + "," + pc.toutzoneFlag + ","  + pc.towerJitter + "," + pc.wallJitter + "," +
-      pc.bckgndJitter + "," + ttls.scanning + "," + pc.mRewardFlag + "," + AutoReward + "," + pc.cmd + ")";
-      _command.ExecuteNonQuery();
+
+        _command.CommandText = "insert into data (time , morph , trialnum, pos, dz, lick, reward," +
+        "tstart, teleport, rzone , scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + morph + "," + numTraversals +
+        "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
+        pc.rzoneFlag + ","  + ttls.scanning + "," + pc.mRewardFlag + "," + _autoReward + "," + pc.cmd + ")";
+        _command.ExecuteNonQuery();
 
     }
 
@@ -154,11 +162,12 @@ public class SP_NeuroMods : MonoBehaviour
 
         File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite",true);
 
-        string sess_connectionString = "Data Source=G:\\My Drive\\InVivoDA\\TVR_Data\\behavior_sessions.sqlite;Version=3;";
+        string sess_connectionString = "Data Source=G:\\My Drive\\InVivoDA\\VR_Data\\behavior_sessions.db;Version=3;";
         IDbConnection db_connection;
         db_connection = (IDbConnection) new SqliteConnection(sess_connectionString);
         db_connection.Open();
         IDbCommand db_command = db_connection.CreateCommand();
+       
         string tmp_date = today.ToString("dd_MM_yyyy");
         db_command.CommandText = "insert into sessions (MouseName, DateFolder, SessionNumber, Track, RewardCount, Imaging, ImagingRegion, Notes) values ('" + mouse +  "', '" + tmp_date + "', "
             + session + ",'"+ sceneName + "', " + numRewards + ", " + scanning + ",'" + notes.imaging_region + "','" + notes.notes + "')";

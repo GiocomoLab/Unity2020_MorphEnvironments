@@ -10,7 +10,7 @@ public class DL_NeuroMods : MonoBehaviour
 {
 
 
-    public string port = "COM3";
+    public string port = "COM7";
     private SerialPort _serialPort;
     private int delay;
     private string lick_raw;
@@ -19,7 +19,7 @@ public class DL_NeuroMods : MonoBehaviour
     //public int pinValue;
     private int pinValue;
     public int trash;
-    public int c_1;    
+    public int c_1;
 
     // for saving data
     private SP_NeuroMods sp;
@@ -49,7 +49,7 @@ public class DL_NeuroMods : MonoBehaviour
     }
 
 
-    void LateUpdate()
+    void Update()
     {
         rflag = 0;
 
@@ -59,14 +59,21 @@ public class DL_NeuroMods : MonoBehaviour
             lick_raw = _serialPort.ReadLine();
             string[] lick_list = lick_raw.Split('\t');
             c_1 = int.Parse(lick_list[0]);
+
             r = int.Parse(lick_list[1]);
+
 
         }
         catch (TimeoutException)
         {
             Debug.Log("lickport timeout");
         }
-        
+
+
+        //Debug.Log(pinValue);
+
+
+
 
     }
 

@@ -19,9 +19,13 @@ public class RR_NeuroMods : MonoBehaviour
     public float delta_z;
     public float true_delta_z;
     private float realSpeed = 0.0447f;
-    public float speedBool = 0; 
+    public float speedBool = 0;
     private float startBool = 0;
+    //public float servoBool = 0;
+    private bool firstFlag = true;
     public float toutBool = 1;
+
+    private static bool created = false;
     public void Awake()
     {
         // set speed
@@ -40,7 +44,7 @@ public class RR_NeuroMods : MonoBehaviour
         //connect(port, 115200, true, 4);
         Debug.Log("Connected to rotary encoder serial port");
 
-        
+
     }
 
     void Update()
@@ -52,8 +56,9 @@ public class RR_NeuroMods : MonoBehaviour
         try
         {
             pulses = int.Parse(_serialPort.ReadLine()); // read number of clicks from rotary encoder
-            true_delta_z = -1f*pulses * realSpeed; 
-            delta_z = -1f * speedBool * startBool  * toutBool * pulses * realSpeed; // convert to cm
+            //Debug.Log (pulses);
+            true_delta_z = -1f * pulses * realSpeed;
+            delta_z = -1f * speedBool * startBool * toutBool * pulses * realSpeed; // convert to cm
             Vector3 movement = new Vector3(0.0f, 0.0f, delta_z);
             transform.position = transform.position + movement;
 

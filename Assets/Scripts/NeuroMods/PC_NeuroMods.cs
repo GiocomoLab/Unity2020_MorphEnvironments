@@ -49,9 +49,7 @@ public class PC_NeuroMods : MonoBehaviour
     public ArrayList LickHistory;
     public bool bckgndOn = true;
 
-    public float towerJitter=0;
-    public float wallJitter=0;
-    public float bckgndJitter=0;
+
 
     public int mRewardFlag = 0;
     public int rzoneFlag = 0;
@@ -100,8 +98,11 @@ public class PC_NeuroMods : MonoBehaviour
         initialPosition = new Vector3(0f, 6f, -50.0f);
 
         LickHistory = new ArrayList();
-    }
 
+        remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), port);
+        client = new UdpClient();
+    }
+   
 
     private void sendString(string message)
     {
@@ -198,9 +199,9 @@ public class PC_NeuroMods : MonoBehaviour
         if (prevReward == 0) // omission or probe trial 
         {
             sendString("L0");
-            yield return new WaitForSeconds(4f + UnityEngine.Random.value * 5f); 
+            yield return new WaitForSeconds(5f);
             sendString("L1");
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1f + UnityEngine.Random.value * 4f);
 
         }
         else
@@ -223,25 +224,29 @@ public class PC_NeuroMods : MonoBehaviour
         rzoneFlag = 1;
        
         
-        while ((transform.position.z <= pos + 75) & (transform.position.z > 100)) 
+        while ((transform.position.z <= pos + 75) & (transform.position.z > 100))
+        { 
             
             
-            if ((sp.AutoReward) & (transform.position.z > pos + 50)) 
+            if ((sp.AutoReward) & (transform.position.z > pos + 50))
+            { 
      
                
                 cmd = 4;
                 StartCoroutine(DeliverReward(1));
                 sp.numRewards += 1;
+                prevReward = 1;
                 yield return new WaitForEndOfFrame();
                 break;
                    
                
             }
 
-            if ((dl.c_1 > 0))
+            if (dl.c_1 > 0) {
                     
                 cmd = 4;
                 sp.numRewards += 1;
+                prevReward = 1;
                 yield return new WaitForEndOfFrame();
                 break;
             }
@@ -281,7 +286,8 @@ public class PC_NeuroMods : MonoBehaviour
         {
             cmd = 4;
             //sp.numRewards += 1;
-            yield return new WaitForEndOfFrame(0.01f);
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             cmd = 0;
         }
         {
