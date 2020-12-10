@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\NeuroMods",
+    "\\ShortTrack",
+    "\\TwoTower_foraging",
+    "\\YMaze",
+    "\\YMazeTraining"
   ],
+  "SelectedNode": "\\TwoTower_foraging\\DL_TwoTower.cs",
   "PreviewInSolutionExplorer": false
 }
