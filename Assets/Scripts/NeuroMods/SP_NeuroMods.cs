@@ -128,45 +128,18 @@ public class SP_NeuroMods : MonoBehaviour
         _command.CommandText = "create table trialInfo (baseline INT, training INT, test INT)";
         _command.ExecuteNonQuery();
 
-       // if (sceneName == "TwoTower_4Way")
-        //{
-        //    _command.CommandText = "insert into trialInfo (baseline, training, test) values (" + dbtt_4way.numBaselineTrials + ", " + dbtt_4way.numTrainingTrials + ", " + dbtt_4way.numTestTrials + ")";
-        //}
-        //else if (sceneName == "FreqMorph_Decision")
-       // {
-        //    _command.CommandText = "insert into trialInfo (baseline, training, test) values ( 0 , " + dbfm.numTrainingTrials + ", " + db.numTestTrials + ")";
-        //} else 
-        //{
-         //   if (orderBool)
-           // {
-            //    _command.CommandText = "insert into trialInfo (baseline, training, test) values (" + dbtt.numBaselineTrials + ", " + dbtt.numTrainingTrials + ", " + dbtt.numTestTrials + ")";
-           // }
-            //else
-            //{
-             //   _command.CommandText = "insert into trialInfo (baseline, training, test) values (" + tott.numBaselineTrials + ", " + tott.numTrainingTrials + ", " + tott.numTestTrials + ")";
-           // }
-            
-       // }
-        //_command.ExecuteNonQuery();
+       
     }
 
     void LateUpdate() {
 
       _command.CommandText = "insert into data (time , morph , trialnum, pos, dz, lick, reward," +
       "tstart, teleport, rzone , toutzone, towerJitter," +
-      " wallJitter , bckgndJitter , scanning, manrewards, cmd) values (" + Time.realtimeSinceStartup + "," + morph + "," + numTraversals +
+      " wallJitter , bckgndJitter , scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + morph + "," + numTraversals +
       "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
       pc.rzoneFlag + "," + pc.toutzoneFlag + ","  + pc.towerJitter + "," + pc.wallJitter + "," +
-      pc.bckgndJitter + "," + ttls.scanning + "," + pc.mRewardFlag + "," + pc.cmd + ")";
-      //Debug.Log(_command.CommandText);
+      pc.bckgndJitter + "," + ttls.scanning + "," + pc.mRewardFlag + "," + AutoReward + "," + pc.cmd + ")";
       _command.ExecuteNonQuery();
-    
-    if (sceneName=="FrameGrabber")
-        {
-            ScreenCapture.CaptureScreenshot("D://FrameGrabber//morph" + morph + "_wallJit" + pc.wallJitter + "_bckgndJit" + pc.bckgndJitter + "_towerJit" + pc.towerJitter + "_pos" + transform.position.z + ".png");
-        }
-
-     
 
     }
 
@@ -180,7 +153,7 @@ public class SP_NeuroMods : MonoBehaviour
 
         File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite",true);
 
-        string sess_connectionString = "Data Source=G:\\My Drive\\VR_Data\\TwoTower\\behavior.sqlite;Version=3;";
+        string sess_connectionString = "Data Source=G:\\My Drive\\InVivoDA\\TVR_Data\\behavior_sessions.sqlite;Version=3;";
         IDbConnection db_connection;
         db_connection = (IDbConnection) new SqliteConnection(sess_connectionString);
         db_connection.Open();
