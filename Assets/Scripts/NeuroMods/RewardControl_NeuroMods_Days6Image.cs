@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class RewardControl_NeuroMods_Day6Image: MonoBehaviour
+public class RewardControl_NeuroMods_Days6Image: MonoBehaviour
 {
 
     private GameObject reward;
@@ -19,7 +19,7 @@ public class RewardControl_NeuroMods_Day6Image: MonoBehaviour
 
 
     private int numTraversalsLocal = -1;
-    private float morph = -1;
+    
 
     // Use this for initialization
     void Start()
@@ -31,23 +31,26 @@ public class RewardControl_NeuroMods_Day6Image: MonoBehaviour
 
         reward_a = GameObject.Find("Reward_A");
         reward_b = GameObject.Find("Reward_B");
+        reward_b.SetActive(false);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (numTraversalsLocal != sp.numTraversals | morph != sp.morph)
+        if (numTraversalsLocal != sp.numTraversals )
         {
             numTraversalsLocal = sp.numTraversals;
             
-            if (numTraversalsLocal>=ChangeRewardTrial)
+            if (numTraversalsLocal<ChangeRewardTrial)
             {
                 reward = reward_a;
+                reward_b.SetActive(false);
             }
             else
             {
                 reward = reward_b;
+                reward_a.SetActive(false);
             }
 
 

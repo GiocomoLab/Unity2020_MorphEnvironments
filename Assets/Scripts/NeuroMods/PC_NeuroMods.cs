@@ -19,8 +19,8 @@ public class PC_NeuroMods : MonoBehaviour
     
     private GameObject blackCam;
     private GameObject panoCam;
-    private GameObject reward0;
-    private GameObject reward1;
+    private GameObject reward_a;
+    private GameObject reward_b;
     private GameObject reward;
     
     
@@ -78,7 +78,7 @@ public class PC_NeuroMods : MonoBehaviour
         rotary = player.GetComponent<RR_NeuroMods>();
         dl = player.GetComponent<DL_NeuroMods>();
         Debug.Log(sp.sceneName);
-        if (sp.sceneName == "NeuroMods_Days2to5")
+        if ((sp.sceneName == "NeuroMods_LocationA") | (sp.sceneName == "NeuroMods_LocationB"))
         {
            
             reward = GameObject.Find("Reward");
@@ -86,8 +86,8 @@ public class PC_NeuroMods : MonoBehaviour
         else
         {
             
-            reward0 = GameObject.Find("Reward0");
-            reward1 = GameObject.Find("Reward1");
+            reward_a = GameObject.Find("Reward_A");
+            reward_b = GameObject.Find("Reward_B");
         }
       
 
@@ -254,10 +254,18 @@ public class PC_NeuroMods : MonoBehaviour
            
         }
        
-        if (sp.sceneName == "NeuroMods_Days2to5")
+        if ((sp.sceneName == "NeuroMods_LocationA"))
         {
             
             reward.SetActive(false);
+
+        } else if ((sp.sceneName == "NeuroMods_LocationB"))
+        {
+            reward.SetActive(false);
+        } else
+        {
+            reward_a.SetActive(false);
+            reward_b.SetActive(false);
         }
         
         
