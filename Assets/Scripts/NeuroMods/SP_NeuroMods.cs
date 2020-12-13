@@ -68,7 +68,7 @@ public class SP_NeuroMods : MonoBehaviour
        
         player = GameObject.Find("Player");
         sceneName = SceneManager.GetActiveScene().name;
-
+        Debug.Log(sceneName);
 
         
         rr = player.GetComponent<RR_NeuroMods>();

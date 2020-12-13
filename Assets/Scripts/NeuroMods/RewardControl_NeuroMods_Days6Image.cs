@@ -31,7 +31,7 @@ public class RewardControl_NeuroMods_Days6Image: MonoBehaviour
 
         reward_a = GameObject.Find("Reward_A");
         reward_b = GameObject.Find("Reward_B");
-        reward_b.SetActive(false);
+        //reward_b.SetActive(false);
 
     }
 

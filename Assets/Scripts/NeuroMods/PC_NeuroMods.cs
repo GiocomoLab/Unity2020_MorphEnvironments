@@ -69,7 +69,7 @@ public class PC_NeuroMods : MonoBehaviour
 
 
 
-    public void Awake()
+    public void Start()
     {
 
 
@@ -85,8 +85,9 @@ public class PC_NeuroMods : MonoBehaviour
         }
         else if ((sp.sceneName == "NeuroMods_LocationB")) 
         {
+            Debug.Log("it worked");
             reward = GameObject.Find("Reward");
-        }
+        } else
         {
             
             reward_a = GameObject.Find("Reward_A");
@@ -202,14 +203,17 @@ public class PC_NeuroMods : MonoBehaviour
         if (prevReward == 0) // omission or probe trial 
         {
             sendString("L0");
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(5f + UnityEngine.Random.value * 4f);
             sendString("L1");
-            yield return new WaitForSeconds(1f + UnityEngine.Random.value * 4f);
+            yield return new WaitForSeconds(1f );
 
         }
         else
         {
-            yield return new WaitForSeconds(1f + UnityEngine.Random.value*4f);
+            sendString("L0");
+            yield return new WaitForSeconds(UnityEngine.Random.value * 4f);
+            sendString("L1");
+            yield return new WaitForSeconds(1f);
         }
 
         rotary.toutBool = 1f;
