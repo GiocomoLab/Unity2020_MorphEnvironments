@@ -31,6 +31,7 @@ public class PC_NeuroMods : MonoBehaviour
     private SP_NeuroMods sp;
     private DL_NeuroMods dl;
     private RR_NeuroMods rotary;
+    private SbxTTLs_NeuroMods sbxttls;
 
     private bool reward_dir;
 
@@ -77,6 +78,7 @@ public class PC_NeuroMods : MonoBehaviour
         sp = player.GetComponent<SP_NeuroMods>();
         rotary = player.GetComponent<RR_NeuroMods>();
         dl = player.GetComponent<DL_NeuroMods>();
+        sbxttls = player.GetComponent<SbxTTLs_NeuroMods>();
         Debug.Log(sp.sceneName);
         if ((sp.sceneName == "NeuroMods_LocationA") )
         {
@@ -202,17 +204,31 @@ public class PC_NeuroMods : MonoBehaviour
         rotary.toutBool = 0f;
         if (prevReward == 0) // omission or probe trial 
         {
-            sendString("L0");
+            if (sbxttls.scanning>0)
+            {
+                sendString("L0");
+            }
+            
             yield return new WaitForSeconds(5f + UnityEngine.Random.value * 4f);
-            sendString("L1");
+            if (sbxttls.scanning > 0)
+            {
+                sendString("L1");
+            }
             yield return new WaitForSeconds(1f );
 
         }
         else
         {
-            sendString("L0");
+            if (sbxttls.scanning > 0)
+            {
+                sendString("L0");
+            }
+            
             yield return new WaitForSeconds(UnityEngine.Random.value * 4f);
-            sendString("L1");
+            if (sbxttls.scanning > 0)
+            {
+                sendString("L1");
+            }
             yield return new WaitForSeconds(1f);
         }
 

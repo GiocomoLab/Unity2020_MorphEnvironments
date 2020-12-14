@@ -2934,7 +2934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c8bffc591b3a21498c5ab8e63868782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChangeRewardTrial: 2
+  ChangeRewardTrial: 30
 --- !u!114 &1973745410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3123,8 +3123,8 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 150
-  maxRewards: 90
+  numTrialsTotal: 100
+  maxRewards: 100
   morph: 0
   rDur: 2
   localDirectory_pre: C:/Users/markp/VR_Data/NeuroMods/
@@ -3148,7 +3148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: test
+  mouse: GRABDA4
   notes: 
   imaging_region: CA1
 --- !u!4 &1973745422
