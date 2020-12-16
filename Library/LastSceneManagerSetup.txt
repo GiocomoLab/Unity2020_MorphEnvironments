@@ -1,5 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/SingleMorph_Reversal.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
