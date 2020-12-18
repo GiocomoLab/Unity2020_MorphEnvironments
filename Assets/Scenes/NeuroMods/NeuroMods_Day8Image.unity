@@ -3116,7 +3116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b9facaae09d7d5390e3f8f81ce3e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkipTrialPcnt: 0
+  SkipTrialPcnt: 0.15
   AutoReward: 0
   BlankLaser: 0
   numRewards: 0
@@ -3148,7 +3148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: GRABDA4
+  mouse: GRABDA7
   notes: 
   imaging_region: CA1
 --- !u!4 &1973745422
