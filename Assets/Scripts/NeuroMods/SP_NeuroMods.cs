@@ -19,6 +19,8 @@ public class SP_NeuroMods : MonoBehaviour
     private int _autoReward = 0;
     public bool BlankLaser = false;
 
+    public int DreamLand = 0;
+
 
     public int numRewards = 0;
     public int numRewards_manual = 0;
@@ -118,7 +120,7 @@ public class SP_NeuroMods : MonoBehaviour
         _connection = (IDbConnection) new SqliteConnection(connectionString);
         _connection.Open();
         _command = _connection.CreateCommand();
-        _command.CommandText = "create table data (time REAL, morph REAL, trialnum INT, pos REAL, dz REAL, lick INT, reward INT," +
+        _command.CommandText = "create table data (time REAL, morph REAL, dreamland INT, trialnum INT, pos REAL, dz REAL, posx REAL, lick INT, reward INT," +
         "tstart INT, teleport INT, rzone INT, scanning NUMERIC, manrewards INT, autoreward INT, cmd INT)";
         
         _command.ExecuteNonQuery();
@@ -144,9 +146,9 @@ public class SP_NeuroMods : MonoBehaviour
         
 
 
-        _command.CommandText = "insert into data (time , morph , trialnum, pos, dz, lick, reward," +
-        "tstart, teleport, rzone , scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + morph + "," + numTraversals +
-        "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
+        _command.CommandText = "insert into data (time , morph , dreamland, trialnum, pos, dz, posx, lick, reward," +
+        "tstart, teleport, rzone , scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + morph + "," + DreamLand + "," + numTraversals +
+        "," + transform.position.z + "," + rr.true_delta_z + "," + transform.position.x + ","  + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
         pc.rzoneFlag + ","  + ttls.scanning + "," + pc.mRewardFlag + "," + _autoReward + "," + pc.cmd + ")";
         _command.ExecuteNonQuery();
 

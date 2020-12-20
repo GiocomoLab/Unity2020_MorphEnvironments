@@ -247,7 +247,7 @@ public class PC_NeuroMods : MonoBehaviour
         rzoneFlag = 1;
        
         
-        while ((transform.position.z <= pos + 75) )
+        while ((transform.position.z <= pos + 75) & (transform.position.z>5) )
         { 
             
             
