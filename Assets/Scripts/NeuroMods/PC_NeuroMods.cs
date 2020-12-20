@@ -31,7 +31,6 @@ public class PC_NeuroMods : MonoBehaviour
     private SP_NeuroMods sp;
     private DL_NeuroMods dl;
     private RR_NeuroMods rotary;
-    private SbxTTLs_NeuroMods sbxttls;
 
     private bool reward_dir;
 
@@ -78,7 +77,6 @@ public class PC_NeuroMods : MonoBehaviour
         sp = player.GetComponent<SP_NeuroMods>();
         rotary = player.GetComponent<RR_NeuroMods>();
         dl = player.GetComponent<DL_NeuroMods>();
-        sbxttls = player.GetComponent<SbxTTLs_NeuroMods>();
         Debug.Log(sp.sceneName);
         if ((sp.sceneName == "NeuroMods_LocationA") )
         {
@@ -87,9 +85,16 @@ public class PC_NeuroMods : MonoBehaviour
         }
         else if ((sp.sceneName == "NeuroMods_LocationB")) 
         {
-            Debug.Log("it worked");
             reward = GameObject.Find("Reward");
-        } else
+        } else if ((sp.sceneName == "NM_DreamLandToPizzaLand")) 
+        {
+            reward_a = GameObject.Find("Reward_A");
+            reward_b = GameObject.Find("Reward_B");
+            reward_c = GameObject.Find("Reward_C");
+            
+            
+        }
+        else
         {
             
             reward_a = GameObject.Find("Reward_A");
@@ -204,31 +209,17 @@ public class PC_NeuroMods : MonoBehaviour
         rotary.toutBool = 0f;
         if (prevReward == 0) // omission or probe trial 
         {
-            if (sbxttls.scanning>0)
-            {
-                sendString("L0");
-            }
-            
+            sendString("L0");
             yield return new WaitForSeconds(5f + UnityEngine.Random.value * 4f);
-            if (sbxttls.scanning > 0)
-            {
-                sendString("L1");
-            }
+            sendString("L1");
             yield return new WaitForSeconds(1f );
 
         }
         else
         {
-            if (sbxttls.scanning > 0)
-            {
-                sendString("L0");
-            }
-            
+            sendString("L0");
             yield return new WaitForSeconds(UnityEngine.Random.value * 4f);
-            if (sbxttls.scanning > 0)
-            {
-                sendString("L1");
-            }
+            sendString("L1");
             yield return new WaitForSeconds(1f);
         }
 
@@ -247,7 +238,7 @@ public class PC_NeuroMods : MonoBehaviour
         rzoneFlag = 1;
        
         
-        while ((transform.position.z <= pos + 75) & (transform.position.z>5) )
+        while ((transform.position.z <= pos + 75)  )
         { 
             
             
