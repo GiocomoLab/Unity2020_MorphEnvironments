@@ -21,16 +21,17 @@ public class PC_NeuroMods : MonoBehaviour
     private GameObject panoCam;
     private GameObject reward_a;
     private GameObject reward_b;
+    private GameObject reward_c;
     private GameObject reward;
-    
-    
+
+
 
 
     private Rigidbody rb;
-
     private SP_NeuroMods sp;
     private DL_NeuroMods dl;
     private RR_NeuroMods rotary;
+    private SbxTTLs_NeuroMods sbxttls;
 
     private bool reward_dir;
 
@@ -75,6 +76,7 @@ public class PC_NeuroMods : MonoBehaviour
 
         GameObject player = GameObject.Find("Player");
         sp = player.GetComponent<SP_NeuroMods>();
+        sbxttls = player.GetComponent<SbxTTLs_NeuroMods>();
         rotary = player.GetComponent<RR_NeuroMods>();
         dl = player.GetComponent<DL_NeuroMods>();
         Debug.Log(sp.sceneName);
@@ -174,7 +176,7 @@ public class PC_NeuroMods : MonoBehaviour
 
         if (other.tag == "Reward")
         {
-           StartCoroutine(RewardSequence(transform.position.z)); 
+           StartCoroutine(RewardSequence(transform.position.z,other.gameObject)); 
         }
         else if (other.tag == "Teleport")
         {
@@ -207,20 +209,37 @@ public class PC_NeuroMods : MonoBehaviour
     {
 
         rotary.toutBool = 0f;
-        if (prevReward == 0) // omission or probe trial 
+        if (sbxttls.scanning>0)
         {
-            sendString("L0");
-            yield return new WaitForSeconds(5f + UnityEngine.Random.value * 4f);
-            sendString("L1");
-            yield return new WaitForSeconds(1f );
+            if (prevReward == 0) // omission or probe trial 
+            {
+                sendString("L0");
+                yield return new WaitForSeconds(5f + UnityEngine.Random.value * 4f);
+                sendString("L1");
+                yield return new WaitForSeconds(1f);
 
-        }
-        else
+            }
+            else
+            {
+                sendString("L0");
+                yield return new WaitForSeconds(UnityEngine.Random.value * 4f);
+                sendString("L1");
+                yield return new WaitForSeconds(1f);
+            }
+        } else
         {
-            sendString("L0");
-            yield return new WaitForSeconds(UnityEngine.Random.value * 4f);
-            sendString("L1");
-            yield return new WaitForSeconds(1f);
+            if (prevReward == 0) // omission or probe trial 
+            {
+                yield return new WaitForSeconds(5f + UnityEngine.Random.value * 4f);
+                yield return new WaitForSeconds(1f);
+
+            }
+            else
+            {
+                yield return new WaitForSeconds(UnityEngine.Random.value * 4f);
+                yield return new WaitForSeconds(1f);
+            }
+
         }
 
         rotary.toutBool = 1f;
@@ -233,7 +252,7 @@ public class PC_NeuroMods : MonoBehaviour
         panoCam.SetActive(false);
     }
 
-    IEnumerator RewardSequence(float pos)
+    IEnumerator RewardSequence(float pos,GameObject _reward)
     {   // water reward
         rzoneFlag = 1;
        
@@ -267,20 +286,22 @@ public class PC_NeuroMods : MonoBehaviour
             yield return new WaitForEndOfFrame();
            
         }
+        _reward.SetActive(false);
        
-        if ((sp.sceneName == "NeuroMods_LocationA"))
-        {
-            
-            reward.SetActive(false);
-
-        } else if ((sp.sceneName == "NeuroMods_LocationB"))
-        {
-            reward.SetActive(false);
-        } else
-        {
-            reward_a.SetActive(false);
-            reward_b.SetActive(false);
-        }
+        //if ((sp.sceneName == "NeuroMods_LocationA"))
+        //{
+        //    
+        //    reward.SetActive(false);
+//
+  //      } else if ((sp.sceneName == "NeuroMods_LocationB"))
+    //    {
+      //      reward.SetActive(false);
+        //} else
+        //{
+         //   reward_a.SetActive(false);
+          //  reward_b.SetActive(false);
+           // reward_c.SetActive(false);
+        //}
         
         
         
