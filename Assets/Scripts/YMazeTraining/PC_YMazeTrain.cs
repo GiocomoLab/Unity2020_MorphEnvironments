@@ -87,11 +87,23 @@ public class PC_YMazeTrain : MonoBehaviour
         }
         else if (other.tag == "Teleport")
         {
-            rewardL.SetActive(true);
-            rewardR.SetActive(true);
-            sp.numTraversals += 1;
+            if (UnityEngine.Random.value > sp.skipTrialPcnt)
+            {
+                rewardL.SetActive(true);
+                rewardR.SetActive(true);
+
+            }
+            else
+            {
+                rewardL.SetActive(false);
+                rewardR.SetActive(false);
+            }
+            // rewardL.SetActive(true);
+            // rewardR.SetActive(true);
+            
             tendFlag = 1;
             rr.t = rr.tvec[2];
+            sp.numTraversals += 1;
         }
 
     }
@@ -119,9 +131,11 @@ public class PC_YMazeTrain : MonoBehaviour
     IEnumerator RewardSequence(float pos)
     {   // water reward
 
-
+        rewardL.SetActive(false);
+        rewardR.SetActive(false);
         while (transform.position.z > 0)
         {
+            
             Debug.Log(cmd);
             //cmd = 12;
             if ((sp.AutoReward) & (rr.t/rr.t2dist > pos + 25))
@@ -129,6 +143,8 @@ public class PC_YMazeTrain : MonoBehaviour
                 
                 cmd = 4;
                 sp.numRewards++;
+                //rewardL.SetActive(false);
+                //rewardR.SetActive(false);
                 yield return new WaitForEndOfFrame();
                 break; 
 
@@ -136,19 +152,19 @@ public class PC_YMazeTrain : MonoBehaviour
             }
            
 
-            if ((dl.c_1 > 0))
+            if ((dl.c_1 > 0) & (rr.t/rr.t2dist < pos + 25))
             {
                 cmd = 4;
                 sp.numRewards++;
+                //rewardL.SetActive(false);
+                //rewardR.SetActive(false);
                 yield return new WaitForEndOfFrame();
                 break;
 
             }
             yield return null;
         }
-        rewardL.SetActive(false);
-        rewardR.SetActive(false);
-
+        
         yield return new WaitForEndOfFrame();
         cmd = 2;
         

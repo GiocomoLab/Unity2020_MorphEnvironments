@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -283,7 +283,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 7.5627007
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0.6666667
@@ -292,8 +292,8 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 30
-  field of view: 58.443115
-  orthographic: 0
+  field of view: 55.74073
+  orthographic: 1
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
@@ -1620,7 +1620,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 7.5627007
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0.33333334
@@ -1629,7 +1629,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 350
-  field of view: 58.443115
+  field of view: 55.74073
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1688,7 +1688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b544609e0eb4d2a448f2930e1e84f715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM7
+  port: COM4
   trash: 0
   c_1: 0
   r: 0
@@ -1705,7 +1705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90af08a82f2d2daa3a98ab38571e9282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM6
+  port: COM3
   delta_z: 0
   true_delta_z: 0
   speedBool: 0
@@ -1724,12 +1724,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkipTrialPcnt: 0.15
   AutoReward: 0
-  BlankLaser: 0
+  BlankLaser: 1
+  DreamLand: 0
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 60
+  numTrialsTotal: 150
   maxRewards: 30
   morph: 0
   rDur: 2
@@ -1786,7 +1787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: GRABDA7
+  mouse: GFP3
   notes: 
   imaging_region: CA1
 --- !u!114 &1236986239
@@ -2207,7 +2208,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 7.5627007
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -2216,7 +2217,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 30
-  field of view: 58.443115
+  field of view: 55.74073
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

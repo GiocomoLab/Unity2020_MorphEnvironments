@@ -162,7 +162,7 @@ public class SbxTTLs_RunTrain : MonoBehaviour
     {
         DateTime today = DateTime.Today;
         // set base directory
-        sendString("D" + "D:/mplitt/" + sp.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
+        sendString("D" + "F:/mplitt/" + sp.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
         yield return new WaitForSeconds(1.5f);
         // set first field/final directory
         sendString("A" + sp.sceneName);

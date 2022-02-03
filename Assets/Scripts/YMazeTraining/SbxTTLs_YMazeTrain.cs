@@ -145,13 +145,16 @@ public class SbxTTLs_YMazeTrain : MonoBehaviour
         scanning = 1;
         sp.scanning = 1;
 
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(2f);
         pc.cmd = 8;
+        yield return new WaitForEndOfFrame();
         yield return new WaitForSeconds(.01f);
         pc.cmd = 0;
         yield return new WaitForSeconds(10f);
         pc.cmd = 9;
-        yield return new WaitForSeconds(.01f);
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        //yield return new WaitForSeconds(.01f);
         pc.cmd = 0;
         Debug.Log("Press G to Start!");
 
@@ -162,7 +165,7 @@ public class SbxTTLs_YMazeTrain : MonoBehaviour
     {
         DateTime today = DateTime.Today;
         // set base directory
-        sendString("D" + "D:/mplitt/" + sp.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
+        sendString("D" + "F:/mplitt/" + sp.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
         yield return new WaitForSeconds(1.5f);
         // set first field/final directory
         sendString("A" + sp.sceneName);

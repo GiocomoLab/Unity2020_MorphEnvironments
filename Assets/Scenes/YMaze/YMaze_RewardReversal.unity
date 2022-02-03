@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -383,6 +383,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &179320906
@@ -728,7 +729,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 58.443115
+  field of view: 56.148354
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1599,6 +1600,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &578521154
@@ -1898,7 +1900,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 58.443115
+  field of view: 56.148354
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3903,7 +3905,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 58.443115
+  field of view: 56.148354
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -4681,7 +4683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2112e518358f0045807e24cf3246c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM6
+  port: COM3
   delta_z: 0
   true_delta_z: 0
   t2dist: 0
@@ -4721,7 +4723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc22a161c5b40614aad08b65bed0b1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM7
+  port: COM4
   trash: 0
   c_1: 0
   r: 0
@@ -4854,7 +4856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2480c70a3d6756a4fb3498cb9d8651c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: 4467333.1
+  mouse: Cre9
   AutoReward: 1
   numRewards: 0
   numRewards_manual: 0
@@ -4865,7 +4867,7 @@ MonoBehaviour:
   LR: -1
   skipTrialPcnt: 0.1
   localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
-  serverDirectory_pre: G:/My Drive/VR_Data/TwoTower
+  serverDirectory_pre: G:/My Drive/VR_Data/TwoTower/
   localDirectory: 
   serverDirectory: 
   localPrefix: 
@@ -4896,7 +4898,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2110517901}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
@@ -4948,5 +4950,6 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0

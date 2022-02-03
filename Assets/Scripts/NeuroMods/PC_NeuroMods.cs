@@ -95,6 +95,10 @@ public class PC_NeuroMods : MonoBehaviour
             reward_c = GameObject.Find("Reward_C");
             
             
+        } else if ((sp.sceneName == "NM_PizzaLandOnly"))
+        {
+            reward_a = GameObject.Find("Reward_B");
+            reward_b = GameObject.Find("Reward_C");
         }
         else
         {
@@ -309,6 +313,8 @@ public class PC_NeuroMods : MonoBehaviour
         rzoneFlag = 0;
         yield return new WaitForEndOfFrame();
         cmd = 2;
+        yield return new WaitForEndOfFrame();
+        cmd = 0;
 
     }
 

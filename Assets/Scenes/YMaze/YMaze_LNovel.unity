@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657892, g: 0.4964133, b: 0.57481736, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1354,6 +1354,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &537156743
@@ -1446,6 +1447,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &554344751
@@ -3022,7 +3024,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 58.443115
+  field of view: 55.951794
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3478,7 +3480,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 58.443115
+  field of view: 55.951794
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3817,12 +3819,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905677835}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0680eb24c62935846bb04eb667bf894b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NovelArm: -1
+  NovelArm: 1
   blockNumber: 0
 --- !u!114 &1905677837
 MonoBehaviour:
@@ -3855,7 +3857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2112e518358f0045807e24cf3246c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM6
+  port: COM3
   delta_z: 0
   true_delta_z: 0
   t2dist: 0
@@ -3895,7 +3897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc22a161c5b40614aad08b65bed0b1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM7
+  port: COM4
   trash: 0
   c_1: 0
   r: 0
@@ -3998,8 +4000,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2480c70a3d6756a4fb3498cb9d8651c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: 4467333.1
-  AutoReward: 0
+  mouse: GRABDAmut19
+  AutoReward: 1
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
@@ -4007,9 +4009,9 @@ MonoBehaviour:
   numTrialsTotal: 500
   maxRewards: 500
   LR: -1
-  skipTrialPcnt: 0.1
-  localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
-  serverDirectory_pre: G:/My Drive/VR_Data/TwoTower/
+  skipTrialPcnt: 0.15
+  localDirectory_pre: C:/Users/markp/VR_Data/NeuroMods/
+  serverDirectory_pre: G:\My Drive\InVivoDA\VR_Data\
   localDirectory: 
   serverDirectory: 
   localPrefix: 
@@ -4040,13 +4042,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905677835}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0a71e39d95d2c74f884487f1a819236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   blockNumber: 0
-  numFamBlocks: 3
+  numFamBlocks: 2
   blankLaser: 1
   longLastBlock: 1
 --- !u!1 &1918851146
@@ -4583,7 +4585,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 58.443115
+  field of view: 55.951794
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

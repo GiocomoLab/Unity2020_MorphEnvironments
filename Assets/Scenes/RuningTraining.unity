@@ -274,7 +274,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 58.443115
+  field of view: 55.74073
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -613,7 +613,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 58.443115
+  field of view: 55.74073
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1612,6 +1612,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &1164322290
@@ -1704,6 +1705,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &1218758584
@@ -2115,7 +2117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b469034ed57d02348a4b597198b68c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM6
+  port: COM3
   delta_z: 0
   true_delta_z: 0
   speedBool: 0
@@ -2132,7 +2134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b53bf44da969145afee69c4433f5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM7
+  port: COM4
   trash: 0
   c_1: 0
   r: 0
@@ -2165,23 +2167,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac0af4714f44b9459127bc4068499b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: GRABDA7
-  AutoReward: 0
-  mrd: 300
+  mouse: GFP2
+  AutoReward: 1
+  mrd: 150
   ard: 0
   fixedRewardSchedule: 0
-  MinTrainingDist: 100
+  MinTrainingDist: 150
   MaxTrainingDist: 300
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 400
-  maxRewards: 30
+  numTrialsTotal: 30
+  maxRewards: 200
   rDur: 2
   MultiReward: 1
   localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
-  serverDirectory_pre: G:/My Drive/VR_Data/TwoTower
+  serverDirectory_pre: G:/My Drive/VR_Data/TwoTower/
   localDirectory: 
   serverDirectory: 
   localPrefix: 
@@ -2347,7 +2349,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 58.443115
+  field of view: 55.74073
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
