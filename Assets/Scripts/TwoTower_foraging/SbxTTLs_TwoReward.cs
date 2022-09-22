@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-public class SbxTTLs_TwoTower : MonoBehaviour
+public class SbxTTLs_TwoReward : MonoBehaviour
 {
 
     private static int localPort;
@@ -22,12 +22,12 @@ public class SbxTTLs_TwoTower : MonoBehaviour
     UdpClient client;
 
 
-    private PC_TwoTower pc;
+    private PC_TwoReward pc;
     private int numTraversals_local = -1;
     private bool microscope_on = false;
     //private int numTraversals;
 
-    private SP_TwoTower sp;
+    private SP_TwoReward sp;
     private Notes notes;
     public int scanning = 0;
 
@@ -56,8 +56,8 @@ public class SbxTTLs_TwoTower : MonoBehaviour
 
         // for saving data
         GameObject player = GameObject.Find("Player");
-        sp = player.GetComponent<SP_TwoTower>();
-        pc = player.GetComponent<PC_TwoTower>();
+        sp = player.GetComponent<SP_TwoReward>();
+        pc = player.GetComponent<PC_TwoReward>();
         notes = player.GetComponent<Notes>();
         Debug.Log(sp.numTraversals);
 
@@ -137,6 +137,10 @@ public class SbxTTLs_TwoTower : MonoBehaviour
 
     IEnumerator ScannerToggle()
     {
+        //pc.cmd = 8;
+        //yield return new WaitForSeconds(.01f);
+        //pc.cmd = 0;
+        //Debug.Log(microscope_on);
         if (microscope_on)
         {
             pc.cmd = 13;
@@ -152,6 +156,7 @@ public class SbxTTLs_TwoTower : MonoBehaviour
         yield return new WaitForEndOfFrame();
         //yield return new WaitForEndOfFrame();
         pc.cmd = 0;
+     
     }
 
     IEnumerator ScannerStart()
@@ -159,16 +164,17 @@ public class SbxTTLs_TwoTower : MonoBehaviour
 
         //start first trial ttl1
 
-        scanning = 1;
-        sp.scanning = 1;
-
-        yield return new WaitForSeconds(2f);
+        scanning = 1; sp.scanning = 1;
         pc.cmd = 8;
+        yield return new WaitForEndOfFrame();
         yield return new WaitForSeconds(.01f);
+        //yield return new WaitForSeconds(.01f);
         pc.cmd = 0;
         yield return new WaitForSeconds(10f);
         pc.cmd = 9;
-        yield return new WaitForSeconds(.01f);
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        //yield return new WaitForSeconds(.01f);
         pc.cmd = 0;
         Debug.Log("Press G to Start!");
 

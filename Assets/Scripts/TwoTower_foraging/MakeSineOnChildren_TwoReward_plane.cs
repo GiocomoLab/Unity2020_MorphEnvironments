@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MakeSineOnChildren_TwoTower_plane : MonoBehaviour
+public class MakeSineOnChildren_TwoReward_plane : MonoBehaviour
 {
 
     private int dim1 = 120; //3600;
@@ -12,8 +12,8 @@ public class MakeSineOnChildren_TwoTower_plane : MonoBehaviour
     private float theta1 = 60f;
     private float theta2 = 10f;
 
-    private SP_TwoTower sp;
-    private PC_TwoTower pc;
+    private SP_TwoReward sp;
+    private PC_TwoReward pc;
     private float morph;
 
     private Color color;
@@ -26,7 +26,7 @@ public class MakeSineOnChildren_TwoTower_plane : MonoBehaviour
     private GameObject eWall;
     private GameObject wWall;
 
-    private SerialPort_TwoTower rr;
+    private SerialPort_TwoReward rr;
 //  private TrialOrdering_Test trialOrder;
 
     private int numTraversalsLocal = -1;
@@ -36,10 +36,10 @@ public class MakeSineOnChildren_TwoTower_plane : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        sp = player.GetComponent<SP_TwoTower>();
-        pc = player.GetComponent<PC_TwoTower>();
+        sp = player.GetComponent<SP_TwoReward>();
+        pc = player.GetComponent<PC_TwoReward>();
         //blackCam = GameObject.Find("Black Camera");
-        rr = player.GetComponent<SerialPort_TwoTower>();
+        rr = player.GetComponent<SerialPort_TwoReward>();
 //       trialOrder = player.GetComponent<TrialOrdering_Test>();
 
         eWall = GameObject.Find("East Wall");
@@ -50,17 +50,18 @@ public class MakeSineOnChildren_TwoTower_plane : MonoBehaviour
         
 
         morph = sp.morph;
+        morph = 0f;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (numTraversalsLocal != sp.numTraversals | morph != sp.morph)
+        if (numTraversalsLocal != sp.numTraversals) // | morph != sp.morph)
         {
             numTraversalsLocal = sp.numTraversals;
 
-            morph = sp.morph;
+            //morph = sp.morph;
 
             rr.speedBool = 0;
             //jitter = .2f * (UnityEngine.Random.value - .5f);
@@ -85,7 +86,8 @@ public class MakeSineOnChildren_TwoTower_plane : MonoBehaviour
 
         float xs = 0f;
         float ys = 0f;
-        float tmp_morph = morph + pc.wallJitter;
+        //float tmp_morph = morph + pc.wallJitter;
+        float tmp_morph = 0f;
         float theta = tmp_morph * theta1 + (1.0f - tmp_morph) * theta2 ;
         float f = tmp_morph * f1 + (1.0f - tmp_morph) * f2 ;
         float thetar = theta * Mathf.PI / 180.0f;

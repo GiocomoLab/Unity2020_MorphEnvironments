@@ -48,8 +48,9 @@ public class SP_TwoTower : MonoBehaviour
     private DebiasingAlg_TwoTower_4Way dbtt_4way;
     private DebiasingAlg_FreqMorph dbfm;
     private TrialOrdering_TwoTower tott;
-    private RR_TwoTower rr;
-    private DL_TwoTower dl;
+    //private RR_TwoTower rr;
+    //private DL_TwoTower dl;
+    private SerialPort_TwoTower dl;
     private PC_TwoTower pc;
     private SbxTTLs_TwoTower ttls;
     private Notes notes;
@@ -90,8 +91,9 @@ public class SP_TwoTower : MonoBehaviour
             
         }
         
-        rr = player.GetComponent<RR_TwoTower>();
-        dl = player.GetComponent<DL_TwoTower>();
+        //rr = player.GetComponent<RR_TwoTower>();
+        //dl = player.GetComponent<DL_TwoTower>();
+        dl = player.GetComponent<SerialPort_TwoTower>();
         pc = player.GetComponent<PC_TwoTower>();
         ttls = player.GetComponent<SbxTTLs_TwoTower>();
         notes = player.GetComponent<Notes>();
@@ -176,7 +178,7 @@ public class SP_TwoTower : MonoBehaviour
       _command.CommandText = "insert into data (time , morph , trialnum, pos, dz, lick, reward," +
       "tstart, teleport, rzone , toutzone, towerJitter," +
       " wallJitter , bckgndJitter , scanning, manrewards, cmd) values (" + Time.realtimeSinceStartup + "," + morph + "," + numTraversals +
-      "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
+      "," + transform.position.z + "," + dl.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
       pc.rzoneFlag + "," + pc.toutzoneFlag + ","  + pc.towerJitter + "," + pc.wallJitter + "," +
       pc.bckgndJitter + "," + ttls.scanning + "," + pc.mRewardFlag + "," + pc.cmd + ")";
       //Debug.Log(_command.CommandText);
@@ -201,7 +203,7 @@ public class SP_TwoTower : MonoBehaviour
 
         File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite",true);
 
-        string sess_connectionString = "Data Source=G:\\My Drive\\VR_Data\\TwoTower\\behavior.sqlite;Version=3;";
+        string sess_connectionString = "Data Source=G:\\My Drive\\VR_BScope\\TwoTower\\behavior.sqlite;Version=3;";
         IDbConnection db_connection;
         db_connection = (IDbConnection) new SqliteConnection(sess_connectionString);
         db_connection.Open();

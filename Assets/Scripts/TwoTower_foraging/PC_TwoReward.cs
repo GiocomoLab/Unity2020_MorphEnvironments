@@ -9,28 +9,28 @@ using System.Threading;
 
 
 
-public class PC_TwoTower : MonoBehaviour
+public class PC_TwoReward : MonoBehaviour
 {
 
 
     private GameObject player;
-    
+
     private GameObject blackCam;
     private GameObject panoCam;
     private GameObject reward0;
     private GameObject reward1;
     private GameObject reward;
-    
-    
+
+
 
 
     private Rigidbody rb;
 
-    private SP_TwoTower sp;
-    private SerialPort_TwoTower dl;
-    //private RR_TwoTower rotary;
+    private SP_TwoReward sp;
+    private SerialPort_TwoReward serial_port;
 
     private bool reward_dir;
+
 
     private Vector3 initialPosition;
     private Vector3 movement;
@@ -41,16 +41,13 @@ public class PC_TwoTower : MonoBehaviour
     //private bool rflag = true;
 
     public int cmd = 2;
-    private bool flashFlag = false;
+    //private bool flashFlag = false;
     private float LastRewardTime;
     private int prevReward = 0;
 
     public ArrayList LickHistory;
     public bool bckgndOn = true;
 
-    public float towerJitter;
-    public float wallJitter;
-    public float bckgndJitter;
 
     public int mRewardFlag = 0;
     public int rzoneFlag = 0;
@@ -67,29 +64,19 @@ public class PC_TwoTower : MonoBehaviour
 
 
         GameObject player = GameObject.Find("Player");
-        sp = player.GetComponent<SP_TwoTower>();
-        dl = player.GetComponent<SerialPort_TwoTower>();
+        sp = player.GetComponent<SP_TwoReward>();
+        serial_port = player.GetComponent<SerialPort_TwoReward>();
+        reward = GameObject.Find("Reward");
 
-        if (sp.sceneName == "TwoTower_foraging_mod")
-        {
-           
-            reward = GameObject.Find("Reward");
-        }
-        else
-        {
-            
-            reward0 = GameObject.Find("Reward0");
-            reward1 = GameObject.Find("Reward1");
-        }
-       // Debug.Log(sp.sceneName);
+        // Debug.Log(sp.sceneName);
 
 
 
         panoCam = GameObject.Find("panoCamera");
-        panoCam.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
+        panoCam.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
         initialPosition = new Vector3(0f, 6f, -50.0f);
 
-        
+
         //towerJitter = .2f * (UnityEngine.Random.value - .5f);
         //wallJitter = .2f * (UnityEngine.Random.value - .5f);
         //bckgndJitter = .2f * (UnityEngine.Random.value - .5f);
@@ -99,20 +86,6 @@ public class PC_TwoTower : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(FlagCheck());//del; coroutine runs in background until you tell it to stop
-        if ((sp.sceneName != "SingleMorph") & (sp.sceneName != "SingleMorph_Reversal"))
-        {
-            Debug.Log("failed");
-            towerJitter = .2f * (UnityEngine.Random.value - .5f);
-            wallJitter = .2f * (UnityEngine.Random.value - .5f);
-            bckgndJitter = .2f * (UnityEngine.Random.value - .5f);
-        }
-        else
-        {
-            towerJitter = 0f;
-            wallJitter = 0f;
-            bckgndJitter = 0f;
-        }
 
     }
 
@@ -120,7 +93,7 @@ public class PC_TwoTower : MonoBehaviour
     {
 
         // make sure rotation angle is 0
-        transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
+        transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
 
         // end game after appropriate number of trials
         if ((sp.numTraversals >= sp.numTrialsTotal) | (sp.numRewards >= sp.maxRewards & transform.position.z < 0f))
@@ -129,7 +102,7 @@ public class PC_TwoTower : MonoBehaviour
 
         }
 
-        if (dl.r > 0 & dl.rflag < 1) { StartCoroutine(DeliverReward(dl.r)); dl.rflag = 1; }; // deliver appropriate reward
+        if (serial_port.r > 0 & serial_port.rflag < 1) { StartCoroutine(DeliverReward(serial_port.r)); serial_port.rflag = 1; }; // deliver appropriate reward
 
         // manual rewards and punishments
         mRewardFlag = 0;
@@ -152,25 +125,15 @@ public class PC_TwoTower : MonoBehaviour
 
         if (other.tag == "Reward")
         {
-           // if (rflag)
-           // {
-           StartCoroutine(RewardSequence(transform.position.z));
+            // if (rflag)
+            // {
+            StartCoroutine(RewardSequence(transform.position.z));
             //}
-            
+
         }
         else if (other.tag == "Teleport")
         {
             //rflag = true;
-
-            if ((sp.sceneName != "SingleMorph") & (sp.sceneName != "SingleMorph_Reversal"))
-            {
-                towerJitter = .2f * (UnityEngine.Random.value - .5f);
-                wallJitter = .2f * (UnityEngine.Random.value - .5f);
-                bckgndJitter = .2f * (UnityEngine.Random.value - .5f);
-            }
-            //towerJitter = .2f * (UnityEngine.Random.value - .5f);
-            //wallJitter = .2f * (UnityEngine.Random.value - .5f);
-            //bckgndJitter = .2f * (UnityEngine.Random.value - .5f);
 
 
             sp.numTraversals += 1;
@@ -186,7 +149,7 @@ public class PC_TwoTower : MonoBehaviour
         {
             cmd = 0;
             tstartFlag = 1;
-            
+
             //rflag = true;
         }
         else if (other.tag == "Timeout")
@@ -205,19 +168,11 @@ public class PC_TwoTower : MonoBehaviour
     }
 
 
-    IEnumerator FlagCheck() {
-      while (true) {
-        yield return new WaitForEndOfFrame();
-        tendFlag = 0;
-        tstartFlag = 0;//useful for lick left lick right, delete ref
-      }
-      yield return null;
 
-    }
     IEnumerator InterTrialTimeout()
     {
 
-        dl.toutBool = 0f;
+        serial_port.toutBool = 0f;
         if (prevReward == 0) // omission
         {
             yield return new WaitForSeconds(5f + UnityEngine.Random.value * 5f); // 10f); // 7f);
@@ -225,10 +180,10 @@ public class PC_TwoTower : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(1f + UnityEngine.Random.value*4f);
+            yield return new WaitForSeconds(1f + UnityEngine.Random.value * 4f);
         }
 
-        dl.toutBool = 1f;
+        serial_port.toutBool = 1f;
         prevReward = 0;
         yield return null;
     }
@@ -241,7 +196,7 @@ public class PC_TwoTower : MonoBehaviour
     IEnumerator RewardSequence(float pos)
     {   // water reward
         rzoneFlag = 1;
-       
+
         //if (sp.morph == .5f) // guarantee no timeout if morph = .5
         //{
         //    StartCoroutine(DeliverReward(5));
@@ -250,17 +205,26 @@ public class PC_TwoTower : MonoBehaviour
         //bool counted = true; transform is the player's set of var--pos for xyz in diff dim
         while ((transform.position.z <= pos + 75) & (transform.position.z > 100)) // & (rflag))  //& (counted)
         {
-            
-            
+
+            cmd = 12;
             if ((sp.AutoReward) & (transform.position.z > pos + 50)) // & (counted) )
             {
-     
-               // if (transform.position.z > pos + 50)
+
+                // if (transform.position.z > pos + 50)
                 //{
-                cmd = 4; //arduino; if lick, dispense r
-                //counted = false;
-                //rflag = false;
-                    
+                if (sp.morph > 0)
+                {
+                    cmd = 14;
+                }
+                else
+                {
+                    cmd = 4;
+                    sp.numRewards += 1;
+                }
+                //cmd = 4; //arduino; if lick, dispense r
+                         //counted = false;
+                         //rflag = false;
+
                 // yield return new WaitForSeconds(.01f);
                 //cmd = 0;
                 LickHistory.Add(.0f);
@@ -268,64 +232,41 @@ public class PC_TwoTower : MonoBehaviour
                 sp.numRewards += 1;
                 yield return new WaitForEndOfFrame();
                 break;
-                   
-                //}
-               // else
-                //{
-                //    cmd = 12;
-                //}
-           // } else
-            //{
-             //   cmd = 12;
+
             }
 
-            if ((dl.c_1 > 0))// & (counted))
+            if ((serial_port.c_1 > 0))// & (counted))
             {
-                    //counted = false;
-                    //rflag = false;
-                cmd = 4;
+                //counted = false;
+                //rflag = false;
+                if (sp.morph > 0)
+                {
+                    cmd = 14;
+                }
+                else
+                {
+                    cmd = 4;
+                    sp.numRewards += 1;
+                }
                 sp.numRewards += 1;
-                if (sp.morph + wallJitter + bckgndJitter<=.5) //(sp.morph == 0)
-                {
 
-                    LickHistory.Add(-1f); //.66f);
-                }
-                else if (sp.morph + wallJitter + bckgndJitter>.5) //(sp.morph == 1)
-                {
-
-                    LickHistory.Add(1f); //.33f);
-                }
-                else // morph trials
-                {
-
-                    LickHistory.Add(.0f);
-                }
-                //LickHistory.Add(0f);
+                LickHistory.Add(0f);
                 yield return new WaitForEndOfFrame();
                 break;
             }
             yield return new WaitForEndOfFrame();
-           // yield return null;
+            // yield return null;
         }
         //yield return new WaitForEndOfFrame();
         //cmd = 2;
         //yield return new WaitForSeconds(.1f);
 
         //yield return null;
-        if (sp.sceneName == "TwoTower_foraging_mod")
-        {
-            
-            reward.SetActive(false);
-        }
-        else
-        {
-           
-            reward0.SetActive(false); reward1.SetActive(false);
-        }
+        reward.SetActive(false);
         
-        
-        
-        
+
+
+
         //cmd = 2;
         rzoneFlag = 0;
         yield return new WaitForEndOfFrame();
@@ -337,35 +278,24 @@ public class PC_TwoTower : MonoBehaviour
     IEnumerator TimeoutSequence(float pos)
     {
         toutzoneFlag = 1;
-        if (sp.morph == .5f)
-        {
-            NoSkipTO = false;
-        }
-        else
-        {
-            NoSkipTO = true;
-        }
+        //if (sp.morph == .5f)
+        //{
+        //    NoSkipTO = false;
+        //}
+        //else
+        //{
+        //    NoSkipTO = true;
+        //}
+        NoSkipTO = false;
 
-        while ((transform.position.z<=pos + 65) )
+        while ((transform.position.z <= pos + 65))
         {
             cmd = 0;
-            if (dl.c_1 > 0)
+            if (serial_port.c_1 > 0)
             {
-                if (sp.morph == 0)
-                {
 
-                    LickHistory.Add(1f); //.66f);
-                }
-                else if (sp.morph == 1)
-                {
 
-                    LickHistory.Add(-1f); //.33f);
-                }
-                else // morph trials
-                {
-
-                    LickHistory.Add(.0f);
-                }
+                LickHistory.Add(.0f);
 
                 toutzoneFlag = 0;
                 tendFlag = 1;
@@ -375,33 +305,26 @@ public class PC_TwoTower : MonoBehaviour
                 bckgndOn = true;
 
 
-                if ((sp.sceneName != "SingleMorph") & (sp.sceneName != "SingleMorph_Reversal"))
-                {
-                    towerJitter = .2f * (UnityEngine.Random.value - .5f);
-                    wallJitter = .2f * (UnityEngine.Random.value - .5f);
-                    bckgndJitter = .2f * (UnityEngine.Random.value - .5f);
-                }
-                
-                
+
                 // rflag = true;
                 // avoid .5 timeout just end trial
                 if (NoSkipTO)
                 {
-                    dl.toutBool = 0f;
+                    serial_port.toutBool = 0f;
                     yield return new WaitForSeconds(5f);
-                  //  if (sp.morph == 0f)
-                  //  {
-                  //      yield return new WaitForSeconds(5f);
-                   // }
+                    //  if (sp.morph == 0f)
+                    //  {
+                    //      yield return new WaitForSeconds(5f);
+                    // }
                     // sp.morph = nextMorph;
                     yield return new WaitForSeconds(5f);
-                    dl.toutBool = 1f;
+                    serial_port.toutBool = 1f;
                 }
                 else
                 {
-                    dl.toutBool = 0f;
+                    serial_port.toutBool = 0f;
                     yield return new WaitForSeconds(1f);
-                    dl.toutBool = 1f;
+                    serial_port.toutBool = 1f;
                 }
                 NoSkipTO = true;
 
@@ -436,14 +359,22 @@ public class PC_TwoTower : MonoBehaviour
             //sp.numRewards += 1;
             yield return null;
         }
-        else if (r ==4)
+        else if (r == 4)
         {
-            cmd = 4;
-            //sp.numRewards += 1;
+            if (sp.morph > 0)
+            {
+                cmd = 14;
+            }
+            else
+            {
+                cmd = 4;
+            }
             yield return new WaitForSeconds(0.01f);
+            //sp.numRewards += 1;
             cmd = 0;
+
         }
-        else if (r==5)
+        else if (r == 5)
         {
             prevReward = 1;
             yield return null;
