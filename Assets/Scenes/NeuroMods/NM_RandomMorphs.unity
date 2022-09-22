@@ -463,7 +463,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 30
-  field of view: 55.74073
+  field of view: 55.646786
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1130,7 +1130,7 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 200
+  numTrialsTotal: 80
   maxRewards: 200
   morph: 0
   rDur: 2
@@ -2688,7 +2688,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 350
-  field of view: 55.74073
+  field of view: 55.646786
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2971,7 +2971,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 30
-  field of view: 55.74073
+  field of view: 55.646786
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

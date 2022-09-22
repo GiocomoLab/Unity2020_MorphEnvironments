@@ -338,6 +338,7 @@ public class PC_NeuroMods : MonoBehaviour
             yield return new WaitForEndOfFrame();
             yield return new WaitForEndOfFrame();
             cmd = 0;
+            yield return new WaitForEndOfFrame();
         }
         {
             yield return null;
