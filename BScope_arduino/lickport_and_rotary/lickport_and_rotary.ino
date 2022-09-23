@@ -1,4 +1,4 @@
-#include <FastGPIO.h>
+// #include <FastGPIO.h>
 
 #define lickport_pin 7
 int lickport_state = LOW;
@@ -12,11 +12,11 @@ long start = 0;
 
 
 
-#define c_EncoderPinA 2
-#define c_EncoderPinB 11
+// #define c_EncoderPinA 2
+// #define c_EncoderPinB 11
 
-volatile bool _EncoderBSet;
-volatile long _EncoderTicks = 0;
+// volatile bool _EncoderBSet;
+// volatile long _EncoderTicks = 0;
 
 
 #define solenoid_pin 6
@@ -39,8 +39,8 @@ void setup() {
   Serial.begin (115200);
 
   
-  FastGPIO::Pin<c_EncoderPinB>::setInputPulledUp();
-  attachInterrupt(digitalPinToInterrupt(c_EncoderPinA), HandleMotorInterruptA, RISING);
+//   FastGPIO::Pin<c_EncoderPinB>::setInputPulledUp();
+//   attachInterrupt(digitalPinToInterrupt(c_EncoderPinA), HandleMotorInterruptA, RISING);
 
   pinMode (lickport_pin,INPUT);
   digitalWrite(lickport_pin,LOW);
@@ -166,25 +166,25 @@ void loop() {
     }
     
     Serial.print(lc);
-    Serial.print("\t");
-    Serial.print(r);
-    Serial.print("\t");
-    Serial.print(_EncoderTicks);     
+//     Serial.print("\t");
+//     Serial.print(r);
+//     Serial.print("\t");
+//     Serial.print(_EncoderTicks);     
     Serial.println("");
     lc = 0; // reset lick count
     r=0; // reset reward count
-    _EncoderTicks=0; // reset rotary encoder
+//     _EncoderTicks=0; // reset rotary encoder
 
   }
   
 
 }
 
-void HandleMotorInterruptA()
-{
-   // read B pin
-   _EncoderBSet = FastGPIO::Pin<c_EncoderPinB>::isInputHigh();
-  // and adjust counter + if A leads B 
-   _EncoderTicks += _EncoderBSet ? -1 : +1;
+// void HandleMotorInterruptA()
+// {
+//    // read B pin
+//    _EncoderBSet = FastGPIO::Pin<c_EncoderPinB>::isInputHigh();
+//   // and adjust counter + if A leads B 
+//    _EncoderTicks += _EncoderBSet ? -1 : +1;
   
-}
+// }
