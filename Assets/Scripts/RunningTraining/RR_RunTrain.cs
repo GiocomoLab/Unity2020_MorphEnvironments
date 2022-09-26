@@ -10,7 +10,7 @@ using System.Threading;
 public class RR_RunTrain : MonoBehaviour
 {
 
-    public string port = "COM6";
+    public string port = "COM3";
     private int pulses;
     private SerialPort _serialPort;
     private int delay;
@@ -32,7 +32,7 @@ public class RR_RunTrain : MonoBehaviour
     void Start()
     {
         // connect to Arduino uno serial port
-        connect(port, 57600, true, 4);
+        connect(port, 115200, true, 4);
         Debug.Log("Connected to rotary encoder serial port");
 
         // set speed
