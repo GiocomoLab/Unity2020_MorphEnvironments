@@ -274,7 +274,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.74073
+  field of view: 58.443115
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -613,7 +613,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 55.74073
+  field of view: 58.443115
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2134,7 +2134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b53bf44da969145afee69c4433f5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM4
+  port: COM7
   trash: 0
   c_1: 0
   r: 0
@@ -2167,12 +2167,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac0af4714f44b9459127bc4068499b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: GFP2
+  mouse: test
   AutoReward: 1
-  mrd: 150
+  mrd: 50
   ard: 0
   fixedRewardSchedule: 0
-  MinTrainingDist: 150
+  MinTrainingDist: 50
   MaxTrainingDist: 300
   numRewards: 0
   numRewards_manual: 0
@@ -2182,7 +2182,7 @@ MonoBehaviour:
   maxRewards: 200
   rDur: 2
   MultiReward: 1
-  localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
+  localDirectory_pre: C:/Users/thorlabs_vr_rig/VR_Data/TwoTower/
   serverDirectory_pre: G:/My Drive/VR_Data/TwoTower/
   localDirectory: 
   serverDirectory: 
@@ -2349,7 +2349,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.74073
+  field of view: 58.443115
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
