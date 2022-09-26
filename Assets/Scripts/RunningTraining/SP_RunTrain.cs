@@ -106,8 +106,9 @@ public class SP_RunTrain : MonoBehaviour
         _connection.Open();
         _command = _connection.CreateCommand();
         _command.CommandText = "create table data (time REAL, trialnum INT, pos REAL, dz REAL, lick INT, reward INT," +
-        "tstart INT, teleport INT, scanning INT, manrewards INT, cmd INT)";
+        "tstart INT, teleport INT, scanning INT, manrewards INT, autoreward INT, cmd INT)";
         _command.ExecuteNonQuery();
+    }
 
 
     void LateUpdate() {
@@ -119,9 +120,9 @@ public class SP_RunTrain : MonoBehaviour
 	}
 
         _command.CommandText = "insert into data (time , trialnum, pos, dz, lick, reward," +
-        "tstart, teleport, scanning, manrewards, cmd) values (" + Time.realtimeSinceStartup + "," + numTraversals +
+        "tstart, teleport, scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + numTraversals +
         "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
-        ttls.scanning + "," + pc.mRewardFlag + "," + pc.cmd + ")";
+        ttls.scanning + "," + pc.mRewardFlag + "," + _autoReward + "," + pc.cmd + ")";
 
         //Debug.Log(_command.CommandText);
         _command.ExecuteNonQuery();
