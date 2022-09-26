@@ -13,6 +13,7 @@ public class SP_RunTrain : MonoBehaviour
     public string mouse;
 
     public bool AutoReward = true;
+    private int _autoReward = 0;
     public float mrd = 30.0f; // minimum reward distance
     public float ard = 10.0f; // additional reward distance
     public bool fixedRewardSchedule = false; // proportion of trials with towers on both sides
@@ -31,8 +32,8 @@ public class SP_RunTrain : MonoBehaviour
 
     public bool MultiReward = true;
     // for saving data
-    public string localDirectory_pre = "C:/Users/markp/VR_Data/TwoTower/";
-    public string serverDirectory_pre = "G:/My Drive/VR_Data/TwoTower";
+    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/TwoTower/";
+    public string serverDirectory_pre = "H:\\My Drive\\VR_Data\\";
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;
@@ -46,7 +47,7 @@ public class SP_RunTrain : MonoBehaviour
     private SbxTTLs_RunTrain ttls;
 
 
-    public int session;
+    public int session = 1;
     private DateTime today;
     private IDbConnection _connection;
     private IDbCommand _command;
@@ -107,10 +108,15 @@ public class SP_RunTrain : MonoBehaviour
         _command.CommandText = "create table data (time REAL, trialnum INT, pos REAL, dz REAL, lick INT, reward INT," +
         "tstart INT, teleport INT, scanning INT, manrewards INT, cmd INT)";
         _command.ExecuteNonQuery();
-    }
 
-    void LateUpdate()
-    {
+
+    void LateUpdate() {
+	if (AutoReward) {
+	    _autoReward = 1;
+	}
+	else {
+	    _autoReward = 0;
+	}
 
         _command.CommandText = "insert into data (time , trialnum, pos, dz, lick, reward," +
         "tstart, teleport, scanning, manrewards, cmd) values (" + Time.realtimeSinceStartup + "," + numTraversals +
@@ -134,13 +140,13 @@ public class SP_RunTrain : MonoBehaviour
 
         File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite", true);
 
-        string sess_connectionString = "Data Source=G:\\My Drive\\VR_Data\\TwoTower\\behavior.sqlite;Version=3;";
+        string sess_connectionString = "Data Source=H:\\My Drive\\VR_Data\\behavior_sessions.db;Version=3;";
         IDbConnection db_connection;
-        db_connection = (IDbConnection)new SqliteConnection(sess_connectionString);
+        db_connection = (IDbConnection) new SqliteConnection(sess_connectionString);
         db_connection.Open();
         IDbCommand db_command = db_connection.CreateCommand();
         string tmp_date = today.ToString("dd_MM_yyyy");
-        db_command.CommandText = "insert into sessions (MouseName, DateFolder, SessionNumber, Track, RewardCount, Imaging) values ('" + mouse + "', '" + tmp_date + "', "
+	db_command.CommandText = "insert into sessions (MouseName, DateFolder, SessionNumber, Track, RewardCount, Imaging) values ('" + mouse + "', '" + tmp_date + "', "
             + session + ",'" + sceneName + "', " + numRewards + ", " + scanning + ")";
 
         Debug.Log(db_command.CommandText);

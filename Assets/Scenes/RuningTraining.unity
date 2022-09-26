@@ -2183,7 +2183,7 @@ MonoBehaviour:
   rDur: 2
   MultiReward: 1
   localDirectory_pre: C:/Users/thorlabs_vr_rig/VR_Data/TwoTower/
-  serverDirectory_pre: G:/My Drive/VR_Data/TwoTower/
+  serverDirectory_pre: H:/My Drive/VR_Data/
   localDirectory: 
   serverDirectory: 
   localPrefix: 

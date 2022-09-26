@@ -164,7 +164,7 @@ public class SP_NeuroMods : MonoBehaviour
 
         File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite",true);
 
-        string sess_connectionString = "Data Source=G:\\My Drive\\InVivoDA\\VR_Data\\behavior_sessions.db;Version=3;";
+        string sess_connectionString = "Data Source=H:\\My Drive\\VR_Data\\behavior_sessions.db;Version=3;";
         IDbConnection db_connection;
         db_connection = (IDbConnection) new SqliteConnection(sess_connectionString);
         db_connection.Open();
