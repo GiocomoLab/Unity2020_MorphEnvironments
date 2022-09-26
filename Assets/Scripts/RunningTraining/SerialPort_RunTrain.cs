@@ -66,7 +66,7 @@ public class SerialPort_RunTrain : MonoBehaviour
             string[] lick_list = lick_raw.Split('\t');
             c_1 = int.Parse(lick_list[0]);
             r = int.Parse(lick_list[1]);
-            pulses = int.Parse(lick_list[2]);
+            pulses = -1*int.Parse(lick_list[2]);
             true_delta_z =  pulses * realSpeed;
             delta_z =  startBool * speedBool * pulses * realSpeed;
             Vector3 movement = new Vector3(0.0f, 0.0f, delta_z);
