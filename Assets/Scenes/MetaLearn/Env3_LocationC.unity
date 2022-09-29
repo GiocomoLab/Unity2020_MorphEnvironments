@@ -292,7 +292,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 30
-  field of view: 114.54854
+  field of view: 55.888496
   orthographic: 1
   orthographic size: 5
   m_Depth: 0
@@ -1628,7 +1628,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 350
-  field of view: 114.54854
+  field of view: 55.888496
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1733,8 +1733,8 @@ MonoBehaviour:
   maxRewards: 30
   morph: 0.5
   rDur: 2
-  localDirectory_pre: C:/Users/markp/VR_Data/NeuroMods/
-  serverDirectory_pre: G:\My Drive\InVivoDA\VR_Data\
+  localDirectory_pre: C:/Users/markp/VR_Data/MetaLearn/
+  serverDirectory_pre: H:\My Drive\VR_Data\
   localDirectory: 
   serverDirectory: 
   localPrefix: 
@@ -2216,7 +2216,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 30
-  field of view: 114.54854
+  field of view: 55.888496
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
