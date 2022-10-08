@@ -74,7 +74,7 @@ public class DL_LickportTraining : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        _serialPort.Write("8,");
+        _serialPort.Write("13,");
     }
 
     private void connect(string serialPortName, Int32 baudRate, bool autoStart, int delay)
