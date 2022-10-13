@@ -635,7 +635,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 350
-  field of view: 55.807945
+  field of view: 56.41131
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1558,7 +1558,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 30
-  field of view: 55.807945
+  field of view: 56.41131
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1614,7 +1614,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 972532269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae7dfd5ca0342148a85dfaa74cd5327, type: 3}
+  m_Script: {fileID: 11500000, guid: e3318df70947541488ce13f8911ef21e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ChangeRewardTrial: 30
@@ -1800,7 +1800,7 @@ MonoBehaviour:
   morph: 0
   rDur: 2
   localDirectory_pre: C:/Users/markp/VR_Data/MetaLearn/
-  serverDirectory_pre: H:\My Drive\VR_Data\
+  serverDirectory_pre: H:\My Drive\MetaLearn\VR_Data\
   localDirectory: 
   serverDirectory: 
   localPrefix: 
@@ -1820,7 +1820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: test
+  mouse: GCAMP3
   notes: 
   imaging_region: CA1
 --- !u!4 &972532282
@@ -2888,7 +2888,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 30
-  field of view: 55.807945
+  field of view: 56.41131
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
