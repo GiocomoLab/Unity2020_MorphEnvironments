@@ -15,7 +15,7 @@
  void setup() { 
    pinMode (encoder0PinA,INPUT);
    pinMode (encoder0PinB,INPUT);
-   Serial.begin (115200);
+   Serial.begin (57600);
    
  } 
 

@@ -32,7 +32,7 @@ public class RR_RunTrain : MonoBehaviour
     void Start()
     {
         // connect to Arduino uno serial port
-        connect(port, 115200, true, 4);
+        connect(port, 57600, true, 4);
         Debug.Log("Connected to rotary encoder serial port");
 
         // set speed
