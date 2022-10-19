@@ -14,7 +14,7 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
     private PC_NeuroMods pc;
     private Vector3 initialPosition;
 
-
+    private int switchCount = 0;
 
     private int numTraversalsLocal = -1;
 
@@ -40,7 +40,7 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
         {
             numTraversalsLocal = sp.numTraversals;
 
-            if (sp.NumTraversals > 5)
+            if (numTraversalsLocal > 5)
             {
             
                 if (numTraversalsLocal%20==0)
@@ -58,6 +58,7 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
                 {
                     Debug.Log("Switch");
                     sp.morph = 1.0f; // Mathf.Abs(sp.morph - 1.0f);
+		    switchCount = switchCount + 1;
                 }
             }
 
