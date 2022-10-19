@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
+public class EnvControl_MetaLearn_123_Random : MonoBehaviour
 {
 
     private GameObject reward1;
@@ -16,9 +16,11 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
     private PC_NeuroMods pc;
     private Vector3 initialPosition;
 
-    private int switchCount = 0;
+
 
     private int numTraversalsLocal = -1;
+
+    public float[] trialOrder;
 
 
     // Use this for initialization
@@ -27,8 +29,6 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
         player = GameObject.Find("Player");
         sp = player.GetComponent<SP_NeuroMods>();
         pc = player.GetComponent<PC_NeuroMods>();
-        
-        sp.morph = 0f;
 
         reward3 = GameObject.Find("Reward_A");
         reward1 = GameObject.Find("Reward_B");
@@ -37,46 +37,29 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
         morphmaze = GameObject.Find("MorphMaze");
         xmaze = GameObject.Find("XMaze");
 
-        morphmaze.SetActive(true);
-        xmaze.SetActive(false);
+        trialOrder = new float[sp.numTrialsTotal];
+        for (int i = 0; i < sp.numTrialsTotal / 3; i++)
+        {
+            trialOrder[3 * i] = 0f;
+            trialOrder[3 * i + 1] = 1f;
+            trialOrder[3 * i + 2] = 0.5f;
+        }
+        trialOrder = FisherYates(trialOrder);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (numTraversalsLocal != sp.numTraversals)
+        if ((numTraversalsLocal != sp.numTraversals) & (player.transform.position.z<0))
         {
             numTraversalsLocal = sp.numTraversals;
-
-            if ((numTraversalsLocal%10==0) & (numTraversalsLocal > 5))
-            {
-                Debug.Log("Switch");
-
-                if (numTraversalsLocal%30==0)
-                {
-                    sp.morph = 0f; // Mathf.Abs(sp.morph - 1.0f);
-                    morphmaze.SetActive(true);
-                    xmaze.SetActive(false);
-                }
-                else if ( ((numTraversalsLocal-10)==0) | ((numTraversalsLocal-10)%30==0) )
-                {
-                    sp.morph = 1.0f; // Mathf.Abs(sp.morph - 1.0f);
-                    morphmaze.SetActive(true);
-                    xmaze.SetActive(false);
-                }
-                else if ( ((numTraversalsLocal-20)==0) | ((numTraversalsLocal-20)%30==0) )
-                {
-                    sp.morph = 0.5f;
-                    morphmaze.SetActive(false);
-                    xmaze.SetActive(true);
-                }
-                    
-                //switchCount = switchCount + 1;
-                //Debug.Log(switchCount);
-            }
+            sp.morph = trialOrder[numTraversalsLocal];
 
             if (sp.morph==0f)
             {
+                morphmaze.SetActive(true);
+                xmaze.SetActive(false);
+
                 if (UnityEngine.Random.value < sp.SkipTrialPcnt)
                 {
                     reward1.SetActive(false);
@@ -93,6 +76,9 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
 
             else if (sp.morph==1.0f)
             {
+                morphmaze.SetActive(true);
+                xmaze.SetActive(false);
+
                 if (UnityEngine.Random.value < sp.SkipTrialPcnt)
                 {
                     reward2.SetActive(false);
@@ -109,6 +95,8 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
             }
             else
             {
+                morphmaze.SetActive(false);
+                xmaze.SetActive(true);
 
                 if (UnityEngine.Random.value < sp.SkipTrialPcnt)
                 {
@@ -123,9 +111,37 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
                 reward1.SetActive(false);
                 reward2.SetActive(false);
             }
-            
+
 
 
         }
+    }
+
+    float[] FisherYates(float[] origArray)
+    {
+        // then shuffle values (Fisher-Yates shuffle)
+        int[] order = new int[origArray.Length];
+
+        for (int i = 0; i < origArray.Length; i++)
+        {
+            order[i] = i;
+        }
+
+
+        for (int i = order.Length - 1; i >= 0; i--)
+        {
+            int r = (int)UnityEngine.Mathf.Round(UnityEngine.Random.Range(0, i));
+            int tmp = order[i];
+            order[i] = order[r];
+            order[r] = tmp;
+        }
+
+        float[] permArray = new float[origArray.Length];
+        for (int i = 0; i < origArray.Length; i++)
+        {
+            permArray[i] = origArray[order[i]];
+        }
+
+        return permArray;
     }
 }
