@@ -10,6 +10,8 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
     private GameObject reward2;
     private GameObject reward3;
     private GameObject player;
+    private GameObject morphmaze;
+    private GameObject xmaze;
     private SP_NeuroMods sp;
     private PC_NeuroMods pc;
     private Vector3 initialPosition;
@@ -31,6 +33,12 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
         reward3 = GameObject.Find("Reward_A");
         reward1 = GameObject.Find("Reward_B");
         reward2 = GameObject.Find("Reward_C");
+
+	morphmaze = GameObject.Find("MorphMaze");
+	xmaze = GameObject.Find("XMaze");
+
+	morphmaze.SetActive(true);
+	xmaze.SetActive(false);
     }
 
     // Update is called once per frame
@@ -46,21 +54,29 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
 
                 if (numTraversalsLocal%30==0)
                 {
-                    Debug.Log("Switch");
                     sp.morph = 0f; // Mathf.Abs(sp.morph - 1.0f);
-                }
+                
+		    morphmaze.SetActive(true);
+		    xmaze.SetActive(false);
+		}
                 else if ( ((numTraversalsLocal-10)==0) | ((numTraversalsLocal-10)%30==0) )
                 {
                     sp.morph = 1.0f; // Mathf.Abs(sp.morph - 1.0f);
+
+		    morphmaze.SetActive(true);
+		    xmaze.SetActive(false);
 		}
 		else if ( ((numTraversalsLocal-20)==0) | ((numTraversalsLocal-20)%30==0) )
 		
 		{
                     sp.morph = 0.5f;
+
+		    morphmaze.SetActive(false);
+		    xmaze.SetActive(true);
                 }
                     
-                switchCount = switchCount + 1;
-		Debug.Log(switchCount);
+                //switchCount = switchCount + 1;
+		//Debug.Log(switchCount);
             }
 
             if (sp.morph==0f)
