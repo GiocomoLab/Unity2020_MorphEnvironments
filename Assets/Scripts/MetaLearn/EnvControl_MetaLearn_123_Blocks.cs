@@ -40,7 +40,7 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
         {
             numTraversalsLocal = sp.numTraversals;
 
-            if (numTraversalsLocal%10==0) && (numTraversalsLocal > 5)
+            if ((numTraversalsLocal%10==0) & (numTraversalsLocal > 5))
             {
                 Debug.Log("Switch");
 
@@ -49,20 +49,18 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
                     Debug.Log("Switch");
                     sp.morph = 0f; // Mathf.Abs(sp.morph - 1.0f);
                 }
-                else
+                else if ( ((numTraversalsLocal-10)==0) | ((numTraversalsLocal-10)%30==0) )
                 {
-                    if (switchCount==0) || (switchCount%3==0)
-                    {
-                        sp.morph = 1.0f; // Mathf.Abs(sp.morph - 1.0f);
-                    }
-                    else
-                    {
-                        sp.morph = 0.5f;
-                    }
+                    sp.morph = 1.0f; // Mathf.Abs(sp.morph - 1.0f);
+		}
+		else if ( ((numTraversalsLocal-20)==0) | ((numTraversalsLocal-20)%30==0) )
+		
+		{
+                    sp.morph = 0.5f;
                 }
                     
                 switchCount = switchCount + 1;
-
+		Debug.Log(switchCount);
             }
 
             if (sp.morph==0f)
