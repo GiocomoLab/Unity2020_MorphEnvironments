@@ -40,26 +40,29 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
         {
             numTraversalsLocal = sp.numTraversals;
 
-            if (numTraversalsLocal > 5)
+            if (numTraversalsLocal%10==0) && (numTraversalsLocal > 5)
             {
-            
-                if (numTraversalsLocal%20==0)
-                {   
-                    Debug.Log("Switch");
-                    sp.morph = 0.5f; // Mathf.Abs(sp.morph - 1.0f);
-                    //reward.transform.position = new Vector3(0f, 0f, 250.0f + 150.0f * UnityEngine.Random.value); ;
-                }
-                else if (numTraversalsLocal%30==0)
+                Debug.Log("Switch");
+
+                if (numTraversalsLocal%30==0)
                 {
                     Debug.Log("Switch");
                     sp.morph = 0f; // Mathf.Abs(sp.morph - 1.0f);
                 }
-                else if (numTraversalsLocal%10==0)
+                else
                 {
-                    Debug.Log("Switch");
-                    sp.morph = 1.0f; // Mathf.Abs(sp.morph - 1.0f);
-		    switchCount = switchCount + 1;
+                    if (switchCount==0) || (switchCount%3==0)
+                    {
+                        sp.morph = 1.0f; // Mathf.Abs(sp.morph - 1.0f);
+                    }
+                    else
+                    {
+                        sp.morph = 0.5f;
+                    }
                 }
+                    
+                switchCount = switchCount + 1;
+
             }
 
             if (sp.morph==0f)
