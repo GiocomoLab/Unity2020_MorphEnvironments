@@ -274,7 +274,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.888496
+  field of view: 55.97795
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -613,7 +613,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 55.888496
+  field of view: 55.97795
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2167,7 +2167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac0af4714f44b9459127bc4068499b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: test
+  mouse: GCAMP8
   AutoReward: 0
   mrd: 300
   ard: 0
@@ -2179,7 +2179,7 @@ MonoBehaviour:
   rewardFlag: 0
   numTraversals: 0
   numTrialsTotal: 200
-  maxRewards: 200
+  maxRewards: 30
   rDur: 2
   MultiReward: 1
   localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
@@ -2349,7 +2349,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.888496
+  field of view: 55.97795
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
