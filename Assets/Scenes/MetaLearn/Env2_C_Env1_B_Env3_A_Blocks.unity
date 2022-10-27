@@ -5151,9 +5151,9 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 30
+  numTrialsTotal: 60
   maxRewards: 150
-  morph: 0
+  morph: 1
   rDur: 2
   localDirectory_pre: C:/Users/markp/VR_Data/MetaLearn/
   serverDirectory_pre: H:\My Drive\MetaLearn\VR_Data\
@@ -5176,7 +5176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: GCAMP9
+  mouse: GCAMP8
   notes: 
   imaging_region: CA1
 --- !u!4 &1934751537
@@ -5203,7 +5203,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1934751524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4be617b487222ce40b34190a7dbd1f8c, type: 3}
+  m_Script: {fileID: 11500000, guid: 805b739ca7cccea4b912a93b6c3348d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2039317201
