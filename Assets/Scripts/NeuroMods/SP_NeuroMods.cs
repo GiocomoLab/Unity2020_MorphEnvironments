@@ -31,7 +31,7 @@ public class SP_NeuroMods : MonoBehaviour
     public int maxRewards = 200;
 
 
-    public float morph = 0;
+    public float morph = 0.0f;
     public float rDur = 2;
 
     // for saving data

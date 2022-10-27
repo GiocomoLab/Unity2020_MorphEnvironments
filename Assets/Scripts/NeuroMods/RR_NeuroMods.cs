@@ -10,7 +10,7 @@ using System.Threading;
 public class RR_NeuroMods : MonoBehaviour
 {
 
-    public string port = "COM6";
+    public string port = "COM4";
     private int pulses;
     private SerialPort _serialPort;
     private int delay;
