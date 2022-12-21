@@ -4,9 +4,9 @@ Unity code for Mark's morph environments, runnning training track, and Mark & Ma
 
 ## Branch notes
 
-`master` -- stable code on NLW rig, updated after completion of GRABDA2m experiments
+`master` -- stable code on NLW rig
 
-`dev` -- development branch of master for MetaLearn tracks on NLW rig
+`dev` -- Mari's development branch of master on NLW rig
 
 `cap_breakout` -- modified code (particularly arduino code) for use of capacitve breakout boards,  \
 initially designed for Thorlabs rig and implemented on boltVR training rig
@@ -14,7 +14,7 @@ initially designed for Thorlabs rig and implemented on boltVR training rig
 - now unstable
 
 `cap_single_arduino` -- stable copy of `cap_breakout` that Mari made before messing with `cap_breakout`  \
-on the Thorlabs rig (TO-DO: make sure rotary lines are not commented out!)
+on the Thorlabs rig. Make sure to re-upload lickport_and_rotary arduino code to run with one arduino.
 
 `boltvr_single_arduino` -- stable single arduino verion on the boltVR rig, originally from `cap_breakout`  \
 but modified with Linux ports and paths
