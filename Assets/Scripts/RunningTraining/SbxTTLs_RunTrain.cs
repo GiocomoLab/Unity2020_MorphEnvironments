@@ -17,10 +17,9 @@ public class SbxTTLs_RunTrain : MonoBehaviour
 
     private SP_RunTrain sp;
     public int scanning = 0;
-    private bool microscope_on = false;
 
     private static int localPort;
-    private static string IP = "171.65.17.36";  // define in init
+    private static string IP = "10.124.53.26";  // define in init
     private static int port = 7000;  // define in init
 
     // "connection" things
@@ -133,19 +132,8 @@ public class SbxTTLs_RunTrain : MonoBehaviour
 
     IEnumerator ScannerToggle()
     {
-        if (microscope_on)
-        {
-            pc.cmd = 13;
-            microscope_on = false;
-        } else
-        {
-            pc.cmd = 8;
-            microscope_on = true;
-        }
-        
-        //yield return new WaitForSeconds(.01f);
-        yield return new WaitForEndOfFrame();
-        //yield return new WaitForEndOfFrame();
+        pc.cmd = 8;
+        yield return new WaitForSeconds(.01f);
         pc.cmd = 0;
     }
 
@@ -174,7 +162,7 @@ public class SbxTTLs_RunTrain : MonoBehaviour
     {
         DateTime today = DateTime.Today;
         // set base directory
-        sendString("D" + "D:/mplitt/" + sp.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
+        sendString("D" + "F:/mplitt/" + sp.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
         yield return new WaitForSeconds(1.5f);
         // set first field/final directory
         sendString("A" + sp.sceneName);
