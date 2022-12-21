@@ -28,6 +28,8 @@ public class EnvControl_MetaLearn_12_Blocks_RewardSwap: MonoBehaviour
 
         reward0 = GameObject.Find("Reward_A");
         reward1 = GameObject.Find("Reward_B");
+        reward0.transform.position = new Vector3(0f, 0f, 225.0f);
+        reward1.transform.position = new Vector3(0f, 0f, 345.0f);
     }
 
     // Update is called once per frame

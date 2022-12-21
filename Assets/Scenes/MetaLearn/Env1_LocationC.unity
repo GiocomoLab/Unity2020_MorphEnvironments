@@ -1731,7 +1731,7 @@ MonoBehaviour:
   rewardFlag: 0
   numTraversals: 0
   numTrialsTotal: 100
-  maxRewards: 100
+  maxRewards: 30
   morph: 0
   rDur: 2
   localDirectory_pre: C:/Users/markp/VR_Data/MetaLearn/

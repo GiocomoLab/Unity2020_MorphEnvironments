@@ -179,7 +179,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 550
-  field of view: 56.905777
+  field of view: 56.878525
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -836,7 +836,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 300
-  field of view: 56.905777
+  field of view: 56.878525
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -4631,8 +4631,8 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 120
-  maxRewards: 80
+  numTrialsTotal: 80
+  maxRewards: 100
   morph: 0.5
   rDur: 2
   localDirectory_pre: C:/Users/markp/VR_Data/MetaLearn/
@@ -4656,7 +4656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: test
+  mouse: GCAMP8
   notes: 
   imaging_region: CA1
 --- !u!4 &1640426138
@@ -4860,7 +4860,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 300
-  field of view: 56.905777
+  field of view: 56.878525
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
