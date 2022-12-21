@@ -31,12 +31,12 @@ public class SP_NeuroMods : MonoBehaviour
     public int maxRewards = 200;
 
 
-    public float morph = 0;
+    public float morph = 0.0f;
     public float rDur = 2;
 
     // for saving data
     public string localDirectory_pre = "C:/Users/markp/VR_Data/NeuroMods/";
-    public string serverDirectory_pre = "G:\\My Drive\\InVivoDA\\VR_Data\\";
+    public string serverDirectory_pre = "H:\\My Drive\\VR_Data\\";
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;
@@ -164,7 +164,7 @@ public class SP_NeuroMods : MonoBehaviour
 
         File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite",true);
 
-        string sess_connectionString = "Data Source=G:\\My Drive\\InVivoDA\\VR_Data\\behavior_sessions.db;Version=3;";
+        string sess_connectionString = "Data Source=H:\\My Drive\\VR_Data\\behavior_sessions.db;Version=3;";
         IDbConnection db_connection;
         db_connection = (IDbConnection) new SqliteConnection(sess_connectionString);
         db_connection.Open();
