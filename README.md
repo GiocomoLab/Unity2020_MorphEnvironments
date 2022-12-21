@@ -14,7 +14,7 @@ initially designed for Thorlabs rig and implemented on boltVR training rig
 - now unstable
 
 `cap_single_arduino` -- stable copy of `cap_breakout` that Mari made before messing with `cap_breakout`  \
-on the Thorlabs rig (TO-DO: make sure rotary lines are not commented out!)
+on the Thorlabs rig. Should run on a single arduino for the rotary and lickport.
 
 `boltvr_single_arduino` -- stable single arduino verion on the boltVR rig, originally from `cap_breakout`  \
 but modified with Linux ports and paths
