@@ -36,7 +36,7 @@ int scan_flag = 0 ;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin (115200);
+  Serial.begin(57600);
 
   
 //   FastGPIO::Pin<c_EncoderPinB>::setInputPulledUp();
@@ -160,20 +160,20 @@ void loop() {
    
    
     cmd = Serial.parseInt(); 
-
+  
     if (scan_flag>0) { // if scanning
       digitalWrite(ttl_0_pin,HIGH); // send frame syncing ttl to scanbox
     }
     
     Serial.print(lc);
-//     Serial.print("\t");
-//     Serial.print(r);
-//     Serial.print("\t");
-//     Serial.print(_EncoderTicks);     
+    Serial.print("\t");
+    Serial.print(r);
+  //    Serial.print("\t");
+  //     Serial.print(_EncoderTicks);     
     Serial.println("");
     lc = 0; // reset lick count
     r=0; // reset reward count
-//     _EncoderTicks=0; // reset rotary encoder
+  //     _EncoderTicks=0; // reset rotary encoder
 
   }
   

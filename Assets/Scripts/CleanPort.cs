@@ -9,7 +9,7 @@ using System.Threading;
 public class CleanPort : MonoBehaviour
 {
 
-    public string port = "COM4";
+    public string port = "COM7";
     private SerialPort _serialPort;
     private int delay;
     private int cmd = 5;
@@ -18,7 +18,7 @@ public class CleanPort : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        connect(port, 115200, true, 4);
+        connect(port, 57600, true, 4);
     }
 
     // Update is called once per frame

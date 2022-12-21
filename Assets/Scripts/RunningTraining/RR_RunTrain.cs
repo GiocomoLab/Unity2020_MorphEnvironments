@@ -10,7 +10,7 @@ using System.Threading;
 public class RR_RunTrain : MonoBehaviour
 {
 
-    public string port = "COM6";
+    public string port = "COM3";
     private int pulses;
     private SerialPort _serialPort;
     private int delay;
@@ -26,7 +26,10 @@ public class RR_RunTrain : MonoBehaviour
     private static bool created = false;
     public void Awake()
     {
-
+        // connect to playerController script
+        GameObject player = GameObject.Find("Player");
+        pc = player.GetComponent<PC_RunTrain>();
+        sp = player.GetComponent<SP_RunTrain>();
     }
 
     void Start()
@@ -38,10 +41,6 @@ public class RR_RunTrain : MonoBehaviour
         // set speed
         speedBool = 0;
 
-        // connect to playerController script
-        GameObject player = GameObject.Find("Player");
-        pc = player.GetComponent<PC_RunTrain>();
-        sp = player.GetComponent<SP_RunTrain>();
     }
 
     void Update()
@@ -51,6 +50,7 @@ public class RR_RunTrain : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G)) { startBool = 1; };
         // read quadrature encoder
         _serialPort.Write("\n");
+
         try
         {
             pulses = int.Parse(_serialPort.ReadLine());
