@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44659358, g: 0.49642974, b: 0.57482505, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -417,13 +417,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46da7f098a1c784fb90507aa7492286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: GCAMP7
+  mouse: test
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
   rDur: 2
-  localDirectory_pre: C:/Users/thorlabs_vr_rig/VR_Data/TwoTower/
-  serverDirectory_pre: G:/My Drive/VR_Data/TwoTower/
+  localDirectory_pre: /home/boltvr/VR_Data/
+  serverDirectory_pre: 
   sceneName: 
   session: 0
   scanning: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe718d9195243141b3e51905bd0b64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM3
+  port: /dev/ttyACM2
   true_delta_z: 0
 --- !u!114 &1650706557
 MonoBehaviour:
@@ -547,7 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3326c40e459d8d04281b5d9f8bacfecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM7
+  port: /dev/ttyACM0
   c_1: 0
   r: 0
   rflag: 1
