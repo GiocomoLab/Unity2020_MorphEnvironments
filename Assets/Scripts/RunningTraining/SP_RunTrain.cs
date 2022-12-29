@@ -32,8 +32,8 @@ public class SP_RunTrain : MonoBehaviour
 
     public bool MultiReward = true;
     // for saving data
-    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/TwoTower/";
-    public string serverDirectory_pre = "H:\\My Drive\\VR_Data\\";
+    public string localDirectory_pre = "/home/boltvr/VR_Data/";
+    public string serverDirectory_pre;
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;
@@ -70,15 +70,15 @@ public class SP_RunTrain : MonoBehaviour
         Debug.Log(today.ToString("dd_MM_yyyy"));
         sceneName = SceneManager.GetActiveScene().name;
         localDirectory = localDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
-        serverDirectory = serverDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
+        //serverDirectory = serverDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
         if (!Directory.Exists(localDirectory))
         {
             Directory.CreateDirectory(localDirectory);
         }
-        if (!Directory.Exists(serverDirectory))
-        {
-            Directory.CreateDirectory(serverDirectory);
-        }
+        //if (!Directory.Exists(serverDirectory))
+        //{
+        //    Directory.CreateDirectory(serverDirectory);
+        //}
 
 
 
@@ -139,9 +139,10 @@ public class SP_RunTrain : MonoBehaviour
         _connection.Close();
         _connection = null;
 
-        File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite", true);
+        //File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite", true);
 
-        string sess_connectionString = "Data Source=H:\\My Drive\\VR_Data\\behavior_sessions.db;Version=3;";
+        string sess_connectionString = "Data Source=" + localDirectory_pre + "behavior_sessions.db;Version=3;";
+        //string sess_connectionString = "Data Source=H:\\My Drive\\VR_Data\\behavior_sessions.db;Version=3;";
         IDbConnection db_connection;
         db_connection = (IDbConnection) new SqliteConnection(sess_connectionString);
         db_connection.Open();

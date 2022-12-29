@@ -21,8 +21,8 @@ public class SP_LickportTraining : MonoBehaviour
 
 
     // for saving data
-    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/TwoTower/";
-    public string serverDirectory_pre = "H:/My Drive/VR_Data/";
+    public string localDirectory_pre = "/home/boltvr/VR_Data/";
+    public string serverDirectory_pre;
     private string localDirectory;
     private string serverDirectory;
     private string localPrefix;
@@ -57,15 +57,15 @@ public class SP_LickportTraining : MonoBehaviour
         Debug.Log(today.ToString("dd_MM_yyyy"));
         sceneName = SceneManager.GetActiveScene().name;
         localDirectory = localDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
-        serverDirectory = serverDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
+       // serverDirectory = serverDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
         if (!Directory.Exists(localDirectory))
         {
             Directory.CreateDirectory(localDirectory);
         }
-        if (!Directory.Exists(serverDirectory))
-        {
-            Directory.CreateDirectory(serverDirectory);
-        }
+       // if (!Directory.Exists(serverDirectory))
+       // {
+       //     Directory.CreateDirectory(serverDirectory);
+       // }
 
 
 
@@ -115,17 +115,20 @@ public class SP_LickportTraining : MonoBehaviour
         _connection.Close();
         _connection = null;
 
-        File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite", true);
+        //File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite", true);
 
-        string sess_connectionString = "Data Source=H:\\My Drive\\VR_Data\\behavior_sessions.db;Version=3;";
+        string connectionString = "Data Source=" + localDirectory_pre + "behavior_sessions.db;Version=3;";
+        
+	//string sess_connectionString = "Data Source=H:\\My Drive\\VR_Data\\behavior_sessions.db;Version=3;";
         IDbConnection db_connection;
-        db_connection = (IDbConnection)new SqliteConnection(sess_connectionString);
+        db_connection = (IDbConnection)new SqliteConnection(connectionString);
         db_connection.Open();
         IDbCommand db_command = db_connection.CreateCommand();
         string tmp_date = today.ToString("dd_MM_yyyy");
         db_command.CommandText = "insert into sessions (MouseName, DateFolder, SessionNumber, Track, RewardCount, Imaging) values ('" + mouse + "', '" + tmp_date + "', "
             + session + ",'" + sceneName + "', " + numRewards + ", " + scanning + ")";
 
+	Debug.Log(connectionString);
         Debug.Log(db_command.CommandText);
 
         db_command.ExecuteNonQuery();
