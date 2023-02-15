@@ -16,13 +16,14 @@ public class SP_LickportTraining : MonoBehaviour
     public int numRewards = 0;
     public int numRewards_manual = 0;
     public int rewardFlag = 0;
+    public int maxRewards = 100;
 
     public float rDur = 2f; // timeout duration between available rewards
 
 
     // for saving data
     public string localDirectory_pre = "C:/Users/markp/VR_Data/TwoTower/";
-    public string serverDirectory_pre = "G:/My Drive/VR_Data/TwoTower/";
+    public string serverDirectory_pre = "H:/My Drive/VR_Data/";
     private string localDirectory;
     private string serverDirectory;
     private string localPrefix;
@@ -117,7 +118,7 @@ public class SP_LickportTraining : MonoBehaviour
 
         File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite", true);
 
-        string sess_connectionString = "Data Source=G:\\My Drive\\VR_Data\\TwoTower\\behavior.sqlite;Version=3;";
+        string sess_connectionString = "Data Source=H:\\My Drive\\VR_Data\\behavior_sessions.db;Version=3;";
         IDbConnection db_connection;
         db_connection = (IDbConnection)new SqliteConnection(sess_connectionString);
         db_connection.Open();

@@ -417,13 +417,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46da7f098a1c784fb90507aa7492286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: GCAMP3
+  mouse: test
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
   rDur: 2
-  localDirectory_pre: C:/Users/markp/VR_Data/TwoTower/
-  serverDirectory_pre: G:/My Drive/VR_Data/TwoTower/
+  localDirectory_pre: C:/Users/markp/VR_Data/
+  serverDirectory_pre: H:/My Drive/VR_Data/
   sceneName: 
   session: 0
   scanning: 0
