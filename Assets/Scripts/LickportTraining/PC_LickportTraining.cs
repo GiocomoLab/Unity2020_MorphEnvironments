@@ -47,7 +47,15 @@ public class PC_LickportTraining : MonoBehaviour
     {
 
         //cmd = 10;
-        if (dl.r > 0) { StartCoroutine(DeliverReward(dl.r)); dl.r = 0; }; // deliver appropriate reward 
+        if (dl.r > 0) { StartCoroutine(DeliverReward(dl.r)); sp.numRewards++; dl.r = 0; }; // deliver appropriate reward 
+	
+	// end game after appropriate number of trials
+        if (sp.numRewards >= sp.maxRewards)
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+
+
+        }
 
         // manual rewards and punishments
         mRewardFlag = 0;

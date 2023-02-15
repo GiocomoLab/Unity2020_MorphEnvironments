@@ -16,6 +16,7 @@ public class SP_LickportTraining : MonoBehaviour
     public int numRewards = 0;
     public int numRewards_manual = 0;
     public int rewardFlag = 0;
+    public int maxRewards = 100;
 
     public float rDur = 2f; // timeout duration between available rewards
 
