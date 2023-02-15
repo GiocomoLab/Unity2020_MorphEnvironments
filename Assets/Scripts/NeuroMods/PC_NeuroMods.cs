@@ -213,7 +213,7 @@ public class PC_NeuroMods : MonoBehaviour
     {
 
         rotary.toutBool = 0f;
-        if (sbxttls.scanning>0)
+        if ((sbxttls.scanning>0) & sp.BlankLaser)
         {
             if (prevReward == 0) // omission or probe trial 
             {
