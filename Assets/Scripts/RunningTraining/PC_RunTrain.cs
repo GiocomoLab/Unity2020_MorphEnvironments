@@ -72,7 +72,11 @@ public class PC_RunTrain : MonoBehaviour
 
         }
 
-        if (dl.r > 0) { StartCoroutine(DeliverReward(dl.r)); sp.numRewards++; dl.r = 0; }; // deliver appropriate reward
+        if (dl.r > 0) 
+	{
+		StartCoroutine(DeliverReward(dl.r));
+		dl.r = 0;
+	}; // deliver appropriate reward
 
         // manual rewards and punishments
         mRewardFlag = 0;
@@ -176,7 +180,7 @@ public class PC_RunTrain : MonoBehaviour
                     {
                         StartCoroutine(MoveReward());
                     }
-                    sp.numRewards++;
+                    sp.numRewards += 1;
                     //counted = false;
                     break; // if (sp.MultiReward) { break;  };
                            //break;
@@ -190,7 +194,9 @@ public class PC_RunTrain : MonoBehaviour
 
             if ((dl.c_1 > 0))// & (counted))
             {
-                if (sp.MultiReward)
+                cmd = 4;
+		sp.numRewards += 1;
+		if (sp.MultiReward)
                 {
 
                     StartCoroutine(MoveReward());
@@ -219,7 +225,8 @@ public class PC_RunTrain : MonoBehaviour
         if (r == 4)
         {
             cmd = 4;
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForEndOfFrame();
+	    yield return new WaitForEndOfFrame();
             cmd = 0;
         }
     }
