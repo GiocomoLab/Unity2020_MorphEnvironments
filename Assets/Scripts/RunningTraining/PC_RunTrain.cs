@@ -80,6 +80,7 @@ public class PC_RunTrain : MonoBehaviour
         {
             mRewardFlag = 1;
             StartCoroutine(DeliverReward(4));
+	    sp.numRewards += 1;
         }
 
 
