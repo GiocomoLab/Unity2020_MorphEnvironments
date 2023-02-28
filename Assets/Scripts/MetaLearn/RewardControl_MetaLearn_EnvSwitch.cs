@@ -25,7 +25,6 @@ public class RewardControl_MetaLearn_EnvSwitch: MonoBehaviour
         sp = player.GetComponent<SP_NeuroMods>();
         pc = player.GetComponent<PC_NeuroMods>();
 
-
         reward0 = GameObject.Find("Reward_A");
         reward1 = GameObject.Find("Reward_B");
     }
@@ -44,6 +43,17 @@ public class RewardControl_MetaLearn_EnvSwitch: MonoBehaviour
                 sp.morph = Mathf.Abs(sp.morph - 1.0f);
                 //reward.transform.position = new Vector3(0f, 0f, 250.0f + 150.0f * UnityEngine.Random.value); ;
             }
+
+	    if ((numTraversalsLocal >= ChangeRewardTrial) & (numTraversalsLocal <= ChangeRewardTrial+9))
+	    {
+		    sp.AutoReward = true;
+	    }
+	    else
+	    {
+		    sp.AutoReward = false;
+	    }
+
+
 
             if (sp.morph==0f)
             {
