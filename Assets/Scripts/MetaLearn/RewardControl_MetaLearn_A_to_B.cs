@@ -52,6 +52,15 @@ public class RewardControl_MetaLearn_A_to_B: MonoBehaviour
                 reward_a.SetActive(false);
             }
 
+            if ((numTraversalsLocal >= ChangeRewardTrial) & (numTraversalsLocal <= ChangeRewardTrial + 9))
+            {
+                sp.AutoReward = true;
+            }
+            else
+            {
+                sp.AutoReward = false;
+            }
+
 
             if (UnityEngine.Random.value < sp.SkipTrialPcnt)
             {
