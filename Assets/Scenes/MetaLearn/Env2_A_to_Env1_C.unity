@@ -667,7 +667,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 30
-  field of view: 56.08937
+  field of view: 115.476494
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1519,7 +1519,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 350
-  field of view: 56.08937
+  field of view: 115.476494
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2065,7 +2065,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311874761}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 225}
+  m_LocalPosition: {x: 0, y: 0, z: 345}
   m_LocalScale: {x: 50, y: 20, z: 50}
   m_Children: []
   m_Father: {fileID: 471841844}
@@ -2854,7 +2854,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 30
-  field of view: 56.08937
+  field of view: 115.476494
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3312,15 +3312,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkipTrialPcnt: 0.15
   AutoReward: 0
-  BlankLaser: 0
+  BlankLaser: 1
   DreamLand: 0
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 80
+  numTrialsTotal: 32
   maxRewards: 150
-  morph: 0
+  morph: 1
   rDur: 2
   localDirectory_pre: C:/Users/markp/VR_Data/MetaLearn/
   serverDirectory_pre: H:\My Drive\MetaLearn\VR_Data\
@@ -3343,7 +3343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: GCAMP11
+  mouse: test
   notes: 
   imaging_region: CA1
 --- !u!4 &1934751537
@@ -3515,7 +3515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121087567}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 345}
+  m_LocalPosition: {x: 0, y: 0, z: 105}
   m_LocalScale: {x: 50, y: 20, z: 50}
   m_Children: []
   m_Father: {fileID: 471841844}
