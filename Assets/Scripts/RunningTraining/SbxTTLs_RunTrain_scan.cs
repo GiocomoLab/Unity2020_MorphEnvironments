@@ -7,8 +7,19 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-public class SbxTTLs_RunTrain : MonoBehaviour
+public class SbxTTLs_RunTrain_scan : MonoBehaviour
 {
+
+    private static int localPort;
+
+    // prefs 
+
+    private static string IP = "10.124.53.26";  // define in init
+    private static int port = 7000;  // define in init
+
+    // "connection" things
+    IPEndPoint remoteEndPoint;
+    UdpClient client;
 
 
     private PC_RunTrain pc;
@@ -16,38 +27,15 @@ public class SbxTTLs_RunTrain : MonoBehaviour
     //private int numTraversals;
 
     private SP_RunTrain sp;
-    public int scanning = 0;
-
-    private static int localPort;
-    private static string IP = "10.124.53.26";  // define in init
-    private static int port = 7000;  // define in init
-
-
     private Notes notes;
-    // "connection" things
-    IPEndPoint remoteEndPoint;
-    UdpClient client;
-
-
-
-    public float p1_x = 0;
-    public float p1_y = 0;
-    public float p1_z = 0;
-
-    public float p2_x = 0;
-    public float p2_y = 0;
-    public float p2_z = 0;
-
-    private float dx;
-    private float dy;
-    private float dz;
+    public int scanning = 0;
 
     public void Awake()
     {
         remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), port);
         client = new UdpClient();
 
-        dx = p1_x - p2_x; dy = p1_y - p2_y; dz = p1_z - p2_z;
+        
     }
 
     void Start()
@@ -57,10 +45,11 @@ public class SbxTTLs_RunTrain : MonoBehaviour
         GameObject player = GameObject.Find("Player");
         sp = player.GetComponent<SP_RunTrain>();
         pc = player.GetComponent<PC_RunTrain>();
-	notes = player.GetComponent<Notes>();
+        notes = player.GetComponent<Notes>();
         Debug.Log(sp.numTraversals);
 
     }
+
 
     // sendData
     private void sendString(string message)
@@ -90,42 +79,23 @@ public class SbxTTLs_RunTrain : MonoBehaviour
             StartCoroutine(set_filenames());
         }
 
-        if (Input.GetKeyDown(KeyCode.S) & (scanning == 0))
+        if (Input.GetKeyDown(KeyCode.S) & (scanning==0))
         {
-
+            
             StartCoroutine(ScannerStart());
             Debug.Log("start");
         };
 
 
 
-        if (Input.GetKeyDown(KeyCode.T) & (scanning == 0))
+        if (Input.GetKeyDown(KeyCode.T) & (scanning==0))
         {
             StartCoroutine(ScannerToggle());
             Debug.Log("toggle");
 
         };
 
-        if (numTraversals_local != sp.numTraversals)
-        {
-            numTraversals_local++;
-            if ((dx != 0) | (dy != 0) | (dz != 0))
-            {
-                if (numTraversals_local > 0)
-                {
-                    if (numTraversals_local % 2 == 1)
-                    {
-                        move_laser(dx, dy, dz);
-                    }
-                    else
-                    {
-                        move_laser(-dx, -dy, -dz);
-                    }
-                }
-            }
-
-        }
-
+        
     }
 
     void OnApplicationQuit()
@@ -145,16 +115,17 @@ public class SbxTTLs_RunTrain : MonoBehaviour
 
         //start first trial ttl1
 
-        scanning = 1;
-        sp.scanning = 1;
-
-        yield return new WaitForSeconds(2f);
+        scanning = 1; sp.scanning = 1;
         pc.cmd = 8;
+        yield return new WaitForEndOfFrame();
         yield return new WaitForSeconds(.01f);
+        //yield return new WaitForSeconds(.01f);
         pc.cmd = 0;
         yield return new WaitForSeconds(10f);
         pc.cmd = 9;
-        yield return new WaitForSeconds(.01f);
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        //yield return new WaitForSeconds(.01f);
         pc.cmd = 0;
         Debug.Log("Press G to Start!");
 
@@ -165,7 +136,7 @@ public class SbxTTLs_RunTrain : MonoBehaviour
     {
         DateTime today = DateTime.Today;
         // set base directory
-        sendString("D" + "F:/mplitt/" + notes.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
+        sendString("D" + "F:/M&M/" + notes.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
         yield return new WaitForSeconds(1.5f);
         // set first field/final directory
         sendString("A" + sp.sceneName);

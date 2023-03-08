@@ -10,7 +10,7 @@ public class SP_RunTrain : MonoBehaviour
 {
 
 
-    public string mouse;
+    private string mouse;
 
     public bool AutoReward = true;
     public float mrd = 30.0f; // minimum reward distance
@@ -43,7 +43,8 @@ public class SP_RunTrain : MonoBehaviour
     private RR_RunTrain rr;
     private DL_RunTrain dl;
     private PC_RunTrain pc;
-    private SbxTTLs_RunTrain ttls;
+    private SbxTTLs_RunTrain_scan ttls;
+    private Notes notes;
 
 
     public int session;
@@ -63,7 +64,9 @@ public class SP_RunTrain : MonoBehaviour
         rr = player.GetComponent<RR_RunTrain>();
         dl = player.GetComponent<DL_RunTrain>();
         pc = player.GetComponent<PC_RunTrain>();
-        ttls = player.GetComponent<SbxTTLs_RunTrain>();
+        ttls = player.GetComponent<SbxTTLs_RunTrain_scan>();
+	notes = player.GetComponent<Notes>();
+	mouse = notes.mouse;
 
         today = DateTime.Today;
         Debug.Log(today.ToString("dd_MM_yyyy"));
