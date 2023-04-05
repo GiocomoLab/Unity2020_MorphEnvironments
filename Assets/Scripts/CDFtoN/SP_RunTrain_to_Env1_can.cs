@@ -6,7 +6,7 @@ using System;
 using System.Data;
 using Mono.Data.Sqlite;
 
-public class SP_RunTrain_to_Env1 : MonoBehaviour
+public class SP_RunTrain_to_Env1_can : MonoBehaviour
 {
 
 
