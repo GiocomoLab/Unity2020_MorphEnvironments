@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 using System.IO;
@@ -9,26 +9,23 @@ using System.Net;
 using System.Net.Sockets;
 
 
-
-
-public class PC_RunTrain_to_Env1 : MonoBehaviour
+public class PC_runtrain_fixreward : MonoBehaviour
 {
 
-
     private GameObject player;
-    
+
     private GameObject blackCam;
     private GameObject panoCam;
-    private GameObject reward_t;
- //   private GameObject reward_b;
- //   private GameObject reward_c;
+    // private GameObject reward_t;
+    //   private GameObject reward_b;
+    //   private GameObject reward_c;
     private GameObject reward;
 
     private Rigidbody rb;
-    private SP_RunTrain_to_Env1 sp;
-    private DL_RunTrain_to_Env1 dl;
-    private RR_RunTrain_to_Env1 rotary;
-    private SbxTTLs_RunTrain_to_Env1 sbxttls;
+    private SP_runtrain_fixreward sp;
+    private DL_runtrain_fixreward dl;
+    private RR_runtrain_fixreward rotary;
+    private SbxTTLs_runtrain_fixreward sbxttls;
 
     private bool reward_dir;
 
@@ -60,42 +57,42 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
     IPEndPoint remoteEndPoint;
     UdpClient client;
 
-   // public void Awake()
-   // {
-        
-   // }
+    // public void Awake()
+    // {
+
+    // }
 
 
     public void Start()
     {
         GameObject player = GameObject.Find("Player");
-        sp = player.GetComponent<SP_RunTrain_to_Env1>();
-        rotary = player.GetComponent<RR_RunTrain_to_Env1>();
-        dl = player.GetComponent<DL_RunTrain_to_Env1>();
-        sbxttls = player.GetComponent<SbxTTLs_RunTrain_to_Env1>();
+        sp = player.GetComponent<SP_runtrain_fixreward>();
+        rotary = player.GetComponent<RR_runtrain_fixreward>();
+        dl = player.GetComponent<DL_runtrain_fixreward>();
+        sbxttls = player.GetComponent<SbxTTLs_runtrain_fixreward>();
         panoCam = GameObject.Find("panoCamera");
         panoCam.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
         initialPosition = new Vector3(0f, 6f, -5.0f);
-        reward_t = GameObject.Find("Reward_T");
+        // reward_t = GameObject.Find("Reward_T");
         reward = GameObject.Find("Reward");
 
         StartCoroutine(FlagCheck());
-       
+
 
         //   GameObject player = GameObject.Find("Player");
         //   sp = player.GetComponent<SP_RunTrain_to_Env1>();
         //   sbxttls = player.GetComponent<SbxTTLs_RunTrain_to_Env1>();
         //   rotary = player.GetComponent<RR_RunTrain_to_Env1>();
         //   dl = player.GetComponent<DL_RunTrain_to_Env1>();
-       
+
         Debug.Log(sp.sceneName);
 
         sp.TrainingTrack = 1;
 
         // put the mouse in the dark tunnel
-        reward_t.SetActive(true);
-        reward.SetActive(false);
-        reward_t.transform.position = reward_t.transform.position + new Vector3(0.0f, 0.0f, sp.mrd + UnityEngine.Random.value * sp.ard);
+        //reward_t.SetActive(true);
+        reward.SetActive(true);
+        // reward_t.transform.position = reward_t.transform.position + new Vector3(0.0f, 0.0f, sp.mrd + UnityEngine.Random.value * sp.ard);
         LastRewardTime = Time.realtimeSinceStartup;
 
 
@@ -112,26 +109,26 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
 
 
     }
-   
+
 
     private void sendString(string message)
     {
-            try
+        try
+        {
+            if (message != "")
             {
-                if (message != "")
-                {
 
-                    // get UTF8 encoding of string
-                    byte[] data = Encoding.UTF8.GetBytes(message);
+                // get UTF8 encoding of string
+                byte[] data = Encoding.UTF8.GetBytes(message);
 
-                    // send message
-                    client.Send(data, data.Length, remoteEndPoint);
-                }
+                // send message
+                client.Send(data, data.Length, remoteEndPoint);
             }
-            catch (Exception err)
-            {
-                print(err.ToString());
-            }
+        }
+        catch (Exception err)
+        {
+            print(err.ToString());
+        }
     }
 
 
@@ -146,6 +143,7 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
         // end game after appropriate number of trials
         if ((sp.numTraversals >= sp.numTrialsTotal) | (sp.numRewards >= sp.maxRewards & transform.position.z < 0f))
         {
+            //Debug.Log(sp.numTrialsTotal);
             UnityEditor.EditorApplication.isPlaying = false;
 
         }
@@ -173,12 +171,12 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
 
         if (other.tag == "Reward")
         {
-           StartCoroutine(RewardSequence(transform.position.z,other.gameObject)); 
+            StartCoroutine(RewardSequence(transform.position.z, other.gameObject));
         }
         else if (other.tag == "Teleport")
         {
-            
-            
+
+
 
             sp.numTraversals += 1;
             tendFlag = 1;
@@ -191,8 +189,8 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
             {
                 reward.SetActive(true);
             }
-            
-           
+
+
             //reward.transform.position = new Vector3(0.0f, 0f, sp.mrd + UnityEngine.Random.value * sp.ard);
             LastRewardTime = Time.realtimeSinceStartup; // to avoid issues with teleports
         }
@@ -200,10 +198,10 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
         {
             cmd = 0;
             tstartFlag = 1;
-            
+
             //rflag = true;
         }
-      
+
 
     }
 
@@ -224,7 +222,7 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
     {
 
         rotary.toutBool = 0f;
-        if ((sbxttls.scanning>0) & sp.BlankLaser)
+        if ((sbxttls.scanning > 0) & sp.BlankLaser)
         {
             if (prevReward == 0) // omission or probe trial 
             {
@@ -241,7 +239,8 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
                 sendString("L1");
                 yield return new WaitForSeconds(1f);
             }
-        } else
+        }
+        else
         {
             if (prevReward == 0) // omission or probe trial 
             {
@@ -262,6 +261,7 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
         yield return null;
     }
 
+
     IEnumerator RewardSequence(float pos, GameObject _reward)
     {   // water reward
         rzoneFlag = 1;
@@ -269,84 +269,52 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
 
         while ((transform.position.z <= pos + 75))
         {
-            if (sp.TrainingTrack == 1)
+
+
+            if ((sp.AutoReward) & (transform.position.z > pos + 50))
             {
-                Debug.Log(cmd);
-                cmd = 12;
-                if ((sp.AutoReward) & (transform.position.z > pos + 30))
-                {
-                    cmd = 4; 
-                    sp.numRewards += 1;
-                    prevReward = 1;
-                    StartCoroutine(DeliverReward(1));
-                    if (sp.MultiReward)
-                    {
-                        StartCoroutine(MoveReward());
-                    }
-                    //counted = false;
-                    yield return new WaitForEndOfFrame();
-                    break; // if (sp.MultiReward) { break;  };
-                            //break;
-                }
-                else
-                {
-                    cmd = 12;
-                }
-
-                if (dl.c_1 > 0)
-                {
-                    cmd = 4;
-                    sp.numRewards += 1;
-                    prevReward = 1;
-                    if (sp.MultiReward)
-                    {
-
-                        StartCoroutine(MoveReward());
-                    }
-                    else
-                    {
-                        reward_t.SetActive(false);
-                    }
-                    //counted = false;
-                    //if (sp.MultiReward) { break; };
-                    yield return new WaitForEndOfFrame();
-                    break;
-                }
-                yield return null;
-            }
-
-            if (sp.TrainingTrack == 0)
-            {
-                cmd = 12;
-                if ((sp.AutoReward) & (transform.position.z > pos + 50))
-                {
 
 
-                    cmd = 4;
-                    StartCoroutine(DeliverReward(1));
-                    sp.numRewards += 1;
-                    prevReward = 1;
-                    yield return new WaitForEndOfFrame();
-                    break;
-
-
-                }
-
-                if (dl.c_1 > 0)
-                {
-
-                    cmd = 4;
-                    sp.numRewards += 1;
-                    prevReward = 1;
-                    yield return new WaitForEndOfFrame();
-                    break;
-                }
+                cmd = 4;
+                StartCoroutine(DeliverReward(1));
+                sp.numRewards += 1;
+                prevReward = 1;
                 yield return new WaitForEndOfFrame();
+                break;
+
+
             }
 
+            if (dl.c_1 > 0)
+            {
+
+                cmd = 4;
+                sp.numRewards += 1;
+                prevReward = 1;
+                yield return new WaitForEndOfFrame();
+                break;
+            }
+            yield return new WaitForEndOfFrame();
 
         }
         _reward.SetActive(false);
+
+        //if ((sp.sceneName == "NeuroMods_LocationA"))
+        //{
+        //    
+        //    reward.SetActive(false);
+        //
+        //      } else if ((sp.sceneName == "NeuroMods_LocationB"))
+        //    {
+        //      reward.SetActive(false);
+        //} else
+        //{
+        //   reward_a.SetActive(false);
+        //  reward_b.SetActive(false);
+        // reward_c.SetActive(false);
+        //}
+
+
 
 
         rzoneFlag = 0;
@@ -357,34 +325,129 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
 
     }
 
-    IEnumerator MoveReward()
-    {
-        float CurrRewardTime = Time.realtimeSinceStartup;
-        yield return new WaitForSeconds(.5f);
-        if (!sp.fixedRewardSchedule)
+    /*    IEnumerator RewardSequence(float pos, GameObject _reward)
+        {   // water reward
+            rzoneFlag = 1;
+
+
+            while ((transform.position.z <= pos + 75))
+            {
+                if (sp.TrainingTrack == 1)
+                {
+                    Debug.Log(cmd);
+                    cmd = 12;
+                    if ((sp.AutoReward) & (transform.position.z > pos + 30))
+                    {
+                        cmd = 4;
+                        sp.numRewards += 1;
+                        prevReward = 1;
+                        StartCoroutine(DeliverReward(1));
+                        if (sp.MultiReward)
+                        {
+                            StartCoroutine(MoveReward());
+                        }
+                        //counted = false;
+                        yield return new WaitForEndOfFrame();
+                        break; // if (sp.MultiReward) { break;  };
+                               //break;
+                    }
+                    else
+                    {
+                        cmd = 12;
+                    }
+
+                    if (dl.c_1 > 0)
+                    {
+                        cmd = 4;
+                        sp.numRewards += 1;
+                        prevReward = 1;
+                        if (sp.MultiReward)
+                        {
+
+                            StartCoroutine(MoveReward());
+                        }
+                        else
+                        {
+                            reward.SetActive(false);
+                        }
+                        //counted = false;
+                        //if (sp.MultiReward) { break; };
+                        yield return new WaitForEndOfFrame();
+                        break;
+                    }
+                    yield return null;
+                }
+
+                if (sp.TrainingTrack == 0)
+                {
+                    cmd = 12;
+                    if ((sp.AutoReward) & (transform.position.z > pos + 50))
+                    {
+
+
+                        cmd = 4;
+                        StartCoroutine(DeliverReward(1));
+                        sp.numRewards += 1;
+                        prevReward = 1;
+                        yield return new WaitForEndOfFrame();
+                        break;
+
+
+                    }
+
+                    if (dl.c_1 > 0)
+                    {
+
+                        cmd = 4;
+                        sp.numRewards += 1;
+                        prevReward = 1;
+                        yield return new WaitForEndOfFrame();
+                        break;
+                    }
+                    yield return new WaitForEndOfFrame();
+                }
+
+
+            }
+            _reward.SetActive(false);
+
+
+            rzoneFlag = 0;
+            yield return new WaitForEndOfFrame();
+            cmd = 2;
+            yield return new WaitForEndOfFrame();
+            cmd = 0;
+
+        }*/
+
+    /*    IEnumerator MoveReward()
         {
-
-            if (CurrRewardTime - LastRewardTime > 20.0f)
+            float CurrRewardTime = Time.realtimeSinceStartup;
+            yield return new WaitForSeconds(.5f);
+            if (!sp.fixedRewardSchedule)
             {
-                sp.mrd = Mathf.Max(sp.MinTrainingDist, sp.mrd + UnityEngine.Random.value * sp.ard - 10f);
 
-            }
-            else
-            {
-                sp.mrd = Mathf.Min(sp.MaxTrainingDist, sp.mrd + UnityEngine.Random.value * sp.ard + 10f);
-            }
+                if (CurrRewardTime - LastRewardTime > 20.0f)
+                {
+                    sp.mrd = Mathf.Max(sp.MinTrainingDist, sp.mrd + UnityEngine.Random.value * sp.ard - 10f);
 
-            if ((sp.mrd > 170f) & (sp.mrd < 310))
-            {
-                sp.mrd = 300;
+                }
+                else
+                {
+                    sp.mrd = Mathf.Min(sp.MaxTrainingDist, sp.mrd + UnityEngine.Random.value * sp.ard + 10f);
+                }
+
+                if ((sp.mrd > 170f) & (sp.mrd < 310))
+                {
+                    sp.mrd = 300;
+                }
             }
+            //float zpos = (reward.transform.position.z + sp.mrd +sp.ard) % 330f;
+            // reward_t.transform.position = reward_t.transform.position + new Vector3(0f, 0f, sp.mrd + UnityEngine.Random.value * sp.ard);
+            LastRewardTime = CurrRewardTime;
+            yield return null;
         }
-        //float zpos = (reward.transform.position.z + sp.mrd +sp.ard) % 330f;
-        reward_t.transform.position = reward_t.transform.position + new Vector3(0f, 0f, sp.mrd + UnityEngine.Random.value * sp.ard);
-        LastRewardTime = CurrRewardTime;
-        yield return null;
-    }
-
+    */
 
     void OnApplicationQuit()
     {
@@ -403,7 +466,7 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
     { // deliver
 
 
-        if (r ==4)
+        if (r == 4)
         {
             cmd = 4;
             //sp.numRewards += 1;
@@ -420,6 +483,6 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
 
     }
 
-   
+
 
 }

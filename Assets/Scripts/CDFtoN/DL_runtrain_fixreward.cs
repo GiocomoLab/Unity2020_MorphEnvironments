@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -6,69 +6,74 @@ using System.IO;
 using System.IO.Ports;
 using System.Threading;
 
-
-public class RR_RunTrain_to_Env1 : MonoBehaviour
+public class DL_runtrain_fixreward : MonoBehaviour
 {
-
-    public string port = "COM3";
-    private int pulses;
+    public string port = "COM4";
     private SerialPort _serialPort;
     private int delay;
-    private SP_RunTrain_to_Env1 sp;
-    private PC_RunTrain_to_Env1 pc;
-    public float delta_z;
-    public float true_delta_z;
-    private float realSpeed = 0.0447f;
-    public float speedBool = 0;
-    private float startBool = 0;
-    //public float servoBool = 0;
-    private bool firstFlag = true;
-    public float toutBool = 1f;
+    private string lick_raw;
+
+
+    //public int pinValue;
+    private int pinValue;
+    public int trash;
+    public int c_1;
+
+    // for saving data
+    private string lickFile;
+    private string serverLickFile;
+
+    public int r;
+    public int rflag = 1;
+    private PC_runtrain_fixreward pc;
 
     private static bool created = false;
+
     public void Awake()
     {
-        // set speed
-        speedBool = 0;
-
-        // connect to playerController script
+        // for saving data
         GameObject player = GameObject.Find("Player");
-        pc = player.GetComponent<PC_RunTrain_to_Env1>();
-        sp = player.GetComponent<SP_RunTrain_to_Env1>();
+        pc = player.GetComponent<PC_runtrain_fixreward>();
     }
 
     void Start()
     {
         // connect to Arduino uno serial port
         connect(port, 57600, true, 4);
-        //connect(port, 115200, true, 4);
-        Debug.Log("Connected to rotary encoder serial port");
+        Debug.Log("Connected to lick detector serial port");
 
     }
 
+
     void Update()
     {
-    //    if (firstFlag) { speedBool = 1; firstFlag = false; }
-        if (Input.GetKeyDown(KeyCode.G)) { startBool = 1; };
-
-        // read quadrature encoder
-        _serialPort.Write("\n"); // write a blank line to indicate new frame
+        rflag = 0;
+        _serialPort.Write(pc.cmd.ToString() + ',');
         try
         {
-            pulses = int.Parse(_serialPort.ReadLine()); // read number of clicks from rotary encoder
-            true_delta_z = -1f * pulses * realSpeed;
-            delta_z = -1f * speedBool * startBool  * toutBool * pulses * realSpeed; // convert to cm // toutBool different from RunTrain
-            Vector3 movement = new Vector3(0.0f, 0.0f, delta_z);
-            transform.position = transform.position + movement;
-            Debug.Log(speedBool);
+            lick_raw = _serialPort.ReadLine();
+            string[] lick_list = lick_raw.Split('\t');
+            c_1 = int.Parse(lick_list[0]);
+            r = int.Parse(lick_list[1]);
+
 
         }
         catch (TimeoutException)
         {
-            Debug.Log("rotary timeout");
+            Debug.Log("lickport timeout");
         }
 
 
+        //Debug.Log(pinValue);
+
+
+
+
+    }
+
+    void OnApplicationQuit()
+    {
+        _serialPort.Write("8,");
     }
 
     private void connect(string serialPortName, Int32 baudRate, bool autoStart, int delay)

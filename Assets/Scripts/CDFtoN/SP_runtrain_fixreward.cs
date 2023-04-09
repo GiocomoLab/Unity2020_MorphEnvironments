@@ -1,15 +1,15 @@
-﻿using UnityEngine;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System;
 using System.Data;
 using Mono.Data.Sqlite;
 
-public class SP_RunTrain_to_Env1 : MonoBehaviour
+
+public class SP_runtrain_fixreward : MonoBehaviour
 {
-
-
+    // Start is called before the first frame update
     private string mouse;
 
     public float SkipTrialPcnt = 0.0f;
@@ -27,7 +27,7 @@ public class SP_RunTrain_to_Env1 : MonoBehaviour
     public int rewardFlag = 0;
 
     public int numTraversals = 0;
-    public int numTrialsTotal;
+    public int numTrialsTotal = 100;
     public int maxRewards = 100;
 
     public bool BlankLaser = false;
@@ -49,10 +49,10 @@ public class SP_RunTrain_to_Env1 : MonoBehaviour
     public string sceneName;
 
     private GameObject player;
-    private RR_RunTrain_to_Env1 rr;
-    private DL_RunTrain_to_Env1 dl;
-    private PC_RunTrain_to_Env1 pc;
-    private SbxTTLs_RunTrain_to_Env1 ttls;
+    private RR_runtrain_fixreward rr;
+    private DL_runtrain_fixreward dl;
+    private PC_runtrain_fixreward pc;
+    private SbxTTLs_runtrain_fixreward ttls;
     private Notes notes;
 
 
@@ -70,10 +70,10 @@ public class SP_RunTrain_to_Env1 : MonoBehaviour
     {
 
         player = GameObject.Find("Player");
-        rr = player.GetComponent<RR_RunTrain_to_Env1>();
-        dl = player.GetComponent<DL_RunTrain_to_Env1>();
-        pc = player.GetComponent<PC_RunTrain_to_Env1>();
-        ttls = player.GetComponent<SbxTTLs_RunTrain_to_Env1>();
+        rr = player.GetComponent<RR_runtrain_fixreward>();
+        dl = player.GetComponent<DL_runtrain_fixreward>();
+        pc = player.GetComponent<PC_runtrain_fixreward>();
+        ttls = player.GetComponent<SbxTTLs_runtrain_fixreward>();
         notes = player.GetComponent<Notes>();
         mouse = notes.mouse;
 

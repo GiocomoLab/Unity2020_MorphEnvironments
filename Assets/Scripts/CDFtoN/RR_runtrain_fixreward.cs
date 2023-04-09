@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -6,16 +6,14 @@ using System.IO;
 using System.IO.Ports;
 using System.Threading;
 
-
-public class RR_RunTrain_to_Env1 : MonoBehaviour
+public class RR_runtrain_fixreward : MonoBehaviour
 {
-
     public string port = "COM3";
     private int pulses;
     private SerialPort _serialPort;
     private int delay;
-    private SP_RunTrain_to_Env1 sp;
-    private PC_RunTrain_to_Env1 pc;
+    private SP_runtrain_fixreward sp;
+    private PC_runtrain_fixreward pc;
     public float delta_z;
     public float true_delta_z;
     private float realSpeed = 0.0447f;
@@ -33,8 +31,8 @@ public class RR_RunTrain_to_Env1 : MonoBehaviour
 
         // connect to playerController script
         GameObject player = GameObject.Find("Player");
-        pc = player.GetComponent<PC_RunTrain_to_Env1>();
-        sp = player.GetComponent<SP_RunTrain_to_Env1>();
+        pc = player.GetComponent<PC_runtrain_fixreward>();
+        sp = player.GetComponent<SP_runtrain_fixreward>();
     }
 
     void Start()
@@ -48,7 +46,7 @@ public class RR_RunTrain_to_Env1 : MonoBehaviour
 
     void Update()
     {
-    //    if (firstFlag) { speedBool = 1; firstFlag = false; }
+        if (firstFlag) { speedBool = 1; firstFlag = false; }
         if (Input.GetKeyDown(KeyCode.G)) { startBool = 1; };
 
         // read quadrature encoder
@@ -57,10 +55,10 @@ public class RR_RunTrain_to_Env1 : MonoBehaviour
         {
             pulses = int.Parse(_serialPort.ReadLine()); // read number of clicks from rotary encoder
             true_delta_z = -1f * pulses * realSpeed;
-            delta_z = -1f * speedBool * startBool  * toutBool * pulses * realSpeed; // convert to cm // toutBool different from RunTrain
+            delta_z = -1f * speedBool * startBool * toutBool * pulses * realSpeed; // convert to cm // toutBool different from RunTrain
             Vector3 movement = new Vector3(0.0f, 0.0f, delta_z);
             transform.position = transform.position + movement;
-            Debug.Log(speedBool);
+            // Debug.Log(delta_z);
 
         }
         catch (TimeoutException)
