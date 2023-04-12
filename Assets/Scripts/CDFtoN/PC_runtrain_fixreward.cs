@@ -138,7 +138,7 @@ public class PC_runtrain_fixreward : MonoBehaviour
     {
 
         // make sure rotation angle is 0
-        transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
+        transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
         Debug.Log(panoCam.transform.eulerAngles);
         // end game after appropriate number of trials
         if ((sp.numTraversals >= sp.numTrialsTotal) | (sp.numRewards >= sp.maxRewards & transform.position.z < 0f))

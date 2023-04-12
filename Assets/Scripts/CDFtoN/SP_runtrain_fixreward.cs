@@ -14,7 +14,7 @@ public class SP_runtrain_fixreward : MonoBehaviour
 
     public float SkipTrialPcnt = 0.0f;
 
-    public bool AutoReward = true;
+    public bool AutoReward = false;
     private int _autoReward = 0;
     public float mrd = 30.0f; // minimum reward distance
     public float ard = 10.0f; // additional reward distance
@@ -27,7 +27,7 @@ public class SP_runtrain_fixreward : MonoBehaviour
     public int rewardFlag = 0;
 
     public int numTraversals = 0;
-    public int numTrialsTotal = 100;
+    public int numTrialsTotal = 40;
     public int maxRewards = 100;
 
     public bool BlankLaser = false;
