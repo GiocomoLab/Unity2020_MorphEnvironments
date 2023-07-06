@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3326c40e459d8d04281b5d9f8bacfecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM4
+  port: COM7
   c_1: 0
   r: 0
   rflag: 1
