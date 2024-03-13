@@ -279,7 +279,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.561283
+  field of view: 55.444767
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -718,7 +718,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 55.561283
+  field of view: 55.444767
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2168,6 +2168,8 @@ MonoBehaviour:
   toutzoneFlag: 0
   tendFlag: 0
   tstartFlag: 0
+  deltaTime: 0
+  target: 60
 --- !u!114 &1722994736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2182,7 +2184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkipTrialPcnt: 0
   AutoReward: 0
-  mrd: 30
+  mrd: 300
   ard: 10
   fixedRewardSchedule: 0
   MinTrainingDist: 10
@@ -2191,7 +2193,7 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 80
+  numTrialsTotal: 40
   maxRewards: 200
   BlankLaser: 0
   rDur: 2
@@ -2319,7 +2321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: CA123-5936-5
+  mouse: test_CA123_0106_1
   notes: 
   imaging_region: CA123
 --- !u!114 &1722994744
@@ -2361,7 +2363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47eb211bf0bc13d438f3d2cdf6a00e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChangeRewardTrial: 40
+  ChangeRewardTrial: 20
 --- !u!1 &1766657574
 GameObject:
   m_ObjectHideFlags: 0
@@ -2418,7 +2420,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.561283
+  field of view: 55.444767
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

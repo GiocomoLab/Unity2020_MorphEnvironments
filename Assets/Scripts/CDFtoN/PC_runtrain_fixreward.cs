@@ -53,6 +53,9 @@ public class PC_runtrain_fixreward : MonoBehaviour
     private static string IP = "10.124.53.26";  // define in init
     private static int port = 7000;  // define in init
 
+    public float deltaTime;
+    public int target = 60;
+
     // "connection" things
     IPEndPoint remoteEndPoint;
     UdpClient client;
@@ -107,6 +110,9 @@ public class PC_runtrain_fixreward : MonoBehaviour
         remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), port);
         client = new UdpClient();
 
+        // set the recording rate
+        Application.targetFrameRate = target;
+
 
     }
 
@@ -141,6 +147,8 @@ public class PC_runtrain_fixreward : MonoBehaviour
         transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
         Debug.Log(panoCam.transform.eulerAngles);
         // end game after appropriate number of trials
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        float fps = 1.0f / deltaTime;
         if ((sp.numTraversals >= sp.numTrialsTotal) | (sp.numRewards >= sp.maxRewards & transform.position.z < 0f))
         {
             //Debug.Log(sp.numTrialsTotal);
@@ -148,7 +156,7 @@ public class PC_runtrain_fixreward : MonoBehaviour
 
         }
 
-        if (dl.r > 0 & dl.rflag < 1) { StartCoroutine(DeliverReward(dl.r)); dl.rflag = 1; }; // deliver appropriate reward
+        if (dl.r > 0 & dl.rflag < 1) { StartCoroutine(DeliverReward(dl.r)); dl.rflag = 1; }; // Debug.Log(fps); }; // deliver appropriate reward
 
         // manual rewards and punishments
         mRewardFlag = 0;
@@ -161,13 +169,21 @@ public class PC_runtrain_fixreward : MonoBehaviour
         }
 
 
+        //Debug.Log(fps);
+        //Debug.Log(deltaTime * 1000);
+        if (Application.targetFrameRate != target)
+        { Application.targetFrameRate = target; }
+        // show frame rate
+
+        //Debug.Log(Application.targetFrameRate);
+
+
 
     }
 
     void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.tag);
-
 
         if (other.tag == "Reward")
         {

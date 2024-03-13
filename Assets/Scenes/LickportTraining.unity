@@ -417,11 +417,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46da7f098a1c784fb90507aa7492286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: 5936_2
+  mouse: test_restrict_0106_1
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
-  maxRewards: 200
+  maxRewards: 100
   rDur: 2
   localDirectory_pre: C:\Users\markp\VR_Data\CanD\behavior\
   serverDirectory_pre: G:\My Drive\CA123\behavior\
