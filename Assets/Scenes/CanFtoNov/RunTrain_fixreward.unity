@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5331
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.5331}
+  m_IndirectSpecularColor: {r: 0.33093098, g: 0.369275, b: 0.429602, a: 0.5331}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -274,7 +274,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 58.443115
+  field of view: 56.0539
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -348,7 +348,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 58.443115
+  field of view: 56.0539
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -787,16 +787,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkipTrialPcnt: 0
   AutoReward: 0
-  mrd: 30
+  mrd: 300
   ard: 10
-  fixedRewardSchedule: 0
+  fixedRewardSchedule: 1
   MinTrainingDist: 10
   MaxTrainingDist: 300
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 40
+  numTrialsTotal: 200
   maxRewards: 200
   BlankLaser: 0
   rDur: 2
@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: CA123-5941-4
+  mouse: CA123-2214-3
   notes: 
   imaging_region: CA123
 --- !u!114 &1722994744
@@ -1010,7 +1010,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 58.443115
+  field of view: 56.0539
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
