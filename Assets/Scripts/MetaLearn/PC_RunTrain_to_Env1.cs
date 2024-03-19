@@ -60,6 +60,8 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
     IPEndPoint remoteEndPoint;
     UdpClient client;
 
+    public int frameRate = 60;
+
    // public void Awake()
    // {
         
@@ -110,6 +112,7 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
         remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), port);
         client = new UdpClient();
 
+        Application.targetFrameRate = frameRate;
 
     }
    
@@ -162,6 +165,13 @@ public class PC_RunTrain_to_Env1 : MonoBehaviour
 
         }
 
+        // set frame Rate
+        if (Application.targetFrameRate != frameRate)
+        {
+            Application.targetFrameRate = frameRate;
+        }
+
+        Debug.Log(Application.targetFrameRate);
 
 
     }
