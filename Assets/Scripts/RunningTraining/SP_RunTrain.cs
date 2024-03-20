@@ -31,8 +31,8 @@ public class SP_RunTrain : MonoBehaviour
 
     public bool MultiReward = true;
     // for saving data
-    public string localDirectory_pre = "C:/Users/markp/VR_Data/TwoTower/";
-    public string serverDirectory_pre = "G:/My Drive/VR_Data/TwoTower";
+    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/";
+    public string serverDirectory_pre = "H:/My Drive/VR_Data/";
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;
@@ -108,7 +108,7 @@ public class SP_RunTrain : MonoBehaviour
         _connection.Open();
         _command = _connection.CreateCommand();
         _command.CommandText = "create table data (time REAL, trialnum INT, pos REAL, dz REAL, lick INT, reward INT," +
-        "tstart INT, teleport INT, scanning INT, manrewards INT, cmd INT)";
+        "tstart INT, teleport INT, scanning INT, manrewards INT, autoreward INT, cmd INT)";
         _command.ExecuteNonQuery();
     }
 
@@ -116,9 +116,9 @@ public class SP_RunTrain : MonoBehaviour
     {
 
         _command.CommandText = "insert into data (time , trialnum, pos, dz, lick, reward," +
-        "tstart, teleport, scanning, manrewards, cmd) values (" + Time.realtimeSinceStartup + "," + numTraversals +
+        "tstart, teleport, scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + numTraversals +
         "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
-        ttls.scanning + "," + pc.mRewardFlag + "," + pc.cmd + ")";
+        ttls.scanning + "," + pc.mRewardFlag + "," + _autoReward + "," + pc.cmd + ")";
 
         //Debug.Log(_command.CommandText);
         _command.ExecuteNonQuery();
