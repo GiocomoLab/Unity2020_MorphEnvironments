@@ -35,8 +35,8 @@ public class SP_MetaLearn : MonoBehaviour
     public float rDur = 2;
 
     // for saving data
-    public string localDirectory_pre = "C:/Users/markp/VR_Data/MetaLearn/";
-    public string serverDirectory_pre = "H:\\My Drive\\VR_Data\\";
+    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/";
+    public string serverDirectory_pre = "H:/My Drive/VR_Data/";
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;

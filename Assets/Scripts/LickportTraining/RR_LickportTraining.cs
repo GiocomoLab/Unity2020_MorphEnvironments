@@ -9,7 +9,7 @@ using System.Threading;
 public class RR_LickportTraining : MonoBehaviour
 {
 
-    public string port = "COM6";
+    public string port = "COM3";
     private int pulses;
     private SerialPort _serialPort;
     private int delay;

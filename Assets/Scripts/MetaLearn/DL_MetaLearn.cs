@@ -79,7 +79,7 @@ public class DL_MetaLearn : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        _serialPort.Write("8,");
+        _serialPort.Write("13,"); // set scope TTL low; 8 toggles on NLW
     }
 
     private void connect(string serialPortName, Int32 baudRate, bool autoStart, int delay)

@@ -22,7 +22,7 @@ public class SP_LickportTraining : MonoBehaviour
 
 
     // for saving data
-    public string localDirectory_pre = "C:/Users/markp/VR_Data/TwoTower/";
+    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/";
     public string serverDirectory_pre = "H:/My Drive/VR_Data/";
     private string localDirectory;
     private string serverDirectory;
