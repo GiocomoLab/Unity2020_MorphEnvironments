@@ -10,7 +10,7 @@ using System.Threading;
 public class RR_MetaLearn : MonoBehaviour
 {
 
-    public string port = "COM4";
+    public string port = "COM3";
     private int pulses;
     private SerialPort _serialPort;
     private int delay;
