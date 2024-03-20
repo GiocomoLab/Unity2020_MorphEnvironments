@@ -179,7 +179,7 @@ public class PC_MetaLearn : MonoBehaviour
             Application.targetFrameRate = frameRate;
         }
 
-        Debug.Log(Application.targetFrameRate);
+        // Debug.Log(Application.targetFrameRate);
 
     }
 
