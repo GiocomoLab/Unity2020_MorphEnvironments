@@ -22,6 +22,7 @@ public class SP_RunTrain : MonoBehaviour
     public int numRewards = 0;
     public int numRewards_manual = 0;
     public int rewardFlag = 0;
+    private int _autoReward = 0;
 
     public int numTraversals = 0;
     public int numTrialsTotal;
@@ -114,7 +115,15 @@ public class SP_RunTrain : MonoBehaviour
 
     void LateUpdate()
     {
-
+        if (AutoReward)
+        {
+            _autoReward = 1;
+        }
+        else
+        {
+            _autoReward = 0;
+        }
+        
         _command.CommandText = "insert into data (time , trialnum, pos, dz, lick, reward," +
         "tstart, teleport, scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + numTraversals +
         "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
