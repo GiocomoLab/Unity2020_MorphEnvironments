@@ -12,8 +12,8 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
     private GameObject player;
     private GameObject morphmaze;
     private GameObject xmaze;
-    private SP_NeuroMods sp;
-    private PC_NeuroMods pc;
+    private SP_MetaLearn sp;
+    private PC_MetaLearn pc;
     private Vector3 initialPosition;
 
     private int switchCount = 0;
@@ -25,8 +25,8 @@ public class EnvControl_MetaLearn_123_Blocks: MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        sp = player.GetComponent<SP_NeuroMods>();
-        pc = player.GetComponent<PC_NeuroMods>();
+        sp = player.GetComponent<SP_MetaLearn>();
+        pc = player.GetComponent<PC_MetaLearn>();
         
         sp.morph = 0f;
 

@@ -11,8 +11,8 @@ public class RewardControl_MetaLearn_A_to_B: MonoBehaviour
     private GameObject reward_b;
 
     private GameObject player;
-    private SP_NeuroMods sp;
-    private PC_NeuroMods pc;
+    private SP_MetaLearn sp;
+    private PC_MetaLearn pc;
 
     public int ChangeRewardTrial = 30;
 
@@ -25,8 +25,8 @@ public class RewardControl_MetaLearn_A_to_B: MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        sp = player.GetComponent<SP_NeuroMods>();
-        pc = player.GetComponent<PC_NeuroMods>();
+        sp = player.GetComponent<SP_MetaLearn>();
+        pc = player.GetComponent<PC_MetaLearn>();
 
 
         reward_a = GameObject.Find("Reward_A");

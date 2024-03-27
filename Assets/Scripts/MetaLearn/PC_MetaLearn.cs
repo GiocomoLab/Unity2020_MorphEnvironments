@@ -62,7 +62,7 @@ public class PC_MetaLearn : MonoBehaviour
     private static string IP = "10.124.53.26";  // define in init
     private static int port = 7000;  // define in init
 
-    public int frameRate = 60;
+    //public int frameRate = 60;
 
     // "connection" things
     IPEndPoint remoteEndPoint;
@@ -121,7 +121,7 @@ public class PC_MetaLearn : MonoBehaviour
         remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), port);
         client = new UdpClient();
 
-        Application.targetFrameRate = frameRate;
+        //Application.targetFrameRate = frameRate;
     }
    
 
@@ -165,7 +165,7 @@ public class PC_MetaLearn : MonoBehaviour
 
         // manual rewards and punishments
         mRewardFlag = 0;
-        if (Input.GetKeyDown(KeyCode.Q) | Input.GetMouseButtonDown(0)) // reward left - sweetened condensed milk
+        if (Input.GetKeyDown(KeyCode.Q) | Input.GetMouseButtonDown(0)) // reward left
         {
             mRewardFlag = 1;
             StartCoroutine(DeliverReward(4));
@@ -174,10 +174,10 @@ public class PC_MetaLearn : MonoBehaviour
         }
 
         // set frame Rate
-        if (Application.targetFrameRate != frameRate)
-        {
-            Application.targetFrameRate = frameRate;
-        }
+        //if (Application.targetFrameRate != frameRate)
+        //{
+        //    Application.targetFrameRate = frameRate;
+        //}
 
         // Debug.Log(Application.targetFrameRate);
 

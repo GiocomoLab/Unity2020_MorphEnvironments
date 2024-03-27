@@ -9,8 +9,8 @@ public class EnvControl_MetaLearn_12_Blocks_RewardSwap: MonoBehaviour
     private GameObject reward0;
     private GameObject reward1;
     private GameObject player;
-    private SP_NeuroMods sp;
-    private PC_NeuroMods pc;
+    private SP_MetaLearn sp;
+    private PC_MetaLearn pc;
     private Vector3 initialPosition;
 
 
@@ -22,8 +22,8 @@ public class EnvControl_MetaLearn_12_Blocks_RewardSwap: MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        sp = player.GetComponent<SP_NeuroMods>();
-        pc = player.GetComponent<PC_NeuroMods>();
+        sp = player.GetComponent<SP_MetaLearn>();
+        pc = player.GetComponent<PC_MetaLearn>();
 
 
         reward0 = GameObject.Find("Reward_A");

@@ -88,7 +88,7 @@ public class PC_RunTrain : MonoBehaviour
         {
             mRewardFlag = 1;
             StartCoroutine(DeliverReward(4));
-	    sp.numRewards += 1;
+	        sp.numRewards += 1;
         }
 
         // set frame Rate
@@ -105,6 +105,7 @@ public class PC_RunTrain : MonoBehaviour
         Debug.Log(other.tag);
         if (other.tag == "Start")
         {
+            cmd = 0;
             tstartFlag = 1;
         }
 
@@ -180,9 +181,9 @@ public class PC_RunTrain : MonoBehaviour
         // bool counted = true;
         while ((transform.position.z <= pos + 75))
         {
+            cmd = 12;
 
-
-            if ((sp.AutoReward) & (transform.position.z > pos + 50))
+            if ((sp.AutoReward) & (transform.position.z > pos + 30))
             {
 
 

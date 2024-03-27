@@ -13,9 +13,9 @@ public class EnvControl_MetaLearn_Env3_DreamLand_Blocks: MonoBehaviour
     private GameObject subcam1; 
     private GameObject dreamland;
     private GameObject morphmaze;
-    private SP_NeuroMods sp;
-    private PC_NeuroMods pc;
-    private RR_NeuroMods rr;
+    private SP_MetaLearn sp;
+    private PC_MetaLearn pc;
+    private RR_MetaLearn rr;
     private Vector3 initialPosition;
 
 
@@ -31,9 +31,9 @@ public class EnvControl_MetaLearn_Env3_DreamLand_Blocks: MonoBehaviour
         subcam1 = GameObject.Find("subCam1");
         middleCamera = subcam1.GetComponent<Camera>();
 
-        sp = player.GetComponent<SP_NeuroMods>();
-        pc = player.GetComponent<PC_NeuroMods>();
-	rr = player.GetComponent<RR_NeuroMods>();
+        sp = player.GetComponent<SP_MetaLearn>();
+        pc = player.GetComponent<PC_MetaLearn>();
+	rr = player.GetComponent<RR_MetaLearn>();
 
 
 
