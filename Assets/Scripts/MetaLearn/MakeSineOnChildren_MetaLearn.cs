@@ -64,8 +64,8 @@ public class MakeSineOnChildren_MetaLearn : MonoBehaviour
             //jitter = .2f * (UnityEngine.Random.value - .5f);
             
             StartCoroutine(drawSineWall());
-            
-           
+
+
         }
     }
 
