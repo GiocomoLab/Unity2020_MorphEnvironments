@@ -14,6 +14,7 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
 
     private SP_MetaLearn sp;
     private PC_MetaLearn pc;
+    private EnvControl_MetaLearn_ShrinkStretch_Blocks env;
     private float morph;
     private float wallScale;
 
@@ -40,6 +41,7 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
         player = GameObject.Find("Player");
         sp = player.GetComponent<SP_MetaLearn>();
         rr = player.GetComponent<RR_MetaLearn>();
+        env = player.GetComponent<EnvControl_MetaLearn_ShrinkStretch_Blocks>();
 
 
         eWall = GameObject.Find("East Wall");
@@ -48,9 +50,11 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
         westRenderer = wWall.GetComponent<Renderer>();
         sineGroup = GameObject.Find("SineWalls1");
         wallScale = sineGroup.transform.localScale.z;
-       
+        //theta1 = theta1 * wallScale;
+        //theta2 = theta2 * wallScale;
 
-        
+
+
 
         morph = sp.morph;
 
@@ -64,6 +68,8 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
             numTraversalsLocal = sp.numTraversals;
 
             morph = sp.morph;
+            //wallScale = env.wallScale;
+            //sineGroup.transform.localScale = new Vector3(1f, 1f, wallScale);
 
             rr.speedBool = 0;
             //jitter = .2f * (UnityEngine.Random.value - .5f);
@@ -84,8 +90,10 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
         foreach (var r in renderers)
         {
             // Do something with the renderer here...
-            r.material.mainTexture = texture; // like disable it for example. 
+            r.material.mainTexture = texture; // like disable it for example.
+
         }
+
 
         Debug.Log(texture.height);
         Debug.Log(texture.width);
@@ -93,11 +101,13 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
         float xs = 0f;
         float ys = 0f;
         float tmp_morph = morph;
-        theta1 = theta1 * wallScale;
-        theta2 = theta2 * wallScale;
+
         float theta = tmp_morph * theta1 + (1.0f - tmp_morph) * theta2 ;
-        float f = tmp_morph * f1 + (1.0f - tmp_morph) * f2 ;
+        float f0 = tmp_morph * f1 + (1.0f - tmp_morph) * f2 ;
+        float f = f0* wallScale;
+        Debug.Log(f);
         float thetar = (theta * Mathf.PI / 180.0f); // * wallScale;
+        Debug.Log(thetar);
         for (int y = 0; y < texture.height; y++)
         {
             for (int x = 0; x < texture.width; x++)
@@ -107,7 +117,6 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
                 ys = (float)y / (float)dim1;
 
                 float intensity = Mathf.Cos(2.0f * Mathf.PI * f * (xs * (Mathf.Cos(thetar + Mathf.PI / 4.0f) + Mathf.Sin(thetar + Mathf.PI / 4.0f)) + ys * (Mathf.Cos(thetar + Mathf.PI / 4.0f) - Mathf.Sin(thetar + Mathf.PI / 4.0f))));
-
 
                 color.r = intensity;
                 color.g = intensity;
@@ -120,7 +129,7 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
             }
            
         }
-       
+
         texture.filterMode = FilterMode.Point;
         texture.Apply();
         rr.speedBool = 1;
