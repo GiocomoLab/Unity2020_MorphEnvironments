@@ -8,11 +8,17 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
 
     private GameObject reward1;
     private GameObject reward2;
-    // private GameObject reward3;
     private GameObject player;
     private GameObject basicmaze;
     private GameObject shrinkmaze;
     private GameObject stretchmaze;
+
+    private GameObject towers1;
+    private GameObject towers2;
+    private GameObject towers3;
+    private GameObject towers4;
+    private GameObject endWall;
+
     private SP_MetaLearn sp;
     private PC_MetaLearn pc;
     private Vector3 initialPosition;
@@ -34,13 +40,10 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
 
         reward1 = GameObject.Find("Reward_A");
         reward2 = GameObject.Find("Reward_B");
-        // reward2 = GameObject.Find("Reward_C");
-
         basicmaze = GameObject.Find("basicmaze");
         shrinkmaze = GameObject.Find("shrinkmaze");
         stretchmaze = GameObject.Find("stretchmaze");
-     
-
+ 
         // towers1 = GameObject.Find("Tower 1");
         // towers2 = GameObject.Find("Tower 2");
         // towers3 = GameObject.Find("RewardTower1");
@@ -52,6 +55,7 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
         // towers2.transform.position = new Vector3(0f, 0f, 165f)
         // towers3.transform.position = new Vector3(0f, 0f, 285f)
         // towers4.transform.position = new Vector3(0f, 0f, 405f)
+
 
         basicmaze.SetActive(true);
       
@@ -70,6 +74,7 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
 
                 if (numTraversalsLocal%ChangeEnvTrial==0)
                 {
+
                    basicmaze.SetActive(false);
                    shrinkmaze.SetActive(true);
 
@@ -87,16 +92,63 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
 
                     stretchmaze.SetActive(true);
                     basicmaze.SetActive(false);
-            
+
+                    //towers1.transform.position = towers1.transform.position - new Vector3(0f, 0f, 15f);
+                    //towers2.transform.position = towers2.transform.position - new Vector3(0f, 0f, 55f);
+                    //towers3.transform.position = towers3.transform.position - new Vector3(0f, 0f, 95f);
+                    //towers4.transform.position = towers4.transform.position - new Vector3(0f, 0f, 135f);
+                    //endWall.transform.position = endWall.transform.position - new Vector3(0f, 0f, 150f);
+
                 }
+                //else if ( ((numTraversalsLocal-10)==0) | ((numTraversalsLocal-10)%30==0) )
+                //{
+                //    sp.morph = 1.0f; // Mathf.Abs(sp.morph - 1.0f);
+                //    morphmaze.SetActive(true);
+                
+                //}
+                //else if ( ((numTraversalsLocal-20)==0) | ((numTraversalsLocal-20)%30==0) )
+                //{
+                //    sp.morph = 0.5f;
+                //    morphmaze.SetActive(false);
+            
+                //}
                     
                 //switchCount = switchCount + 1;
                 //Debug.Log(switchCount);
             }
 
-            
-            
 
+            //if (sp.morph==0f)
+            //{
+            //    if (UnityEngine.Random.value < sp.SkipTrialPcnt)
+            //    {
+            //        reward1.SetActive(false);
+
+            //    }
+            //    else
+            //    {
+            //        reward1.SetActive(true);
+            //    }
+                
+            //    reward2.SetActive(false);
+            //}
+
+            //else if (sp.morph==1.0f)
+            //{
+            //    if (UnityEngine.Random.value < sp.SkipTrialPcnt)
+            //    {
+            //        reward2.SetActive(false);
+
+            //    }
+            //    else
+            //    {
+            //        reward2.SetActive(true);
+            //    }
+                
+            //    reward1.SetActive(false);
+
+            //}            
+            
 
         }
     }
