@@ -53,19 +53,6 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
         stretch_maze = GameObject.Find("stretch_maze");
         sineGroup = GameObject.Find("SineWalls1");
 
-        // towers1 = GameObject.Find("Tower 1");
-        // towers2 = GameObject.Find("Tower 2");
-        // towers3 = GameObject.Find("RewardTower1");
-        // towers4 = GameObject.Find("RewardTower2");
-
-        //reward.transform.position = reward.transform.position + new Vector3(0f, 0f, sp.mrd
-        // initial tower positions: 45, 165, 285, 405
-        // towers1.transform.position = new Vector3(0f, 0f, 45f)
-        // towers2.transform.position = new Vector3(0f, 0f, 165f)
-        // towers3.transform.position = new Vector3(0f, 0f, 285f)
-        // towers4.transform.position = new Vector3(0f, 0f, 405f)
-
-
         basic_maze.SetActive(true);
         stretch_maze.SetActive(false);
         shrink_maze.SetActive(false);
@@ -81,7 +68,6 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
 
             if ((numTraversalsLocal%10==0) & (numTraversalsLocal > 5))
             {
-                //Debug.Log(Mathf.RoundToInt(reward2_initialPosition.z * 1.3333f));
 
                 if ( (numTraversalsLocal%ChangeEnvTrial==0) & (switchCount%2==0) )
                 {
@@ -118,11 +104,6 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
                     reward2.transform.position = new Vector3(0f, 0f, Mathf.RoundToInt(reward2_initialPosition.z * 1.3333f));
                     switchCount += 1;
 
-                    //towers1.transform.position = towers1.transform.position - new Vector3(0f, 0f, 15f);
-                    //towers2.transform.position = towers2.transform.position - new Vector3(0f, 0f, 55f);
-                    //towers3.transform.position = towers3.transform.position - new Vector3(0f, 0f, 95f);
-                    //towers4.transform.position = towers4.transform.position - new Vector3(0f, 0f, 135f);
-                    //endWall.transform.position = endWall.transform.position - new Vector3(0f, 0f, 150f);
 
                 }
                 //else if ( ((numTraversalsLocal-10)==0) | ((numTraversalsLocal-10)%30==0) )

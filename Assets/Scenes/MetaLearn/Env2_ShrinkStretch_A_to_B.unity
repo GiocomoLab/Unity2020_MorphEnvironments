@@ -3824,7 +3824,7 @@ MonoBehaviour:
   numTraversals: 0
   numTrialsTotal: 150
   maxRewards: 200
-  morph: 0
+  morph: 1
   rDur: 2
   localDirectory_pre: C:/Users/markp/VR_Data/MetaLearn/
   serverDirectory_pre: H:\My Drive\MetaLearn\VR_Data\
@@ -3847,7 +3847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: test
+  mouse: GCAMP18
   notes: 
   imaging_region: CA1
 --- !u!4 &972532282
