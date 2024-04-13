@@ -50,11 +50,6 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
         westRenderer = wWall.GetComponent<Renderer>();
         sineGroup = GameObject.Find("SineWalls1");
         wallScale = sineGroup.transform.localScale.z;
-        //theta1 = theta1 * wallScale;
-        //theta2 = theta2 * wallScale;
-
-
-
 
         morph = sp.morph;
 
@@ -68,8 +63,6 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
             numTraversalsLocal = sp.numTraversals;
 
             morph = sp.morph;
-            //wallScale = env.wallScale;
-            //sineGroup.transform.localScale = new Vector3(1f, 1f, wallScale);
 
             rr.speedBool = 0;
             //jitter = .2f * (UnityEngine.Random.value - .5f);
@@ -95,9 +88,6 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
         }
 
 
-        Debug.Log(texture.height);
-        Debug.Log(texture.width);
-
         float xs = 0f;
         float ys = 0f;
         float tmp_morph = morph;
@@ -105,9 +95,9 @@ public class MakeSineOnChildren_MetaLearn_StretchShrink : MonoBehaviour
         float theta = tmp_morph * theta1 + (1.0f - tmp_morph) * theta2 ;
         float f0 = tmp_morph * f1 + (1.0f - tmp_morph) * f2 ;
         float f = f0* wallScale;
-        Debug.Log(f);
-        float thetar = (theta * Mathf.PI / 180.0f); // * wallScale;
-        Debug.Log(thetar);
+        //Debug.Log(f);
+        float thetar = (theta * Mathf.PI / 180.0f);
+
         for (int y = 0; y < texture.height; y++)
         {
             for (int x = 0; x < texture.width; x++)

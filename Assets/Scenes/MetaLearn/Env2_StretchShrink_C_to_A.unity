@@ -2252,7 +2252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498410671}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 105}
+  m_LocalPosition: {x: 0, y: 0, z: 345}
   m_LocalScale: {x: 50, y: 20, z: 50}
   m_Children: []
   m_Father: {fileID: 1130492667}
@@ -3824,7 +3824,7 @@ MonoBehaviour:
   numTraversals: 0
   numTrialsTotal: 150
   maxRewards: 200
-  morph: 0
+  morph: 1
   rDur: 2
   localDirectory_pre: C:/Users/markp/VR_Data/MetaLearn/
   serverDirectory_pre: H:\My Drive\MetaLearn\VR_Data\
@@ -3847,7 +3847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: test
+  mouse: GCAMP17
   notes: 
   imaging_region: CA1
 --- !u!4 &972532282
@@ -3891,7 +3891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scale: 1
   ChangeEnvTrial: 60
-  StretchFirst: 0
+  StretchFirst: 1
 --- !u!1 &983475565
 GameObject:
   m_ObjectHideFlags: 0
@@ -5949,7 +5949,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614163092}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 225}
+  m_LocalPosition: {x: 0, y: 0, z: 105}
   m_LocalScale: {x: 50, y: 20, z: 50}
   m_Children: []
   m_Father: {fileID: 1130492667}

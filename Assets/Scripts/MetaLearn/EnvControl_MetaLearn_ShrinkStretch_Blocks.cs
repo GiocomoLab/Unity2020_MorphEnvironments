@@ -22,15 +22,15 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
 
     private SP_MetaLearn sp;
     private PC_MetaLearn pc;
-    //private MakeSineOnChildren_MetaLearn_StretchShrink msw;
     private Vector3 initialPosition;
     private Vector3 reward1_initialPosition;
     private Vector3 reward2_initialPosition;
-    public float wallScale=1;
+    public float scale = 1;
 
 
     private int switchCount = 0;
     public int ChangeEnvTrial = 60;
+    public bool StretchFirst = false;
 
     private int numTraversalsLocal = -1;
 
@@ -73,11 +73,22 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
                 {
 
                     basic_maze.SetActive(false);
-                    stretch_maze.SetActive(false);
-                    shrink_maze.SetActive(true);
+                    if (StretchFirst)
+                    {
+                        stretch_maze.SetActive(true);
+                        shrink_maze.SetActive(false);
+                        scale = 1.3333f;
+                    }
+                    else
+                    {
+                        stretch_maze.SetActive(false);
+                        shrink_maze.SetActive(true);
+                        scale = 0.6666f;
+
+                    }
+
                     //sineGroup.transform.localScale = new Vector3(1f, 1f, 0.6666f);
-                    wallScale = 0.6666f;
-                    reward2.transform.position = new Vector3(0f, 0f, Mathf.RoundToInt(reward2_initialPosition.z*0.6666f));
+                    reward2.transform.position = new Vector3(0f, 0f, Mathf.RoundToInt(reward2_initialPosition.z*scale));
                     switchCount += 1;
 
                     
@@ -87,7 +98,7 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
                     
                     basic_maze.SetActive(true);
                     //sineGroup.transform.localScale = new Vector3(1f, 1f, 1f);
-                    wallScale = 1f;
+                    scale = 1f;
                     shrink_maze.SetActive(false);
                     stretch_maze.SetActive(false);
                     reward2.transform.position = reward2_initialPosition;
@@ -95,65 +106,28 @@ public class EnvControl_MetaLearn_ShrinkStretch_Blocks: MonoBehaviour
                 }
                 else if ( (numTraversalsLocal % ChangeEnvTrial ==0) & (switchCount%2 != 0))
                 {
-
-                    stretch_maze.SetActive(true);
-                    //sineGroup.transform.localScale = new Vector3(1f, 1f, 1.3333f);
-                    wallScale =1.3333f;
                     basic_maze.SetActive(false);
-                    shrink_maze.SetActive(false);
-                    reward2.transform.position = new Vector3(0f, 0f, Mathf.RoundToInt(reward2_initialPosition.z * 1.3333f));
+                    if (StretchFirst)
+                    {
+                        stretch_maze.SetActive(false);
+                        shrink_maze.SetActive(true);
+                        scale = 0.6666f;
+                    }
+                    else
+                    {
+                        stretch_maze.SetActive(true);
+                        shrink_maze.SetActive(false);
+                        scale = 1.3333f;
+
+                    }
+                    //sineGroup.transform.localScale = new Vector3(1f, 1f, 1.3333f);
+                    reward2.transform.position = new Vector3(0f, 0f, Mathf.RoundToInt(reward2_initialPosition.z * scale));
                     switchCount += 1;
 
 
                 }
-                //else if ( ((numTraversalsLocal-10)==0) | ((numTraversalsLocal-10)%30==0) )
-                //{
-                //    sp.morph = 1.0f; // Mathf.Abs(sp.morph - 1.0f);
-                //    morphmaze.SetActive(true);
-                
-                //}
-                //else if ( ((numTraversalsLocal-20)==0) | ((numTraversalsLocal-20)%30==0) )
-                //{
-                //    sp.morph = 0.5f;
-                //    morphmaze.SetActive(false);
-            
-                //}
-                    
-                //switchCount = switchCount + 1;
-                //Debug.Log(switchCount);
-            }
 
-
-            //if (sp.morph==0f)
-            //{
-            //    if (UnityEngine.Random.value < sp.SkipTrialPcnt)
-            //    {
-            //        reward1.SetActive(false);
-
-            //    }
-            //    else
-            //    {
-            //        reward1.SetActive(true);
-            //    }
-                
-            //    reward2.SetActive(false);
-            //}
-
-            //else if (sp.morph==1.0f)
-            //{
-            //    if (UnityEngine.Random.value < sp.SkipTrialPcnt)
-            //    {
-            //        reward2.SetActive(false);
-
-            //    }
-            //    else
-            //    {
-            //        reward2.SetActive(true);
-            //    }
-                
-            //    reward1.SetActive(false);
-
-            //}            
+            }      
             
 
         }
