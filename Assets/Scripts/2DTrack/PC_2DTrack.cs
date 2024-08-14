@@ -14,29 +14,24 @@ using System.Net.Sockets;
 public class PC_2DTrack : MonoBehaviour
 {
 
-
     private GameObject player;
-    
-    private GameObject blackCam;
-    private GameObject panoCam;
-    private GameObject reward_a;
-    private GameObject reward_b;
-    private GameObject reward_c;
     private GameObject reward;
-
-
-
+    private GameObject panoCam;
+    private GameObject endWall;
 
     private Rigidbody rb;
+
     private SP_2DTrack sp;
     private DL_2DTrack dl;
     private RR_2DTrack rotary;
     private SbxTTLs_2DTrack sbxttls;
+    private TrialBlocks_2DTrack tb;
 
     private bool reward_dir;
 
 
     private Vector3 initialPosition;
+    private Vector3 initialRotation;
     private Vector3 movement;
 
     private static bool created = false;
@@ -66,60 +61,35 @@ public class PC_2DTrack : MonoBehaviour
     IPEndPoint remoteEndPoint;
     UdpClient client;
 
+    public float radius = 200;
+
 
 
 
 
     public void Start()
     {
-
-
-        GameObject player = GameObject.Find("Player");
+        player = GameObject.Find("Player");
+        endWall = GameObject.Find("End Wall");
+        
         sp = player.GetComponent<SP_2DTrack>();
-        sbxttls = player.GetComponent<SbxTTLs_2DTrack>();
-        rotary = player.GetComponent<RR_2DTrack>();
         dl = player.GetComponent<DL_2DTrack>();
+        rotary = player.GetComponent<RR_2DTrack>();
+        sbxttls = player.GetComponent<SbxTTLs_2DTrack>();
+        tb = player.GetComponent<TrialBlocks_2DTrack>();
+
         Debug.Log(sp.sceneName);
-        if ((sp.sceneName == "NeuroMods_LocationA") )
-        {
-           
-            reward = GameObject.Find("Reward");
-        }
-        else if ((sp.sceneName == "NeuroMods_LocationB")) 
-        {
-            reward = GameObject.Find("Reward");
-        } else if ((sp.sceneName == "NM_DreamLandToPizzaLand")) 
-        {
-            reward_a = GameObject.Find("Reward_A");
-            reward_b = GameObject.Find("Reward_B");
-            reward_c = GameObject.Find("Reward_C");
-            
-            
-        } else if ((sp.sceneName == "NM_PizzaLandOnly"))
-        {
-            reward_a = GameObject.Find("Reward_B");
-            reward_b = GameObject.Find("Reward_C");
-        }
-        else
-        {
-            
-            reward_a = GameObject.Find("Reward_A");
-            reward_b = GameObject.Find("Reward_B");
-        }
-      
-
-
 
         panoCam = GameObject.Find("panoCamera");
         panoCam.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
-        initialPosition = new Vector3(0f, 6f, -50.0f);
+        PositionPlayer(tb.trialAnglesList[0], radius);
+        reward = GameObject.Find("Reward");
 
         LickHistory = new ArrayList();
 
         remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), port);
         client = new UdpClient();
     }
-   
 
     private void sendString(string message)
     {
@@ -146,9 +116,6 @@ public class PC_2DTrack : MonoBehaviour
 
     void Update()
     {
-
-        // make sure rotation angle is 0
-        transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
 
         // end game after appropriate number of trials
         if ((sp.numTraversals >= sp.numTrialsTotal) | (sp.numRewards >= sp.maxRewards & transform.position.z < 0f))
@@ -184,12 +151,12 @@ public class PC_2DTrack : MonoBehaviour
         }
         else if (other.tag == "Teleport")
         {
-            
-            
-
             sp.numTraversals += 1;
             tendFlag = 1;
-            transform.position = initialPosition;
+
+            PositionPlayer(tb.trialAnglesList[sp.numTraversals], radius);
+            PositionEndWall(transform.position, reward.transform.position, radius);
+            
             bckgndOn = true;
 
             StartCoroutine(InterTrialTimeout());
@@ -207,8 +174,6 @@ public class PC_2DTrack : MonoBehaviour
 
     }
 
-
-    
     IEnumerator InterTrialTimeout()
     {
 
@@ -346,6 +311,37 @@ public class PC_2DTrack : MonoBehaviour
 
 
 
+    }
+
+    //Moves end wall to position in arena in relation to the initial player position and reward location
+    void PositionEndWall(Vector3 playerpos, Vector3 rewardpos, float radius){
+
+        //Calculate end wall position
+        Vector3 distToReward = rewardpos - playerpos;
+        float cosTheta = Vector3.Dot(Vector3.Normalize(-playerpos), Vector3.Normalize(distToReward));
+        float relativeToWall = 2 * radius * cosTheta;
+        Vector3 wallPos = Vector3.Normalize(distToReward) * relativeToWall + playerpos;
+
+        //Calculate end wall rotation
+        double wallAngleRad = Math.Atan2(wallPos.x, wallPos.z);
+        float wallAngleRadFloat = Convert.ToSingle(wallAngleRad);
+        float wallAngleDeg = wallAngleRadFloat * Mathf.Rad2Deg;
+
+        //Move and rotate end wall
+        endWall.transform.position = wallPos;
+        endWall.transform.eulerAngles = new Vector3(0.0f, wallAngleDeg, 0.0f);
+    }
+
+    void PositionPlayer(float angle, float radius){
+        
+        //Move to initial position
+        float angleRad = angle *Mathf.Deg2Rad;
+        transform.position = new Vector3(radius*Mathf.Cos(angleRad), 0.0f, radius*Mathf.Sin(angleRad));
+
+        //Rotate
+        transform.eulerAngles = new Vector3(0.0f, -angle, 0.0f);
+
+        Debug.Log("Current position in world space: " + transform.position);
     }
 
 }

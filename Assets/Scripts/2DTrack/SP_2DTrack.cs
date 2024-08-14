@@ -54,6 +54,7 @@ public class SP_2DTrack : MonoBehaviour
     private DL_2DTrack dl;
     private PC_2DTrack pc;
     private SbxTTLs_2DTrack ttls;
+    private TrialBlocks_2DTrack tb;
     private Notes notes;
 
 
@@ -77,17 +78,18 @@ public class SP_2DTrack : MonoBehaviour
         dl = player.GetComponent<DL_2DTrack>();
         pc = player.GetComponent<PC_2DTrack>();
         ttls = player.GetComponent<SbxTTLs_2DTrack>();
+        tb = player.GetComponent<TrialBlocks_2DTrack>();
         notes = player.GetComponent<Notes>();
         mouse = notes.mouse;
 
 
         today = DateTime.Today;
-        Debug.Log(today.ToString("dd_MM_yyyy"));
+        Debug.Log(today.ToString("yyyy_MM_dd"));
 
 
         
-        localDirectory = localDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
-        serverDirectory = serverDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
+        localDirectory = localDirectory_pre + mouse + '/' + today.ToString("yyyy_MM_dd") + '/';
+        serverDirectory = serverDirectory_pre + mouse + '/' + today.ToString("yyyy_MM_dd") + '/';
         if (!Directory.Exists(localDirectory))
         {
             Directory.CreateDirectory(localDirectory);
@@ -120,8 +122,7 @@ public class SP_2DTrack : MonoBehaviour
         _connection = (IDbConnection) new SqliteConnection(connectionString);
         _connection.Open();
         _command = _connection.CreateCommand();
-        _command.CommandText = "create table data (time REAL, morph REAL, dreamland INT, trialnum INT, pos REAL, dz REAL, posx REAL, lick INT, reward INT," +
-        "tstart INT, teleport INT, rzone INT, scanning NUMERIC, manrewards INT, autoreward INT, cmd INT)";
+        _command.CommandText = "create table data (time REAL, trialnum INT, startangle REAL, posx REAL, posz REAL, dz REAL, lick INT, reward INT, tstart INT, teleport INT, rzone INT, scanning NUMERIC, manrewards INT, autoreward INT, cmd INT)";
         
         _command.ExecuteNonQuery();
 
@@ -146,10 +147,7 @@ public class SP_2DTrack : MonoBehaviour
         
 
 
-        _command.CommandText = "insert into data (time , morph , dreamland, trialnum, pos, dz, posx, lick, reward," +
-        "tstart, teleport, rzone , scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + morph + "," + DreamLand + "," + numTraversals +
-        "," + transform.position.z + "," + rr.true_delta_z + "," + transform.position.x + ","  + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
-        pc.rzoneFlag + ","  + ttls.scanning + "," + pc.mRewardFlag + "," + _autoReward + "," + pc.cmd + ")";
+        _command.CommandText = "insert into data (time, trialnum, startangle, posx, posz, dz, lick, reward, tstart, teleport, rzone, scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + numTraversals + "," + tb.trialAnglesList[numTraversals] + "," + transform.position.x + "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," + pc.rzoneFlag + ","  + ttls.scanning + "," + pc.mRewardFlag + "," + _autoReward + "," + pc.cmd + ")";
         _command.ExecuteNonQuery();
 
     }

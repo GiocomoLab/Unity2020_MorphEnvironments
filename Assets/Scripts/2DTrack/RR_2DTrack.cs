@@ -58,9 +58,10 @@ public class RR_2DTrack : MonoBehaviour
             pulses = int.Parse(_serialPort.ReadLine()); // read number of clicks from rotary encoder
             //Debug.Log (pulses);
             true_delta_z = -1f * pulses * realSpeed;
-            delta_z = -1f * speedBool * startBool * toutBool * pulses * realSpeed; // convert to cm
-            Vector3 movement = new Vector3(0.0f, 0.0f, delta_z);
-            transform.position = transform.position + movement;
+            delta_z = -1f * speedBool * startBool * toutBool * pulses * realSpeed;
+            transform.position += transform.forward * delta_z;
+            
+            Debug.Log("Current position in world space: " + transform.position);
 
         }
         catch (TimeoutException)
