@@ -11,7 +11,7 @@ public class SP_2DTrack : MonoBehaviour
 {
 
 
-    private string mouse;
+    public string mouse;
 
     public float SkipTrialPcnt = 0.0f;
 
@@ -35,8 +35,8 @@ public class SP_2DTrack : MonoBehaviour
     public float rDur = 2;
 
     // for saving data
-    public string localDirectory_pre = "C:/Users/markp/VR_Data/NeuroMods/";
-    public string serverDirectory_pre = "H:\\My Drive\\VR_Data\\";
+    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/2DTrack/";
+    public string serverDirectory_pre = "J:/My Drive/VR_Data/";
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;
