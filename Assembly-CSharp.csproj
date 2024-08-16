@@ -114,6 +114,7 @@
     <Compile Include="Assets/Scripts/MetaLearn/RewardControl_MetaLearn_B_to_C.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/RandomExtremeMorphs_NeuroMods.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/SP_NeuroMods.cs" />
+    <Compile Include="Assets/TestCode1.cs" />
     <Compile Include="Assets/RandomFromDistributions/Examples/DistributionsExamples/LinearTestScript.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/Notes.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/RewardControl_NeuroMods_Days2to5.cs" />
@@ -165,7 +166,6 @@
     <Compile Include="Assets/Scripts/MetaLearn/RewardControl_MetaLearn_A_to_B.cs" />
     <Compile Include="Assets/TraverseLine.cs" />
     <Compile Include="Assets/Scripts/MetaLearn/EnvControl_MetaLearn_123_Blocks.cs" />
-    <Compile Include="Assets/TestCode1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/RandomFromDistributions/Examples/DistributionsExamples/DistributionsExamples README.txt" />

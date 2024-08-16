@@ -55,8 +55,6 @@ public class SP_2DTrack : MonoBehaviour
     private PC_2DTrack pc;
     private SbxTTLs_2DTrack ttls;
     private TrialBlocks_2DTrack tb;
-    private Notes notes;
-
 
 
     private IDbConnection _connection;
@@ -79,9 +77,6 @@ public class SP_2DTrack : MonoBehaviour
         pc = player.GetComponent<PC_2DTrack>();
         ttls = player.GetComponent<SbxTTLs_2DTrack>();
         tb = player.GetComponent<TrialBlocks_2DTrack>();
-        notes = player.GetComponent<Notes>();
-        mouse = notes.mouse;
-
 
         today = DateTime.Today;
         Debug.Log(today.ToString("yyyy_MM_dd"));
@@ -169,8 +164,7 @@ public class SP_2DTrack : MonoBehaviour
         IDbCommand db_command = db_connection.CreateCommand();
        
         string tmp_date = today.ToString("dd_MM_yyyy");
-        db_command.CommandText = "insert into sessions (MouseName, DateFolder, SessionNumber, Track, RewardCount, Imaging, ImagingRegion, Notes) values ('" + mouse +  "', '" + tmp_date + "', "
-            + session + ",'"+ sceneName + "', " + numRewards + ", " + scanning + ",'" + notes.imaging_region + "','" + notes.notes + "')";
+        db_command.CommandText = "insert into sessions (MouseName, DateFolder, SessionNumber, Track, RewardCount, Imaging) values ('" + mouse + "', '" + tmp_date + "', " + session + "', " + sceneName + "', " + numRewards + "', " + scanning + ")";
 
         Debug.Log(db_command.CommandText);
 

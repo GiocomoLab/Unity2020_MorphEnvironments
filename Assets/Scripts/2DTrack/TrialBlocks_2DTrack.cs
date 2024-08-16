@@ -16,7 +16,7 @@ public class TrialBlocks_2DTrack : MonoBehaviour
     int[] trialIndexList;       // Not sure if needed, keeping for now
     public float[] trialAnglesList;
     
-    void Start()
+    void Awake()
     {
         player = GameObject.Find("Player");
         sp = player.GetComponent<SP_2DTrack>();
