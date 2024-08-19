@@ -81,9 +81,10 @@ public class PC_2DTrack : MonoBehaviour
         Debug.Log(sp.sceneName);
 
         panoCam = GameObject.Find("panoCamera");
-        panoCam.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
-        PositionPlayer(tb.trialAnglesList[0], radius);
+        //panoCam.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);        // Needed?
         reward = GameObject.Find("Reward");
+
+        PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, reward.transform.position);
 
         LickHistory = new ArrayList();
 
@@ -154,8 +155,7 @@ public class PC_2DTrack : MonoBehaviour
             sp.numTraversals += 1;
             tendFlag = 1;
 
-            PositionPlayer(tb.trialAnglesList[sp.numTraversals], radius);
-            PositionEndWall(transform.position, reward.transform.position, radius);
+            PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, reward.transform.position);
             
             bckgndOn = true;
 
@@ -313,6 +313,38 @@ public class PC_2DTrack : MonoBehaviour
 
     }
 
+    // Moves player and end wall to proper positions relative to start angle given by user and reward location
+    void PositionObjects(float angle, float radius, Vector3 rewardPos){
+
+        // Move player to initial posiiton
+        float angleRad = angle * Mathf.Deg2Rad;
+        Vector3 playerPos = new Vector3(radius*Mathf.Cos(angleRad), 0.0f, radius*Mathf.Sin(angleRad));
+        transform.position = playerPos;
+
+        Debug.Log("Current player position in world space: " + transform.position);
+
+        // Calculate end wall position and move end wall to it
+        Vector3 distToReward = rewardPos - playerPos;
+        float cosTheta = Vector3.Dot(Vector3.Normalize(-playerPos), Vector3.Normalize(distToReward));
+        float theta = Mathf.Acos(cosTheta);
+        float relativeToWall = 2 * radius * cosTheta;
+        Vector3 wallPos = Vector3.Normalize(distToReward) * relativeToWall + playerPos;
+        endWall.transform.position = wallPos;
+
+        Debug.Log("Current end wall position in world space: " + endWall.transform.position);
+
+        // Rotate player to face towards end wall
+        float oppAngle = (-90 - angle) % 360;   // Angle so z-axis of player faces arena origin
+        float thetaP = oppAngle + theta;    // Angle z-axis of player faces end wall
+        transform.eulerAngles = new Vector3(0.0f, thetaP, 0.0f);
+
+        Debug.Log("Current player rotation in world space: " + transform.eulerAngles);
+
+        // Rotate end wall position
+        //float thetaW = Mathf.Rad2Deg* Mathf.Atan2(wallPos.x, wallPos.z);
+        //endWall.transform.eulerAngles = new Vector3(0.0f, -thetaW, 0.0f);
+    }
+
     //Moves end wall to position in arena in relation to the initial player position and reward location
     void PositionEndWall(Vector3 playerpos, Vector3 rewardpos, float radius){
 
@@ -339,7 +371,8 @@ public class PC_2DTrack : MonoBehaviour
         transform.position = new Vector3(radius*Mathf.Cos(angleRad), 0.0f, radius*Mathf.Sin(angleRad));
 
         //Rotate
-        transform.eulerAngles = new Vector3(0.0f, -angle, 0.0f);
+        float angleTransform = (angle + 180) % 360;
+        transform.eulerAngles = new Vector3(0.0f, -angleTransform, 0.0f);
 
         Debug.Log("Current position in world space: " + transform.position);
     }

@@ -49,6 +49,7 @@ public class RR_2DTrack : MonoBehaviour
 
     void Update()
     {
+        if (firstFlag) { speedBool = 1; firstFlag = false; }
         if (Input.GetKeyDown(KeyCode.G)) { startBool = 1; };
 
         // read quadrature encoder
