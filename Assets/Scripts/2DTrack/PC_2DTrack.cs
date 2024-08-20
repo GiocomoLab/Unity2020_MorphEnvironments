@@ -326,7 +326,7 @@ public class PC_2DTrack : MonoBehaviour
         // Calculate end wall position and move end wall to it
         Vector3 distToReward = rewardPos - playerPos;
         float cosTheta = Vector3.Dot(Vector3.Normalize(-playerPos), Vector3.Normalize(distToReward));
-        float theta = Mathf.Acos(cosTheta);
+        float theta = Mathf.Acos(cosTheta) * Mathf.Rad2Deg;
         float relativeToWall = 2 * radius * cosTheta;
         Vector3 wallPos = Vector3.Normalize(distToReward) * relativeToWall + playerPos;
         endWall.transform.position = wallPos;

@@ -19,8 +19,8 @@ public class RR_2DTrack : MonoBehaviour
     public float delta_z;
     public float true_delta_z;
     private float realSpeed = 0.0447f;
-    public float speedBool = 0;
-    private float startBool = 0;
+    public float speedBool = 1;     //Changed this to 1
+    private float startBool = 0;            
     //public float servoBool = 0;
     private bool firstFlag = true;
     public float toutBool = 1;
@@ -49,7 +49,6 @@ public class RR_2DTrack : MonoBehaviour
 
     void Update()
     {
-        if (firstFlag) { speedBool = 1; firstFlag = false; }
         if (Input.GetKeyDown(KeyCode.G)) { startBool = 1; };
 
         // read quadrature encoder
@@ -61,6 +60,8 @@ public class RR_2DTrack : MonoBehaviour
             true_delta_z = -1f * pulses * realSpeed;
             delta_z = -1f * speedBool * startBool * toutBool * pulses * realSpeed;
             transform.position += transform.forward * delta_z;
+            Debug.Log("speedBool: " + speedBool + "startBool: " + startBool + "toutBool: " + toutBool + "pulses: " + pulses);
+
             
             Debug.Log("Current position in world space: " + transform.position);
 

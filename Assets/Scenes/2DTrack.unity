@@ -716,7 +716,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655082148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 21, y: 2, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 98915174}
@@ -746,8 +746,8 @@ Camera:
     width: 0.33333334
     height: 1
   near clip plane: 0.3
-  far clip plane: 30
-  field of view: 90.02843
+  far clip plane: 300
+  field of view: 55.91539
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -980,8 +980,8 @@ Camera:
     width: 0.33333334
     height: 1
   near clip plane: 0.3
-  far clip plane: 30
-  field of view: 90.02843
+  far clip plane: 300
+  field of view: 55.91539
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1238,7 +1238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af42d3d586a6140b0b5dd48a99976a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM4
+  port: COM7
   trash: 0
   c_1: 0
   r: 0
@@ -1280,7 +1280,7 @@ MonoBehaviour:
   delta_z: 0
   true_delta_z: 0
   speedBool: 0
-  toutBool: 1
+  toutBool: 0
 --- !u!114 &1419153354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1302,12 +1302,12 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 0
+  numTrialsTotal: 200
   maxRewards: 200
   morph: 0
   rDur: 2
-  localDirectory_pre: 
-  serverDirectory_pre: 
+  localDirectory_pre: C:/Users/thorlabs_vr_rig/VR_Data/2DTrack/
+  serverDirectory_pre: J:/My Drive/VR_Data/
   localDirectory: 
   serverDirectory: 
   localPrefix: 
@@ -1328,11 +1328,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startAngles:
-  - 0
-  - 45
+  - 180
+  - 270
   - 90
   - 180
-  blockChanges: 0000000004000000080000000c000000
+  blockChanges: 0000000002000000080000000c000000
   trialAnglesList: []
 --- !u!54 &1419153357
 Rigidbody:
@@ -1610,7 +1610,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 400
-  field of view: 90.02843
+  field of view: 55.91539
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
