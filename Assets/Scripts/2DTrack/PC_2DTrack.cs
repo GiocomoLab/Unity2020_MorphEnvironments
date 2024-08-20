@@ -317,8 +317,8 @@ public class PC_2DTrack : MonoBehaviour
     void PositionObjects(float angle, float radius, Vector3 rewardPos){
 
         // Move player to initial posiiton
-        float angleRad = angle * Mathf.Deg2Rad;
-        Vector3 playerPos = new Vector3(radius*Mathf.Cos(angleRad), 0.0f, radius*Mathf.Sin(angleRad));
+        float radAngle = angle * Mathf.Deg2Rad;
+        Vector3 playerPos = new Vector3(radius*Mathf.Cos(radAngle), 0.0f, radius*Mathf.Sin(radAngle));
         transform.position = playerPos;
 
         Debug.Log("Current player position in world space: " + transform.position);
@@ -334,15 +334,23 @@ public class PC_2DTrack : MonoBehaviour
         Debug.Log("Current end wall position in world space: " + endWall.transform.position);
 
         // Rotate player to face towards end wall
-        float oppAngle = (-90 - angle) % 360;   // Angle so z-axis of player faces arena origin
-        float thetaP = oppAngle + theta;    // Angle z-axis of player faces end wall
+        float oppAngle = (angle + 270) % 360;   // Angle so z-axis of player faces arena origin
+
+        //Check sign
+        float tempvalue = rewardPos.x * Mathf.Cos(oppAngle) - rewardPos.z * Mathf.Sin(oppAngle);
+        float thetaP;
+        if (tempvalue > 0){
+            thetaP = oppAngle + theta;
+        }
+        else{
+            thetaP = oppAngle - theta;
+        }
         transform.eulerAngles = new Vector3(0.0f, thetaP, 0.0f);
 
         Debug.Log("Current player rotation in world space: " + transform.eulerAngles);
 
-        // Rotate end wall position
-        //float thetaW = Mathf.Rad2Deg* Mathf.Atan2(wallPos.x, wallPos.z);
-        //endWall.transform.eulerAngles = new Vector3(0.0f, -thetaW, 0.0f);
+        // Rotate end wall
+        endWall.transform.eulerAngles = new Vector3(0.0f, -angle, 0.0f);
     }
 
     //Moves end wall to position in arena in relation to the initial player position and reward location
