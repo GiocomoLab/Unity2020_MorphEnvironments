@@ -31,8 +31,8 @@ public class SP_RunTrain : MonoBehaviour
 
     public bool MultiReward = true;
     // for saving data
-    public string localDirectory_pre = "C:/Users/markp/VR_Data/TwoTower/";
-    public string serverDirectory_pre = "G:/My Drive/VR_Data/TwoTower";
+    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/Michelle/";
+    public string serverDirectory_pre = "J:/My Drive/VR_Data/";
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;
@@ -66,10 +66,10 @@ public class SP_RunTrain : MonoBehaviour
         ttls = player.GetComponent<SbxTTLs_RunTrain>();
 
         today = DateTime.Today;
-        Debug.Log(today.ToString("dd_MM_yyyy"));
+        Debug.Log(today.ToString("yyyy_MM_dd"));
         sceneName = SceneManager.GetActiveScene().name;
-        localDirectory = localDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
-        serverDirectory = serverDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
+        localDirectory = localDirectory_pre + mouse + '/' + today.ToString("yyyy_MM_dd") + '/';
+        serverDirectory = serverDirectory_pre + mouse + '/' + today.ToString("yyyy_MM_dd") + '/';
         if (!Directory.Exists(localDirectory))
         {
             Directory.CreateDirectory(localDirectory);

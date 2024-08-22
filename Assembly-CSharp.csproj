@@ -139,6 +139,8 @@
     <Compile Include="Assets/Scripts/2DTrack/TrialBlocks_2DTrack.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/PC_NeuroMods.cs" />
     <Compile Include="Assets/Scripts/YMazeTraining/SbxTTLs_YMazeTrain.cs" />
+    <Compile Include="Assets/TestingVectors.cs" />
+    <Compile Include="Assets/TestingAngles.cs" />
     <Compile Include="Assets/Scripts/YMazeTraining/RewardControl_YMaze.cs" />
     <Compile Include="Assets/Scripts/ShortTrack/SbxTTLs_ShortTrack.cs" />
     <Compile Include="Assets/Scripts/LickportTraining/DL_LickportTraining.cs" />
@@ -166,7 +168,6 @@
     <Compile Include="Assets/Scripts/MetaLearn/RewardControl_MetaLearn_A_to_B.cs" />
     <Compile Include="Assets/TraverseLine.cs" />
     <Compile Include="Assets/Scripts/MetaLearn/EnvControl_MetaLearn_123_Blocks.cs" />
-    <Compile Include="Assets/TestingAngles.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/RandomFromDistributions/Examples/DistributionsExamples/DistributionsExamples README.txt" />

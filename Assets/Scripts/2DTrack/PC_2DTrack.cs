@@ -16,8 +16,9 @@ public class PC_2DTrack : MonoBehaviour
 
     private GameObject player;
     private GameObject reward;
-    private GameObject panoCam;
+    private GameObject panoCam;     // This might not be needed
     private GameObject endWall;
+    private GameObject startWall;
 
     private Rigidbody rb;
 
@@ -29,16 +30,14 @@ public class PC_2DTrack : MonoBehaviour
 
     private bool reward_dir;
 
-
-    private Vector3 initialPosition;
-    private Vector3 initialRotation;
-    private Vector3 movement;
+    private Vector3 initialPosition;        // This might not be needed
+    private Vector3 movement;           // This might not be needed
 
     private static bool created = false;
     private int r;
 
     public int cmd = 2;
-    private bool flashFlag = false;
+    private bool flashFlag = false;     // Not on Can's script
     private float LastRewardTime;
     public int prevReward = 0;
 
@@ -71,6 +70,7 @@ public class PC_2DTrack : MonoBehaviour
     {
         player = GameObject.Find("Player");
         endWall = GameObject.Find("End Wall");
+        startWall = GameObject.Find("Start");
         
         sp = player.GetComponent<SP_2DTrack>();
         dl = player.GetComponent<DL_2DTrack>();
@@ -78,6 +78,8 @@ public class PC_2DTrack : MonoBehaviour
         sbxttls = player.GetComponent<SbxTTLs_2DTrack>();
         tb = player.GetComponent<TrialBlocks_2DTrack>();
 
+        StartCoroutine(FlagCheck());
+        
         Debug.Log(sp.sceneName);
 
         panoCam = GameObject.Find("panoCamera");
@@ -172,6 +174,15 @@ public class PC_2DTrack : MonoBehaviour
         }
       
 
+    }
+
+    IEnumerator FlagCheck(){
+        while (true){
+            yield return new WaitForEndOfFrame();
+            tendFlag = 0;
+            tstartFlag = 0;
+        }
+        yield return null;
     }
 
     IEnumerator InterTrialTimeout()
@@ -337,7 +348,7 @@ public class PC_2DTrack : MonoBehaviour
         float oppAngle = (angle + 270) % 360;   // Angle so z-axis of player faces arena origin
 
         //Check sign
-        float tempvalue = rewardPos.x * Mathf.Cos(oppAngle) - rewardPos.z * Mathf.Sin(oppAngle);
+        float tempvalue = rewardPos.x * Mathf.Cos(oppAngle*Mathf.Deg2Rad) - rewardPos.z * Mathf.Sin(oppAngle*Mathf.Deg2Rad);
         float thetaP;
         if (tempvalue > 0){
             thetaP = oppAngle + theta;
@@ -350,7 +361,15 @@ public class PC_2DTrack : MonoBehaviour
         Debug.Log("Current player rotation in world space: " + transform.eulerAngles);
 
         // Rotate end wall
-        endWall.transform.eulerAngles = new Vector3(0.0f, -angle, 0.0f);
+        double wallAngleRad = Math.Atan2(wallPos.x, wallPos.z);
+        float wallAngleRadFloat = Convert.ToSingle(wallAngleRad);
+        endWall.transform.eulerAngles = new Vector3(0.0f, -wallAngleRadFloat*Mathf.Rad2Deg, 0.0f);
+
+        // Move start wall to initial position
+        startWall.transform.position = playerPos;
+
+        // Rotate start wall to initial position
+        startWall.transform.eulerAngles = new Vector3(0.0f, -angle, 0.0f);
     }
 
     //Moves end wall to position in arena in relation to the initial player position and reward location

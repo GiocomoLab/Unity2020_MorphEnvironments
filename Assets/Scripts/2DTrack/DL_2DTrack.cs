@@ -22,9 +22,9 @@ public class DL_2DTrack : MonoBehaviour
     public int c_1;
 
     // for saving data
-    private SP_2DTrack sp;
-    private string lickFile;
-    private string serverLickFile;
+    private SP_2DTrack sp;          // What is this for?
+    private string lickFile;        // What is this for?
+    private string serverLickFile;  // What is this for?
 
     public int r;
     public int rflag = 1;
@@ -35,8 +35,8 @@ public class DL_2DTrack : MonoBehaviour
     public void Awake()
     {
         // for saving data
-        GameObject player = GameObject.Find("Player");
-        sp = player.GetComponent<SP_2DTrack>();
+        GameObject player = GameObject.Find("Player");  
+        sp = player.GetComponent<SP_2DTrack>();     // What is this for?
         pc = player.GetComponent<PC_2DTrack>();
     }
 
@@ -59,7 +59,6 @@ public class DL_2DTrack : MonoBehaviour
             lick_raw = _serialPort.ReadLine();
             string[] lick_list = lick_raw.Split('\t');
             c_1 = int.Parse(lick_list[0]);
-
             r = int.Parse(lick_list[1]);
 
 

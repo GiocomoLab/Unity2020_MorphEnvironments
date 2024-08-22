@@ -11,8 +11,6 @@ public class PC_LickportTraining : MonoBehaviour
 
     public float rDur = 2.0f; // timeout duration between available rewards
 
-    private static int numRewards = 0;
-    private int numRewards_manual = 0;
     private int rewardFlag = 0;
 
     // for saving data
@@ -60,8 +58,8 @@ public class PC_LickportTraining : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) | Input.GetMouseButtonDown(0)) // reward left
         {
             mRewardFlag = 1;
-            numRewards_manual += 1;
-            Debug.Log(numRewards_manual);
+            sp.numRewards_manual++;
+            Debug.Log(sp.numRewards_manual);
             StartCoroutine(DeliverReward(4));
 
 

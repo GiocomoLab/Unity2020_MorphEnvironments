@@ -35,7 +35,7 @@ public class SP_2DTrack : MonoBehaviour
     public float rDur = 2;
 
     // for saving data
-    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/2DTrack/";
+    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/Michelle/";
     public string serverDirectory_pre = "J:/My Drive/VR_Data/";
     public string localDirectory;
     public string serverDirectory;
