@@ -154,6 +154,7 @@ public class PC_2DTrack : MonoBehaviour
         }
         else if (other.tag == "Teleport")
         {
+            Debug.Log("Teleport");
             sp.numTraversals += 1;
             tendFlag = 1;
 
@@ -345,7 +346,7 @@ public class PC_2DTrack : MonoBehaviour
         Debug.Log("Current end wall position in world space: " + endWall.transform.position);
 
         // Rotate player to face towards end wall
-        float oppAngle = (angle + 270) % 360;   // Angle so z-axis of player faces arena origin
+        float oppAngle = (-angle + 270) % 360;   // Angle so z-axis of player faces arena origin
 
         //Check sign
         float tempvalue = rewardPos.x * Mathf.Cos(oppAngle*Mathf.Deg2Rad) - rewardPos.z * Mathf.Sin(oppAngle*Mathf.Deg2Rad);
