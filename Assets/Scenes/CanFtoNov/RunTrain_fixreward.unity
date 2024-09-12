@@ -274,7 +274,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 56.0539
+  field of view: 55.349144
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -348,7 +348,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 56.0539
+  field of view: 55.349144
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -803,8 +803,8 @@ MonoBehaviour:
   morph: 0
   TrainingTrack: 1
   MultiReward: 0
-  localDirectory_pre: C:/Users/markp/VR_Data/CanD/behavior/
-  serverDirectory_pre: G:\My Drive\CA123\behavior\
+  localDirectory_pre: C:\Users\thorlabs_vr_rig\VR_Data\Can_train\
+  serverDirectory_pre: I:\My Drive\CA123\behavior\
   localDirectory: 
   serverDirectory: 
   localPrefix: 
@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: CA123-2214-3
+  mouse: 0914_2
   notes: 
   imaging_region: CA123
 --- !u!114 &1722994744
@@ -1010,7 +1010,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 56.0539
+  field of view: 55.349144
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
