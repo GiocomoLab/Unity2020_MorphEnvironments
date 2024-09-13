@@ -18,7 +18,7 @@ public class PC_2DTrack : MonoBehaviour
     private GameObject reward;
     private GameObject panoCam;     // This might not be needed
     private GameObject endWall;
-    private GameObject startWall;
+    private GameObject startObjects;
 
     private Rigidbody rb;
 
@@ -32,6 +32,7 @@ public class PC_2DTrack : MonoBehaviour
 
     private Vector3 initialPosition;        // This might not be needed
     private Vector3 movement;           // This might not be needed
+    private Vector3 playerPos;
 
     private static bool created = false;
     private int r;
@@ -70,7 +71,7 @@ public class PC_2DTrack : MonoBehaviour
     {
         player = GameObject.Find("Player");
         endWall = GameObject.Find("End Wall");
-        startWall = GameObject.Find("Start");
+        startObjects = GameObject.Find("StartObjects");
         
         sp = player.GetComponent<SP_2DTrack>();
         dl = player.GetComponent<DL_2DTrack>();
@@ -150,11 +151,13 @@ public class PC_2DTrack : MonoBehaviour
 
         if (other.tag == "Reward")
         {
-           StartCoroutine(RewardSequence(transform.position.z,other.gameObject)); 
+           StartCoroutine(RewardSequence(transform.position, other.gameObject)); 
         }
         else if (other.tag == "Teleport")
         {
             Debug.Log("Teleport");
+
+            reward.SetActive(true);
             sp.numTraversals += 1;
             tendFlag = 1;
 
@@ -233,27 +236,38 @@ public class PC_2DTrack : MonoBehaviour
         panoCam.SetActive(false);
     }
 
-    IEnumerator RewardSequence(float pos,GameObject _reward)
+    IEnumerator RewardSequence(Vector3 rewardStart,GameObject _reward)
     {   // water reward
         rzoneFlag = 1;
-       
-        
-        while ((transform.position.z <= pos + 75)  )
-        { 
-            
-            
-            if ((sp.AutoReward) & (transform.position.z > pos + 50))
-            { 
-     
-               
+
+        //Calculate end of reward zone
+        Vector3 rewardEnd = GetRewardEnd(rewardStart, 50, playerPos);
+
+        //Calculate reward zone boundaries
+        float rewardMinX = Mathf.Min(rewardStart.x, rewardEnd.x);
+        float rewardMaxX = Mathf.Max(rewardStart.x, rewardEnd.x);
+        float rewardMinZ = Mathf.Min(rewardStart.z, rewardEnd.z);
+        float rewardMaxZ = Mathf.Max(rewardStart.z, rewardEnd.z);
+
+        //Calculate auto reward boundary
+        Vector3 rewardAuto = GetRewardEnd(rewardStart, 30, playerPos);
+
+        //Calculate auto reward zone boundaries
+        float rewardAutoMinX = Mathf.Min(rewardAuto.x, rewardEnd.x);
+        float rewardAutoMaxX = Mathf.Max(rewardAuto.x, rewardEnd.x);
+        float rewardAutoMinZ = Mathf.Min(rewardAuto.z, rewardEnd.z);
+        float rewardAutoMaxZ = Mathf.Max(rewardAuto.z, rewardEnd.z);
+
+        while(transform.position.x >= rewardMinX && transform.position.x <= rewardMaxX && transform.position.z >= rewardMinZ && transform.position.z <= rewardMaxZ){
+
+            if((sp.AutoReward) & (transform.position.x >= rewardAutoMinX && transform.position.x <= rewardAutoMaxX && transform.position.z >= rewardAutoMinZ && transform.position.z <= rewardAutoMaxZ)){
+
                 cmd = 4;
                 StartCoroutine(DeliverReward(1));
                 sp.numRewards += 1;
                 prevReward = 1;
                 yield return new WaitForEndOfFrame();
                 break;
-                   
-               
             }
 
             if (dl.c_1 > 0) {
@@ -268,31 +282,13 @@ public class PC_2DTrack : MonoBehaviour
            
         }
         _reward.SetActive(false);
-       
-        //if ((sp.sceneName == "NeuroMods_LocationA"))
-        //{
-        //    
-        //    reward.SetActive(false);
-//
-  //      } else if ((sp.sceneName == "NeuroMods_LocationB"))
-    //    {
-      //      reward.SetActive(false);
-        //} else
-        //{
-         //   reward_a.SetActive(false);
-          //  reward_b.SetActive(false);
-           // reward_c.SetActive(false);
-        //}
-        
-        
-        
-        
+
         rzoneFlag = 0;
         yield return new WaitForEndOfFrame();
         cmd = 2;
         yield return new WaitForEndOfFrame();
         cmd = 0;
-
+    
     }
 
     
@@ -330,7 +326,7 @@ public class PC_2DTrack : MonoBehaviour
 
         // Move player to initial posiiton
         float radAngle = angle * Mathf.Deg2Rad;
-        Vector3 playerPos = new Vector3(radius*Mathf.Cos(radAngle), 0.0f, radius*Mathf.Sin(radAngle));
+        playerPos = new Vector3(radius*Mathf.Cos(radAngle), 0.0f, radius*Mathf.Sin(radAngle));
         transform.position = playerPos;
 
         Debug.Log("Current player position in world space: " + transform.position);
@@ -366,11 +362,11 @@ public class PC_2DTrack : MonoBehaviour
         float wallAngleRadFloat = Convert.ToSingle(wallAngleRad);
         endWall.transform.eulerAngles = new Vector3(0.0f, -wallAngleRadFloat*Mathf.Rad2Deg, 0.0f);
 
-        // Move start wall to initial position
-        startWall.transform.position = playerPos;
+        // Move start objects to initial position
+        startObjects.transform.position = playerPos;
 
         // Rotate start wall to initial position
-        startWall.transform.eulerAngles = new Vector3(0.0f, -angle, 0.0f);
+        startObjects.transform.eulerAngles = new Vector3(0.0f, -angle, 0.0f);
     }
 
     //Moves end wall to position in arena in relation to the initial player position and reward location
@@ -403,6 +399,23 @@ public class PC_2DTrack : MonoBehaviour
         transform.eulerAngles = new Vector3(0.0f, -angleTransform, 0.0f);
 
         Debug.Log("Current position in world space: " + transform.position);
+    }
+
+    Vector3 GetRewardEnd(Vector3 playerpos, float rewarddist, Vector3 startpos){
+
+        //Calculate distance traversed, or between player start position and current player position
+        Vector3 distTraversed = playerpos - startpos;
+
+        //Get length of distance traversed
+        float lengthTraversed = distTraversed.magnitude;
+
+        //Add reward distance to vector length
+        float rewardLength = lengthTraversed + rewarddist;
+
+        //Make vector length the reward length
+        Vector3 normVector = Vector3.Normalize(distTraversed);
+        Vector3 rewardEnd = rewardLength * normVector + startpos;
+        return rewardEnd;
     }
 
 }

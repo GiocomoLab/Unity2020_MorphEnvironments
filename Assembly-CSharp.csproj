@@ -84,8 +84,8 @@
     <Compile Include="Assets/Scripts/NeuroMods/Morph1DreamLandBlocks_NeuroMods.cs" />
     <Compile Include="Assets/Scripts/MetaLearn/EnvControl_MetaLearn_12_Blocks_RewardSwap.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/MakeSineOnChildren_TwoTower.cs" />
-    <Compile Include="Assets/PanoCam/scripts/panoCamScript.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/DL_NeuroMods.cs" />
+    <Compile Include="Assets/PanoCam/scripts/panoCamScript.cs" />
     <Compile Include="Assets/RandomFromDistributions/Examples/Monster Spawner Example/Monster.cs" />
     <Compile Include="Assets/Scripts/YMazeTraining/TurnController_random.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/TowerColor_NeuroMods.cs" />
@@ -100,8 +100,8 @@
     <Compile Include="Assets/Scripts/2DTrack/SbxTTLs_2DTrack.cs" />
     <Compile Include="Assets/Scripts/MetaLearn/RewardControl_MetaLearn_C_to_A.cs" />
     <Compile Include="Assets/RandomFromDistributions/Examples/DistributionsExamples/CurveTestScript.cs" />
-    <Compile Include="Assets/Scripts/NeuroMods/RewardControl_NeuroMods_Days6Image.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/MakeSineOnChildren_NeuroMods.cs" />
+    <Compile Include="Assets/Scripts/NeuroMods/RewardControl_NeuroMods_Days6Image.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/ExtremeMorphBlocks_NeuroMods.cs" />
     <Compile Include="Assets/Scripts/YMazeTraining/DL_YMazeTrain.cs" />
     <Compile Include="Assets/Scripts/2DTrack/PC_2DTrack.cs" />
@@ -935,12 +935,20 @@
       <HintPath>/home/stackm/Apps/Unity/2020.3.19f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/netstandard.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
@@ -953,6 +961,14 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ProBuilder">
+      <HintPath>Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.UI">
