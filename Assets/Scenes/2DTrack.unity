@@ -427,7 +427,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0.019607844}
+  m_BackGroundColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0.019607844}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -561,7 +561,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30250
+  m_Name: pb_Mesh20148
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1072,9 +1072,9 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 8fdb9c60a28b8a546b05fc949e6824ed, type: 2}
-  - {fileID: 2100000, guid: a5bc2a6edaf531347a45cc6cdc83dd6b, type: 2}
-  - {fileID: 2100000, guid: 480ccdc055528ea11a0720a01f3f257d, type: 2}
-  - {fileID: 2100000, guid: bc7863cacf1b94044908d1e6da7da3e9, type: 2}
+  - {fileID: 2100000, guid: 45eb3f8288082bf4c85dd5edaad8b17b, type: 2}
+  - {fileID: 2100000, guid: fc7f6362cb9ad87f2b883450179bd1a2, type: 2}
+  - {fileID: 2100000, guid: 512ab52dbc9ffce40890da9521c0f2f4, type: 2}
   - {fileID: 2100000, guid: 28bbc70139c33474aa365c161e2c9034, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -12791,7 +12791,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 03899fb498ad738e28f159342bed7f7e, type: 2}
+  - {fileID: 2100000, guid: 600bff626e4aae2e6a8a1098205c98d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
