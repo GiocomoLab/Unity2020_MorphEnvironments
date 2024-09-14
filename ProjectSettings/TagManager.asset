@@ -7,6 +7,9 @@ TagManager:
   - Reward
   - East Tower
   - Teleport
+  - West Tower
+  - Start
+  - StartObjects
   layers:
   - Default
   - TransparentFX

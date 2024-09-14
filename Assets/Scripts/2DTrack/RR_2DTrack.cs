@@ -61,10 +61,6 @@ public class RR_2DTrack : MonoBehaviour
             true_delta_z = -1f * pulses * realSpeed;
             delta_z = -1f * speedBool * startBool * toutBool * pulses * realSpeed;
             transform.position += transform.forward * delta_z;
-            Debug.Log("speedBool: " + speedBool + "startBool: " + startBool + "toutBool: " + toutBool + "pulses: " + pulses);
-
-            
-            Debug.Log("Current position in world space: " + transform.position);
 
         }
         catch (TimeoutException)

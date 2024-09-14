@@ -151,7 +151,7 @@ public class PC_2DTrack : MonoBehaviour
 
         if (other.tag == "Reward")
         {
-           StartCoroutine(RewardSequence(transform.position, other.gameObject)); 
+            StartCoroutine(RewardSequence(transform.position, other.gameObject));
         }
         else if (other.tag == "Teleport")
         {
@@ -239,6 +239,7 @@ public class PC_2DTrack : MonoBehaviour
     IEnumerator RewardSequence(Vector3 rewardStart,GameObject _reward)
     {   // water reward
         rzoneFlag = 1;
+        Debug.Log("Entered reward zone: " + rewardStart);
 
         //Calculate end of reward zone
         Vector3 rewardEnd = GetRewardEnd(rewardStart, 50, playerPos);
@@ -262,6 +263,7 @@ public class PC_2DTrack : MonoBehaviour
 
             if((sp.AutoReward) & (transform.position.x >= rewardAutoMinX && transform.position.x <= rewardAutoMaxX && transform.position.z >= rewardAutoMinZ && transform.position.z <= rewardAutoMaxZ)){
 
+                Debug.Log("Auto reward on: " + transform.position);
                 cmd = 4;
                 StartCoroutine(DeliverReward(1));
                 sp.numRewards += 1;
@@ -284,6 +286,7 @@ public class PC_2DTrack : MonoBehaviour
         _reward.SetActive(false);
 
         rzoneFlag = 0;
+        Debug.Log("Exited reward zone: " + transform.position);
         yield return new WaitForEndOfFrame();
         cmd = 2;
         yield return new WaitForEndOfFrame();
@@ -327,7 +330,8 @@ public class PC_2DTrack : MonoBehaviour
         // Move player to initial posiiton
         float radAngle = angle * Mathf.Deg2Rad;
         playerPos = new Vector3(radius*Mathf.Cos(radAngle), 0.0f, radius*Mathf.Sin(radAngle));
-        transform.position = playerPos;
+        Vector3 playerPosInTunnel = new Vector3((radius + 5) * Mathf.Cos(radAngle), 0.0f, (radius + 5) * Mathf.Sin(radAngle));
+        transform.position = playerPosInTunnel;
 
         Debug.Log("Current player position in world space: " + transform.position);
 
@@ -337,7 +341,7 @@ public class PC_2DTrack : MonoBehaviour
         float theta = Mathf.Acos(cosTheta) * Mathf.Rad2Deg;
         float relativeToWall = 2 * radius * cosTheta;
         Vector3 wallPos = Vector3.Normalize(distToReward) * relativeToWall + playerPos;
-        endWall.transform.position = wallPos;
+        endWall.transform.position = new Vector3(wallPos.x, 0.0f, wallPos.z);
 
         Debug.Log("Current end wall position in world space: " + endWall.transform.position);
 
@@ -358,12 +362,15 @@ public class PC_2DTrack : MonoBehaviour
         Debug.Log("Current player rotation in world space: " + transform.eulerAngles);
 
         // Rotate end wall
-        double wallAngleRad = Math.Atan2(wallPos.x, wallPos.z);
+        double wallAngleRad = Math.Atan2(wallPos.z, wallPos.x);
         float wallAngleRadFloat = Convert.ToSingle(wallAngleRad);
         endWall.transform.eulerAngles = new Vector3(0.0f, -wallAngleRadFloat*Mathf.Rad2Deg, 0.0f);
 
+        Debug.Log("Current end wall rotation in world space: " + endWall.transform.eulerAngles);
+
         // Move start objects to initial position
         startObjects.transform.position = playerPos;
+        Debug.Log("moved start objects");
 
         // Rotate start wall to initial position
         startObjects.transform.eulerAngles = new Vector3(0.0f, -angle, 0.0f);
