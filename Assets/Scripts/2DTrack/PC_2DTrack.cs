@@ -88,6 +88,7 @@ public class PC_2DTrack : MonoBehaviour
         reward = GameObject.Find("Reward");
 
         PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, reward.transform.position);
+        Debug.Log("Start angle: " + tb.trialAnglesList[sp.numTraversals]);
 
         if (UnityEngine.Random.value < sp.autoRewardPercent){
             sp.AutoReward = true;
@@ -95,6 +96,7 @@ public class PC_2DTrack : MonoBehaviour
         else{
             sp.AutoReward = false;
         }
+        Debug.Log("Auto reward: " + sp.AutoReward);
 
         LickHistory = new ArrayList();
 
@@ -169,6 +171,7 @@ public class PC_2DTrack : MonoBehaviour
             tendFlag = 1;
 
             PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, reward.transform.position);
+            Debug.Log("Start angle: " + tb.trialAnglesList[sp.numTraversals]);
 
             if (UnityEngine.Random.value < sp.autoRewardPercent){
                 sp.AutoReward = true;
@@ -176,10 +179,11 @@ public class PC_2DTrack : MonoBehaviour
             else{
                 sp.AutoReward = false;
             }
-            
+            Debug.Log("Auto reward: " + sp.AutoReward);
+
             bckgndOn = true;
 
-            StartCoroutine(InterTrialTimeout());
+            //StartCoroutine(InterTrialTimeout());
 
             LastRewardTime = Time.realtimeSinceStartup; // to avoid issues with teleports
         }
