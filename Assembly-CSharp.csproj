@@ -63,6 +63,7 @@
     <Compile Include="Assets/MoveForward.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/SbxTTLs_NeuroMods.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/SbxTTLs_TwoTower.cs" />
+    <Compile Include="Assets/Shapes2D/Demos/DragCamera.cs" />
     <Compile Include="Assets/Scripts/MetaLearn/EnvControl_MetaLearn_123_Random.cs" />
     <Compile Include="Assets/Scripts/ShortTrack/DL_ShortTrack.cs" />
     <Compile Include="Assets/Scripts/2DTrack/DL_2DTrack.cs" />
@@ -76,9 +77,11 @@
     <Compile Include="Assets/Scripts/NeuroMods/RewardControl_NeuroMods_Day8Image.cs" />
     <Compile Include="Assets/Scripts/MetaLearn/EnvControl_MetaLearn_Env3_DreamLand_Blocks.cs" />
     <Compile Include="Assets/Scripts/RunningTraining/RandomBlocksOnChildren.cs" />
+    <Compile Include="Assets/Shapes2D/Demos/Simple Effect/TapEffect.cs" />
     <Compile Include="Assets/Scripts/YMaze/TrialController_YMaze.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/mouseCrawler.cs" />
     <Compile Include="Assets/GetSize.cs" />
+    <Compile Include="Assets/Shapes2D/Scripts/Shapes2DPrefs.cs" />
     <Compile Include="Assets/Scripts/MetaLearn/RewardControl_MetaLearn_Env3.cs" />
     <Compile Include="Assets/Scripts/LickportTraining/PC_LickportTraining.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/Morph1DreamLandBlocks_NeuroMods.cs" />
@@ -86,6 +89,7 @@
     <Compile Include="Assets/Scripts/TwoTower_foraging/MakeSineOnChildren_TwoTower.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/DL_NeuroMods.cs" />
     <Compile Include="Assets/PanoCam/scripts/panoCamScript.cs" />
+    <Compile Include="Assets/Shapes2D/Scripts/Shape.cs" />
     <Compile Include="Assets/RandomFromDistributions/Examples/Monster Spawner Example/Monster.cs" />
     <Compile Include="Assets/Scripts/YMazeTraining/TurnController_random.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/TowerColor_NeuroMods.cs" />
@@ -98,6 +102,7 @@
     <Compile Include="Assets/Test.cs" />
     <Compile Include="Assets/Scripts/2DTrack/RR_2DTrack.cs" />
     <Compile Include="Assets/Scripts/2DTrack/SbxTTLs_2DTrack.cs" />
+    <Compile Include="Assets/Shapes2D/Demos/Flappy Shapes/Bird.cs" />
     <Compile Include="Assets/Scripts/MetaLearn/RewardControl_MetaLearn_C_to_A.cs" />
     <Compile Include="Assets/RandomFromDistributions/Examples/DistributionsExamples/CurveTestScript.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/MakeSineOnChildren_NeuroMods.cs" />
@@ -110,6 +115,7 @@
     <Compile Include="Assets/Scripts/TwoTower_foraging/TrialOrdering_TwoTower.cs" />
     <Compile Include="Assets/Scripts/LickportTraining/SP_LickportTraining.cs" />
     <Compile Include="Assets/RandomFromDistributions/Examples/Monster Spawner Example/MonsterSpawner.cs" />
+    <Compile Include="Assets/Shapes2D/Demos/Stress Test/Spawner.cs" />
     <Compile Include="Assets/PanoCam/scripts/createPanoCam.cs" />
     <Compile Include="Assets/Scripts/MetaLearn/RewardControl_MetaLearn_B_to_C.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/RandomExtremeMorphs_NeuroMods.cs" />
@@ -123,12 +129,14 @@
     <Compile Include="Assets/Scripts/RunningTraining/DL_RunTrain.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/grabFrames.cs" />
     <Compile Include="Assets/Scripts/YMazeTraining/SP_YMazeTrain.cs" />
+    <Compile Include="Assets/Shapes2D/Demos/Simple Effect/EffectDemo.cs" />
     <Compile Include="Assets/Scripts/2DTrack/SP_2DTrack.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/DL_TwoTower.cs" />
     <Compile Include="Assets/Scripts/RunningTraining/PC_RunTrain.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/DebiasingAlg_TwoTower.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/DebiasingAlg_TwoTower_4Way.cs" />
     <Compile Include="Assets/RandomFromDistributions/Examples/GenerateObjects Example/GenerateObjects.cs" />
+    <Compile Include="Assets/Shapes2D/Demos/InputUtils.cs" />
     <Compile Include="Assets/Scripts/YMazeTraining/PC_YMazeTrain.cs" />
     <Compile Include="Assets/RandomFromDistributions/Examples/DistributionsExamples/DistributionTestScript.cs" />
     <Compile Include="Assets/Scripts/YMaze/TrialController_LastDay.cs" />
@@ -155,9 +163,11 @@
     <Compile Include="Assets/Scripts/MetaLearn/RewardControl_MetaLearn_C_to_B.cs" />
     <Compile Include="Assets/Scripts/ShortTrack/SP_ShortTrack.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/RR_TwoTower.cs" />
+    <Compile Include="Assets/Shapes2D/Demos/Showcase/PacMan.cs" />
     <Compile Include="Assets/RandomFromDistributions/Examples/DistributionsExamples/ExponentialTestScript.cs" />
     <Compile Include="Assets/Scripts/ShortTrack/RR_ShortTrack.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/BkgndColor_NeuroMods.cs" />
+    <Compile Include="Assets/Shapes2D/Demos/Flappy Shapes/Game.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/RR_NeuroMods.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/RewardControl_TwoTower.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/RandomBlockPattern.cs" />
@@ -168,11 +178,21 @@
     <Compile Include="Assets/Scripts/MetaLearn/RewardControl_MetaLearn_A_to_B.cs" />
     <Compile Include="Assets/TraverseLine.cs" />
     <Compile Include="Assets/Scripts/MetaLearn/EnvControl_MetaLearn_123_Blocks.cs" />
+    <Compile Include="Assets/Shapes2D/Scripts/PolyMap.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets/Shapes2D/Shaders/Triangle.cginc" />
+    <None Include="Assets/Shapes2D/Shaders/Common.cginc" />
+    <None Include="Assets/Shapes2D/Shaders/Ellipse.cginc" />
+    <None Include="Assets/Shapes2D/Shaders/Shape.shader" />
     <None Include="Assets/RandomFromDistributions/Examples/DistributionsExamples/DistributionsExamples README.txt" />
     <None Include="Assets/FREE Food Pack/Shaders/Food.shader" />
+    <None Include="Assets/Shapes2D/Shaders/Rectangle.cginc" />
+    <None Include="Assets/Shapes2D/Shaders/Polygon.cginc" />
+    <None Include="Assets/Shapes2D/changelog.txt" />
+    <None Include="Assets/Shapes2D/Shaders/Path.cginc" />
     <None Include="Assets/RandomFromDistributions/Readme.txt" />
+    <None Include="Assets/Shapes2D/readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

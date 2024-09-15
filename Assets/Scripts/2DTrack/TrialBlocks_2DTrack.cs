@@ -15,6 +15,7 @@ public class TrialBlocks_2DTrack : MonoBehaviour
     public int[] blockChanges = {0, 4, 8, 12};
     int[] trialIndexList;       // Not sure if needed, keeping for now
     public float[] trialAnglesList;
+    int randomAngle;
     
     void Awake()
     {
@@ -25,14 +26,17 @@ public class TrialBlocks_2DTrack : MonoBehaviour
         trialAnglesList = new float[sp.numTrialsTotal];
 
         for (int i = 0; i < sp.numTrialsTotal; i++){
-            int tempInd = 0;
-            for (int j = 0; j < blockChanges.Length; j++){
-                if (i >= blockChanges[j]){
-                    tempInd = j;
-                }
-            }
-            trialIndexList[i] = tempInd;
-            trialAnglesList[i] = startAngles[tempInd];
+            randomAngle = UnityEngine.Random.Range(0, 46);
+            trialAnglesList[i] = randomAngle;
+
+            // int tempInd = 0;
+            // for (int j = 0; j < blockChanges.Length; j++){
+            //     if (i >= blockChanges[j]){
+            //         tempInd = j;
+            //     }
+            // }
+            // trialIndexList[i] = tempInd;
+            // trialAnglesList[i] = startAngles[tempInd];
         }
     }
     

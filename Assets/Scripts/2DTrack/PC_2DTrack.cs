@@ -89,6 +89,13 @@ public class PC_2DTrack : MonoBehaviour
 
         PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, reward.transform.position);
 
+        if (UnityEngine.Random.value < sp.autoRewardPercent){
+            sp.AutoReward = true;
+        }
+        else{
+            sp.AutoReward = false;
+        }
+
         LickHistory = new ArrayList();
 
         remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), port);
@@ -162,6 +169,13 @@ public class PC_2DTrack : MonoBehaviour
             tendFlag = 1;
 
             PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, reward.transform.position);
+
+            if (UnityEngine.Random.value < sp.autoRewardPercent){
+                sp.AutoReward = true;
+            }
+            else{
+                sp.AutoReward = false;
+            }
             
             bckgndOn = true;
 

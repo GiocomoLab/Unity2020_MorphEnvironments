@@ -19,6 +19,8 @@ public class SP_2DTrack : MonoBehaviour
     private int _autoReward = 0;
     public bool BlankLaser = false;
 
+    public float autoRewardPercent = 0.8f;
+
     public int DreamLand = 0;
 
 
