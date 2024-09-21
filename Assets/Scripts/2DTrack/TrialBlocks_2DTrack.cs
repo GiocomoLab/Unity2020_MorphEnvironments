@@ -26,8 +26,17 @@ public class TrialBlocks_2DTrack : MonoBehaviour
         trialAnglesList = new float[sp.numTrialsTotal];
 
         for (int i = 0; i < sp.numTrialsTotal; i++){
-            randomAngle = UnityEngine.Random.Range(0, 91);
-            trialAnglesList[i] = randomAngle;
+            if(i <= 50)
+            {
+                randomAngle = UnityEngine.Random.Range(0, 91);
+                trialAnglesList[i] = randomAngle;
+            }
+            else
+            {
+                randomAngle = UnityEngine.Random.Range(0, 121);
+                trialAnglesList[i] = randomAngle;
+            }
+            Debug.Log(trialAnglesList[i]);
 
             // int tempInd = 0;
             // for (int j = 0; j < blockChanges.Length; j++){
@@ -38,6 +47,7 @@ public class TrialBlocks_2DTrack : MonoBehaviour
             // trialIndexList[i] = tempInd;
             // trialAnglesList[i] = startAngles[tempInd];
         }
+
     }
     
     void Update()
