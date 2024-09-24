@@ -135,7 +135,8 @@ public class SbxTTLs_runtrain_fixreward : MonoBehaviour
     {
         DateTime today = DateTime.Today;
         // set base directory
-        sendString("D" + "D:/CanDong/" + notes.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
+        //sendString("D" + "D:/CanDong/" + notes.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
+        sendString("D" + "F:/CanDong/" + notes.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
         yield return new WaitForSeconds(1.5f);
         // set first field/final directory
         sendString("A" + sp.sceneName);
