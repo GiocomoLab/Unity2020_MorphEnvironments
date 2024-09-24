@@ -167,9 +167,10 @@ public class PC_RunTrain : MonoBehaviour
 
         // Debug.Log("Reward");
         // bool counted = true;
-        while (transform.position.z <= pos + 75)
+        while ((transform.position.z <= pos + 75) & (transform.position.z > 0))
         {
-            if ((sp.AutoReward) & (transform.position.z > pos + 50))
+            cmd = 12;
+            if ((sp.AutoReward) & (transform.position.z > pos + 30))
             {
                 cmd = 4;
                 if (sp.MultiReward)

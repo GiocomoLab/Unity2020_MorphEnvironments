@@ -106,7 +106,7 @@ public class SP_RunTrain : MonoBehaviour
         _connection.Open();
         _command = _connection.CreateCommand();
         _command.CommandText = "create table data (time REAL, trialnum INT, pos REAL, dz REAL, lick INT, reward INT," +
-        "tstart INT, teleport INT, scanning INT, manrewards INT, cmd INT)";
+        "tstart INT, teleport INT, scanning INT, manrewards INT, autoreward INT, cmd INT)";
         _command.ExecuteNonQuery();
     }
 
