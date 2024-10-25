@@ -26,8 +26,8 @@ public class SP_YMazeTrain : MonoBehaviour
 
 
     // for saving data
-    public string localDirectory_pre = "C:/Users/markp/VR_Data/TwoTower/";
-    public string serverDirectory_pre = "G:/My Drive/VR_Data/TwoTower";
+    public string localDirectory_pre = "C:/Users/markp/VR_Data/Stx3";
+    public string serverDirectory_pre = "H:/My Drive/VR_Data/Stx3"; 
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;
@@ -128,7 +128,7 @@ public class SP_YMazeTrain : MonoBehaviour
 
         File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite", true);
 
-        string sess_connectionString = "Data Source=G:\\My Drive\\VR_Data\\TwoTower\\behavior.sqlite;Version=3;";
+        string sess_connectionString = "Data Source=H:\\My Drive\\VR_Data\\Stx3\\behavior_sessions.sqlite;Version=3;";
         IDbConnection db_connection;
         db_connection = (IDbConnection)new SqliteConnection(sess_connectionString);
         db_connection.Open();
