@@ -72,7 +72,7 @@ public class PC_RunTrain : MonoBehaviour
 
         }
 
-        if (dl.r > 0 & dl.rflag <1){
+        if (dl.r > 0 & dl.rflag < 1){
             StartCoroutine(DeliverReward(dl.r));
             dl.rflag = 1;
         } // deliver appropriate reward
@@ -167,9 +167,9 @@ public class PC_RunTrain : MonoBehaviour
 
         // Debug.Log("Reward");
         // bool counted = true;
-        while ((transform.position.z <= pos + 75) & (transform.position.z > 0))
+        while (transform.position.z <= pos + 75)
         {
-            cmd = 12;
+
             if ((sp.AutoReward) & (transform.position.z > pos + 30))
             {
                 cmd = 4;
@@ -201,9 +201,9 @@ public class PC_RunTrain : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForEndOfFrame();
         cmd = 2;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForEndOfFrame();
         cmd = 0;
     }
 
