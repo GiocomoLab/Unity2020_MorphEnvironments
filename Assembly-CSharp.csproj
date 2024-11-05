@@ -99,7 +99,6 @@
     <Compile Include="Assets/Scripts/NameCheck.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/ForagingControl_NeuroMods.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/RewardControl_Morph1.cs" />
-    <Compile Include="Assets/Test.cs" />
     <Compile Include="Assets/Scripts/2DTrack/RR_2DTrack.cs" />
     <Compile Include="Assets/Scripts/2DTrack/SbxTTLs_2DTrack.cs" />
     <Compile Include="Assets/Shapes2D/Demos/Flappy Shapes/Bird.cs" />
@@ -120,7 +119,6 @@
     <Compile Include="Assets/Scripts/MetaLearn/RewardControl_MetaLearn_B_to_C.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/RandomExtremeMorphs_NeuroMods.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/SP_NeuroMods.cs" />
-    <Compile Include="Assets/TestCode1.cs" />
     <Compile Include="Assets/RandomFromDistributions/Examples/DistributionsExamples/LinearTestScript.cs" />
     <Compile Include="Assets/Scripts/TwoTower_foraging/Notes.cs" />
     <Compile Include="Assets/Scripts/NeuroMods/RewardControl_NeuroMods_Days2to5.cs" />

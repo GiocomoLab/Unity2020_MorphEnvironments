@@ -35,8 +35,8 @@ public class SP_NeuroMods : MonoBehaviour
     public float rDur = 2;
 
     // for saving data
-    public string localDirectory_pre = "C:/Users/markp/VR_Data/NeuroMods/";
-    public string serverDirectory_pre = "H:\\My Drive\\VR_Data\\";
+    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/Michelle/";
+    public string serverDirectory_pre = "J:/My Drive/VR_Data/";
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;
@@ -82,12 +82,12 @@ public class SP_NeuroMods : MonoBehaviour
 
 
         today = DateTime.Today;
-        Debug.Log(today.ToString("dd_MM_yyyy"));
+        Debug.Log(today.ToString("yyyy_MM_dd"));
 
 
         
-        localDirectory = localDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
-        serverDirectory = serverDirectory_pre + mouse + '/' + today.ToString("dd_MM_yyy") + '/';
+        localDirectory = localDirectory_pre + mouse + '/' + today.ToString("yyyy_MM_dd") + '/';
+        serverDirectory = serverDirectory_pre + mouse + '/' + today.ToString("yyyy_MM_dd") + '/';
         if (!Directory.Exists(localDirectory))
         {
             Directory.CreateDirectory(localDirectory);
@@ -120,8 +120,7 @@ public class SP_NeuroMods : MonoBehaviour
         _connection = (IDbConnection) new SqliteConnection(connectionString);
         _connection.Open();
         _command = _connection.CreateCommand();
-        _command.CommandText = "create table data (time REAL, morph REAL, dreamland INT, trialnum INT, pos REAL, dz REAL, posx REAL, lick INT, reward INT," +
-        "tstart INT, teleport INT, rzone INT, scanning NUMERIC, manrewards INT, autoreward INT, cmd INT)";
+        _command.CommandText = "create table data (time REAL, trialnum INT, pos REAL, dz REAL, lick INT, reward INT, tstart INT, teleport INT, rzone INT, scanning NUMERIC, manrewards INT, autoreward INT, cmd INT)";
         
         _command.ExecuteNonQuery();
 
@@ -146,10 +145,7 @@ public class SP_NeuroMods : MonoBehaviour
         
 
 
-        _command.CommandText = "insert into data (time , morph , dreamland, trialnum, pos, dz, posx, lick, reward," +
-        "tstart, teleport, rzone , scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + morph + "," + DreamLand + "," + numTraversals +
-        "," + transform.position.z + "," + rr.true_delta_z + "," + transform.position.x + ","  + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
-        pc.rzoneFlag + ","  + ttls.scanning + "," + pc.mRewardFlag + "," + _autoReward + "," + pc.cmd + ")";
+        _command.CommandText = "insert into data (time, trialnum, pos, dz, lick, reward, tstart, teleport, rzone, scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + numTraversals + "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," + pc.rzoneFlag + ","  + ttls.scanning + "," + pc.mRewardFlag + "," + _autoReward + "," + pc.cmd + ")";
         _command.ExecuteNonQuery();
 
     }
