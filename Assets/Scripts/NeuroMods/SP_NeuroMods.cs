@@ -11,11 +11,11 @@ public class SP_NeuroMods : MonoBehaviour
 {
 
 
-    private string mouse;
+    public string mouse;
 
     public float SkipTrialPcnt = 0.0f;
 
-    public bool AutoReward = false;
+    public bool AutoReward = true;
     private int _autoReward = 0;
     public bool BlankLaser = false;
 
@@ -54,7 +54,6 @@ public class SP_NeuroMods : MonoBehaviour
     private DL_NeuroMods dl;
     private PC_NeuroMods pc;
     private SbxTTLs_NeuroMods ttls;
-    private Notes notes;
 
 
 
@@ -77,8 +76,6 @@ public class SP_NeuroMods : MonoBehaviour
         dl = player.GetComponent<DL_NeuroMods>();
         pc = player.GetComponent<PC_NeuroMods>();
         ttls = player.GetComponent<SbxTTLs_NeuroMods>();
-        notes = player.GetComponent<Notes>();
-        mouse = notes.mouse;
 
 
         today = DateTime.Today;
@@ -167,8 +164,8 @@ public class SP_NeuroMods : MonoBehaviour
         IDbCommand db_command = db_connection.CreateCommand();
        
         string tmp_date = today.ToString("dd_MM_yyyy");
-        db_command.CommandText = "insert into sessions (MouseName, DateFolder, SessionNumber, Track, RewardCount, Imaging, ImagingRegion, Notes) values ('" + mouse +  "', '" + tmp_date + "', "
-            + session + ",'"+ sceneName + "', " + numRewards + ", " + scanning + ",'" + notes.imaging_region + "','" + notes.notes + "')";
+        db_command.CommandText = "insert into sessions (MouseName, DateFolder, SessionNumber, Track, RewardCount, Imaging) values ('" + mouse +  "', '" + tmp_date + "', "
+            + session + ",'"+ sceneName + "', " + numRewards + ", " + scanning + "')";
 
         Debug.Log(db_command.CommandText);
 

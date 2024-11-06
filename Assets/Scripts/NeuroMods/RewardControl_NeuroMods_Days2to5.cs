@@ -38,6 +38,7 @@ public class RewardControl_NeuroMods_Days2to5 : MonoBehaviour {
                 reward.SetActive(false);
                 
             }
+
             else
             {
                 reward.SetActive(true);

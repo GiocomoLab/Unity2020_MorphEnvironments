@@ -106,13 +106,14 @@ public class PC_NeuroMods : MonoBehaviour
             reward_a = GameObject.Find("Reward_A");
             reward_b = GameObject.Find("Reward_B");
         }
-      
 
+
+        StartCoroutine(FlagCheck());
 
 
         panoCam = GameObject.Find("panoCamera");
         panoCam.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
-        initialPosition = new Vector3(0f, 6f, -50.0f);
+        initialPosition = new Vector3(0f, 6f, -10.0f);
 
         LickHistory = new ArrayList();
 
@@ -192,7 +193,16 @@ public class PC_NeuroMods : MonoBehaviour
             transform.position = initialPosition;
             bckgndOn = true;
 
-            StartCoroutine(InterTrialTimeout());
+            if (sp.numTraversals < 10)
+            {
+                sp.AutoReward = true;
+            }
+            else
+            {
+                sp.AutoReward = false;
+            }
+
+            //StartCoroutine(InterTrialTimeout());
 
             LastRewardTime = Time.realtimeSinceStartup; // to avoid issues with teleports
         }
@@ -207,8 +217,17 @@ public class PC_NeuroMods : MonoBehaviour
 
     }
 
+    IEnumerator FlagCheck()
+    {
+        while (true)
+        {
+            yield return new WaitForEndOfFrame();
+            tendFlag = 0;
+            tstartFlag = 0;
+        }
+        yield return null;
+    }
 
-    
     IEnumerator InterTrialTimeout()
     {
 
