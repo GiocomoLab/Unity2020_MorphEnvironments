@@ -194,14 +194,14 @@ public class PC_NeuroMods : MonoBehaviour
             bckgndOn = true;
 
             
-            ///if (sp.numTraversals > 29 && sp.numTraversals < 40)
-            ///{
-            ///    sp.AutoReward = true;
-            ///}
-            ///else
-            ///{
-            ///    sp.AutoReward = false;
-            ///}
+            if (sp.numTraversals > 29 && sp.numTraversals < 40)
+            {
+                sp.AutoReward = true;
+            }
+            else
+            {
+                sp.AutoReward = false;
+            }
 
             //StartCoroutine(InterTrialTimeout());
 
