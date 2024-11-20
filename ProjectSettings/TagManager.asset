@@ -10,6 +10,7 @@ TagManager:
   - West Tower
   - Start
   - StartObjects
+  - Anchor
   layers:
   - Default
   - TransparentFX

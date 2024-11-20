@@ -19,6 +19,7 @@ public class PC_2DTrack : MonoBehaviour
     private GameObject panoCam;     // This might not be needed
     private GameObject endWall;
     private GameObject startObjects;
+    private GameObject anchor;
 
     private Rigidbody rb;
 
@@ -87,7 +88,9 @@ public class PC_2DTrack : MonoBehaviour
         //panoCam.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);        // Needed?
         reward = GameObject.Find("Reward");
 
-        PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, reward.transform.position);
+        anchor = GameObject.Find("Anchor");
+
+        PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, anchor.transform.position);
         Debug.Log("Start angle: " + tb.trialAnglesList[sp.numTraversals]);
 
         if (UnityEngine.Random.value < sp.autoRewardPercent){
@@ -170,7 +173,7 @@ public class PC_2DTrack : MonoBehaviour
             sp.numTraversals += 1;
             tendFlag = 1;
 
-            PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, reward.transform.position);
+            PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, anchor.transform.position);
             Debug.Log("Start angle: " + tb.trialAnglesList[sp.numTraversals]);
 
             if (UnityEngine.Random.value < sp.autoRewardPercent){
@@ -277,7 +280,7 @@ public class PC_2DTrack : MonoBehaviour
         float rewardAutoMinZ = Mathf.Min(rewardAuto.z, rewardEnd.z);
         float rewardAutoMaxZ = Mathf.Max(rewardAuto.z, rewardEnd.z);
 
-        while(transform.position.x >= rewardMinX && transform.position.x <= rewardMaxX && transform.position.z >= rewardMinZ && transform.position.z <= rewardMaxZ){
+        while (transform.position.x >= rewardMinX && transform.position.x <= rewardMaxX && transform.position.z >= rewardMinZ && transform.position.z <= rewardMaxZ){
 
             if((sp.AutoReward) & (transform.position.x >= rewardAutoMinX && transform.position.x <= rewardAutoMaxX && transform.position.z >= rewardAutoMinZ && transform.position.z <= rewardAutoMaxZ)){
 
