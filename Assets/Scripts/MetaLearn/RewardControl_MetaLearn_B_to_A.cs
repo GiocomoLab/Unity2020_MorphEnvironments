@@ -58,7 +58,12 @@ public class RewardControl_MetaLearn_B_to_A: MonoBehaviour
             }
             else
             {
-                sp.AutoReward = false;
+                if (numTraversalsLocal == ChangeRewardTrial + 10)
+                {
+                    // turn it off at the end of the 10-trial period, otherwise leave it alone
+                    sp.AutoReward = false;
+                }
+
             }
 
 
