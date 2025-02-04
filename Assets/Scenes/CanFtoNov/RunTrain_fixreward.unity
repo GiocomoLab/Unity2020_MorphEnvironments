@@ -798,7 +798,7 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 200
+  numTrialsTotal: 40
   maxRewards: 200
   BlankLaser: 0
   rDur: 2
@@ -814,7 +814,7 @@ MonoBehaviour:
   sceneName: 
   session: 1
   scanning: 0
-  dirCheck: 0
+  dirCheck: 75
 --- !u!114 &1722994737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -926,7 +926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: 5690_1
+  mouse: CA123-5690-2
   notes: 
   imaging_region: CA123
 --- !u!114 &1722994744
