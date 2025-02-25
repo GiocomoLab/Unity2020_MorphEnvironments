@@ -208,9 +208,9 @@ public class PC_runtrain_fixreward_ESdebug : MonoBehaviour
             tendFlag = 1;
             transform.position = initialPosition;
             bckgndOn = true;
-
-            blackScreen.SetActive(false);
-            blackoutActive = false;
+            Debug.Log("BLACK OUT IS:" + blackoutActive);
+            //blackScreen.SetActive(false);
+            //blackoutActive = false;
             //Env3_Maze.gameObject.SetActive(true);
             StartCoroutine(InterTrialTimeout());
 
@@ -235,13 +235,12 @@ public class PC_runtrain_fixreward_ESdebug : MonoBehaviour
     IEnumerator NoRewardSequence(float pos)
     {
         Debug.Log("enter loc B");
-        Debug.Log(transform.position.z);
-        Debug.Log(pos);
+        //Debug.Log(transform.position.z);
+        //Debug.Log(pos);
         yield return null;
-        // Couldn't finish on Feb21, but maybe next step is to work on the if logic
-        // even there was lick and the clackout active is true, couldn't enter the if
-        /*while ((transform.position.z <= pos + 75))
-        {*/
+        // Couldn't finish on Feb 24 partly working, current issue:
+        // How to make sure the time out is corretly timmed: when animal is teleport, the time could be longer than the animals' time staying the start box
+        // in this case, the animal is still running in the blck but the VR is updated to the maze. need to work on this tomorrow.
         if (dl.c_1 > 0 && !blackoutActive)
         {
             Debug.Log("triggered punishment");
@@ -249,8 +248,11 @@ public class PC_runtrain_fixreward_ESdebug : MonoBehaviour
             blackoutActive = true;
             blackoutStartTime = Time.time;
             Debug.Log("start timing");
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(10f);
             Debug.Log("punishment end");
+            blackScreen.SetActive(false);
+            blackoutActive = false;
+            Debug.Log("in if loop BLACK OUT IS:" + blackoutActive);
             //break;
 
             //bckgndOn = false;
