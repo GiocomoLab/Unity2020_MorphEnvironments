@@ -374,7 +374,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 115.559685
+  field of view: 56.349056
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -638,7 +638,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 115.559685
+  field of view: 56.349056
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1460,9 +1460,9 @@ GameObject:
   - component: {fileID: 1722994739}
   - component: {fileID: 1722994738}
   - component: {fileID: 1722994736}
+  - component: {fileID: 1722994746}
   - component: {fileID: 1722994737}
   - component: {fileID: 1722994735}
-  - component: {fileID: 1722994746}
   - component: {fileID: 1722994734}
   - component: {fileID: 1722994733}
   m_Layer: 0
@@ -1711,6 +1711,7 @@ MonoBehaviour:
   target: 60
   blackScreen: {fileID: 80203343}
   blackoutActive: 0
+  punishLength: 10
 --- !u!1 &1766657574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,7 +1768,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 115.559685
+  field of view: 56.349056
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

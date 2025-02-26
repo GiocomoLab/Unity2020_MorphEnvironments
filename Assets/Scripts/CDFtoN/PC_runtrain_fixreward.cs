@@ -56,6 +56,7 @@ public class PC_runtrain_fixreward : MonoBehaviour
     public float deltaTime;
     public int target = 60;
 
+    public bool norewardSession = false;
     // "connection" things
     IPEndPoint remoteEndPoint;
     UdpClient client;
@@ -285,7 +286,10 @@ public class PC_runtrain_fixreward : MonoBehaviour
 
         while ((transform.position.z <= pos + 75))
         {
-
+            if (norewardSession == true) // Skipp reward  for the whole session
+            {
+                break;
+            }
 
             if ((sp.AutoReward) & (transform.position.z > pos + 50))
             {

@@ -62,8 +62,12 @@ public class PC_runtrain_fixreward_ESdebug : MonoBehaviour
     // UI for punishment in wrong trials
     public GameObject blackScreen;
     public bool blackoutActive = false;
+    public float punishLength = 10f; // Can modify this number based on the prefered punishment strength
+    //public bool norewardSession = false;
     private bool playerIntrigger = false;
     private float blackoutStartTime = 0f;
+    private float TriggerStartTime = 0f;
+    private float punishTime = 0f;
 
 
     // "connection" things
@@ -225,48 +229,42 @@ public class PC_runtrain_fixreward_ESdebug : MonoBehaviour
             cmd = 0;
             tstartFlag = 1;
         }
-        else if (other.tag == "No Reward")
+        else if (other.tag == "No Reward") // punish the animal if it licks at the wrong reward zone
         {
             Debug.Log("enter punish zone");
-            StartCoroutine(NoRewardSequence(transform.position.z));
+            StartCoroutine(NoRewardSequence(transform.position.z, sp.numTraversals));
         }
     }
 
-    IEnumerator NoRewardSequence(float pos)
+    IEnumerator NoRewardSequence(float pos, float traversal)
     {
-        Debug.Log("enter loc B");
+        Debug.Log("enter lick punishment zone");
         //Debug.Log(transform.position.z);
         //Debug.Log(pos);
         yield return null;
-        // Couldn't finish on Feb 24 partly working, current issue:
-        // How to make sure the time out is corretly timmed: when animal is teleport, the time could be longer than the animals' time staying the start box
-        // in this case, the animal is still running in the blck but the VR is updated to the maze. need to work on this tomorrow.
-        if (dl.c_1 > 0 && !blackoutActive)
+        if (dl.c_1 > 0 && !blackoutActive) // If animal lick at the wrong reward location, black out the screen, during this time, animal can still run and finish the trial
         {
             Debug.Log("triggered punishment");
             blackScreen.SetActive(true);
             blackoutActive = true;
             blackoutStartTime = Time.time;
             Debug.Log("start timing");
-            yield return new WaitForSeconds(10f);
+            while (transform.position.z < 450 && sp.numTraversals <= traversal)
+            {
+                yield return new WaitForSeconds(punishLength); // screen keep black out if animal not run and not finish the currtent trial
+            }
+            //yield return new WaitForSeconds(punishLength);
             Debug.Log("punishment end");
             blackScreen.SetActive(false);
             blackoutActive = false;
             Debug.Log("in if loop BLACK OUT IS:" + blackoutActive);
-            //break;
 
-            //bckgndOn = false;
-            //Env3_Maze.gameObject.SetActive(false);
-            //Vector3 originalPosition = transform.position;
-            //transform.position = originalPosition;
-            //rotary.delta_z = 0;
 
             Color originalColor = cam.backgroundColor;
             cam.backgroundColor = Color.black;
 
 
             cam.backgroundColor = originalColor;
-            //transform.position = originalPosition;
         }
         else { Debug.Log("didn't enter the if loop"); }
         //}
@@ -294,6 +292,17 @@ public class PC_runtrain_fixreward_ESdebug : MonoBehaviour
     {
 
         rotary.toutBool = 0f;
+        // finish the rest of the punishment of lick at the wrong loction ( if the animal keep running, the punish ment will be punishLength in total, if it sit in the current trail not running, the punishment will be longer
+        TriggerStartTime = Time.time;
+        punishTime = TriggerStartTime - blackoutStartTime;
+        Debug.Log("punish time before teleport is "+ punishTime);
+        if (blackoutActive == true) 
+        {
+            Debug.Log(" continue punish for " + (punishLength - punishTime));    
+            yield return new WaitForSeconds(punishLength - punishTime);
+        }
+        
+
         if ((sbxttls.scanning > 0) & sp.BlankLaser)
         {
             if (prevReward == 0) // omission or probe trial 
@@ -341,6 +350,11 @@ public class PC_runtrain_fixreward_ESdebug : MonoBehaviour
 
         while ((transform.position.z <= pos + 75))
         {
+            if (blackoutActive == true) // Skipp reward if the wrong location is before the reward location -> this will also cause a longer timeout after teleport, decide to leave it as it is
+                                        // but could consider using the lick value to make sure the two type on reward and wrog location (Env_locA and Env_locB) has the same length at the beginning after teleport
+            {
+                break;
+            }
 
 
             if ((sp.AutoReward) & (transform.position.z > pos + 50))
@@ -397,129 +411,8 @@ public class PC_runtrain_fixreward_ESdebug : MonoBehaviour
 
     }
 
-    /*    IEnumerator RewardSequence(float pos, GameObject _reward)
-        {   // water reward
-            rzoneFlag = 1;
+  
 
-
-            while ((transform.position.z <= pos + 75))
-            {
-                if (sp.TrainingTrack == 1)
-                {
-                    Debug.Log(cmd);
-                    cmd = 12;
-                    if ((sp.AutoReward) & (transform.position.z > pos + 30))
-                    {
-                        cmd = 4;
-                        sp.numRewards += 1;
-                        prevReward = 1;
-                        StartCoroutine(DeliverReward(1));
-                        if (sp.MultiReward)
-                        {
-                            StartCoroutine(MoveReward());
-                        }
-                        //counted = false;
-                        yield return new WaitForEndOfFrame();
-                        break; // if (sp.MultiReward) { break;  };
-                               //break;
-                    }
-                    else
-                    {
-                        cmd = 12;
-                    }
-
-                    if (dl.c_1 > 0)
-                    {
-                        cmd = 4;
-                        sp.numRewards += 1;
-                        prevReward = 1;
-                        if (sp.MultiReward)
-                        {
-
-                            StartCoroutine(MoveReward());
-                        }
-                        else
-                        {
-                            reward.SetActive(false);
-                        }
-                        //counted = false;
-                        //if (sp.MultiReward) { break; };
-                        yield return new WaitForEndOfFrame();
-                        break;
-                    }
-                    yield return null;
-                }
-
-                if (sp.TrainingTrack == 0)
-                {
-                    cmd = 12;
-                    if ((sp.AutoReward) & (transform.position.z > pos + 50))
-                    {
-
-
-                        cmd = 4;
-                        StartCoroutine(DeliverReward(1));
-                        sp.numRewards += 1;
-                        prevReward = 1;
-                        yield return new WaitForEndOfFrame();
-                        break;
-
-
-                    }
-
-                    if (dl.c_1 > 0)
-                    {
-
-                        cmd = 4;
-                        sp.numRewards += 1;
-                        prevReward = 1;
-                        yield return new WaitForEndOfFrame();
-                        break;
-                    }
-                    yield return new WaitForEndOfFrame();
-                }
-
-
-            }
-            _reward.SetActive(false);
-
-
-            rzoneFlag = 0;
-            yield return new WaitForEndOfFrame();
-            cmd = 2;
-            yield return new WaitForEndOfFrame();
-            cmd = 0;
-
-        }*/
-
-    /*    IEnumerator MoveReward()
-        {
-            float CurrRewardTime = Time.realtimeSinceStartup;
-            yield return new WaitForSeconds(.5f);
-            if (!sp.fixedRewardSchedule)
-            {
-
-                if (CurrRewardTime - LastRewardTime > 20.0f)
-                {
-                    sp.mrd = Mathf.Max(sp.MinTrainingDist, sp.mrd + UnityEngine.Random.value * sp.ard - 10f);
-
-                }
-                else
-                {
-                    sp.mrd = Mathf.Min(sp.MaxTrainingDist, sp.mrd + UnityEngine.Random.value * sp.ard + 10f);
-                }
-
-                if ((sp.mrd > 170f) & (sp.mrd < 310))
-                {
-                    sp.mrd = 300;
-                }
-            }
-            //float zpos = (reward.transform.position.z + sp.mrd +sp.ard) % 330f;
-            // reward_t.transform.position = reward_t.transform.position + new Vector3(0f, 0f, sp.mrd + UnityEngine.Random.value * sp.ard);
-            LastRewardTime = CurrRewardTime;
-            yield return null;
-        }
-    */
 
     void OnApplicationQuit()
     {
