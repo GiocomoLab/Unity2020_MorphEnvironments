@@ -62,7 +62,7 @@ public class PC_runtrain_fixreward_ESdebug : MonoBehaviour
     // UI for punishment in wrong trials
     public GameObject blackScreen;
     public bool blackoutActive = false;
-    public float punishLength = 10f; // Can modify this number based on the prefered punishment strength
+    public float punishLength = 15f; // Can modify this number based on the prefered punishment strength
     //public bool norewardSession = false;
     private bool playerIntrigger = false;
     private float blackoutStartTime = 0f;
@@ -238,36 +238,43 @@ public class PC_runtrain_fixreward_ESdebug : MonoBehaviour
 
     IEnumerator NoRewardSequence(float pos, float traversal)
     {
-        Debug.Log("enter lick punishment zone");
-        //Debug.Log(transform.position.z);
-        //Debug.Log(pos);
-        yield return null;
-        if (dl.c_1 > 0 && !blackoutActive) // If animal lick at the wrong reward location, black out the screen, during this time, animal can still run and finish the trial
-        {
-            Debug.Log("triggered punishment");
-            blackScreen.SetActive(true);
-            blackoutActive = true;
-            blackoutStartTime = Time.time;
-            Debug.Log("start timing");
-            while (transform.position.z < 450 && sp.numTraversals <= traversal)
+        while ((transform.position.z <= pos + 75)) // from the rigger location till 75 cm, also both punishment trigger location is 
+                                                   // 25cm before the reward loc. e.g. Loc A reward location is 150, punishment trigger loc is 125 
+        { 
+            Debug.Log("enter lick punishment zone");
+            //Debug.Log(transform.position.z);
+            //Debug.Log(pos);
+        
+            if (dl.c_1 > 0 && !blackoutActive) // If animal lick at the wrong reward location, black out the screen, during this time, animal can still run and finish the trial
             {
-                yield return new WaitForSeconds(punishLength); // screen keep black out if animal not run and not finish the currtent trial
+                Debug.Log("triggered punishment");
+                blackScreen.SetActive(true);
+                blackoutActive = true;
+                blackoutStartTime = Time.time;
+                Debug.Log("start timing");
+                while (transform.position.z < 450 && sp.numTraversals <= traversal)
+                {
+                    yield return new WaitForSeconds(punishLength); // screen keep black out if animal not run and not finish the currtent trial
+                }
+                //yield return new WaitForSeconds(punishLength);
+                Debug.Log("punishment end");
+                blackScreen.SetActive(false);
+                blackoutActive = false;
+                Debug.Log("in if loop BLACK OUT IS:" + blackoutActive);
+
+
+                Color originalColor = cam.backgroundColor;
+                cam.backgroundColor = Color.black;
+
+
+                cam.backgroundColor = originalColor;
             }
-            //yield return new WaitForSeconds(punishLength);
-            Debug.Log("punishment end");
-            blackScreen.SetActive(false);
-            blackoutActive = false;
-            Debug.Log("in if loop BLACK OUT IS:" + blackoutActive);
-
-
-            Color originalColor = cam.backgroundColor;
-            cam.backgroundColor = Color.black;
-
-
-            cam.backgroundColor = originalColor;
+            else 
+            { 
+                Debug.Log("didn't enter the if loop"); 
+            }
+            yield return new WaitForEndOfFrame();
         }
-        else { Debug.Log("didn't enter the if loop"); }
-        //}
     }
             
 
