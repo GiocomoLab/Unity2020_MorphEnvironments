@@ -144,8 +144,12 @@ public class SP_RunTrain : MonoBehaviour
         db_connection = (IDbConnection)new SqliteConnection(sess_connectionString);
         db_connection.Open();
         IDbCommand db_command = db_connection.CreateCommand();
+
+        db_command.CommandText = "create table IF NOT exists sessions (Mouse VARCHAR(100), Date VARCHAR(100), Scene VARCHAR(100), Session INT, Rewards INT, Trials INT, Imaging INT)";
+        db_command.ExecuteNonQuery();
+
         string tmp_date = today.ToString("yyyy_MM_dd");
-        db_command.CommandText = "insert into sessions (Mouse, Date, Scene, Session, Rewards, Trials, Imaging) values (" + mouse + "," + tmp_date + "," + sceneName + "," + session + "," + numRewards + "," + numTraversals + "," + scanning + ")";
+        db_command.CommandText = "insert into sessions (Mouse, Date, Scene, Session, Rewards, Trials, Imaging) values ('" + mouse + "','" + tmp_date + "','" + sceneName + "'," + session + "," + numRewards + "," + numTraversals + "," + scanning + ")";
 
         Debug.Log(db_command.CommandText);
         Debug.Log(Time.realtimeSinceStartup);
