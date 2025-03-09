@@ -113,7 +113,7 @@ public class PC_NeuroMods : MonoBehaviour
 
         panoCam = GameObject.Find("panoCamera");
         panoCam.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);
-        initialPosition = new Vector3(0f, 6f, -10.0f);
+        initialPosition = new Vector3(0f, 6f, -50.0f);
 
         LickHistory = new ArrayList();
 
@@ -194,7 +194,7 @@ public class PC_NeuroMods : MonoBehaviour
             bckgndOn = true;
 
             
-            if (sp.numTraversals > 29 && sp.numTraversals < 40)
+            if (sp.numTraversals < 10)
             {
                 sp.AutoReward = true;
             }
@@ -203,7 +203,7 @@ public class PC_NeuroMods : MonoBehaviour
                 sp.AutoReward = false;
             }
 
-            //StartCoroutine(InterTrialTimeout());
+            StartCoroutine(InterTrialTimeout());
 
             LastRewardTime = Time.realtimeSinceStartup; // to avoid issues with teleports
         }
