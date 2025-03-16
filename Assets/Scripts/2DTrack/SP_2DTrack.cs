@@ -19,7 +19,7 @@ public class SP_2DTrack : MonoBehaviour
     private int _autoReward = 0;
     public bool BlankLaser = false;
 
-    public float autoRewardPercent = 0.8f;
+    public float autoRewardPercent = 0.0f;
 
     public int DreamLand = 0;
 
@@ -159,19 +159,17 @@ public class SP_2DTrack : MonoBehaviour
 
         File.Copy(localPrefix + ".sqlite", serverPrefix + ".sqlite",true);
 
-        string sess_connectionString = "Data Source=H:\\My Drive\\VR_Data\\behavior_sessions.db;Version=3;";
+        string sess_connectionString = "Data Source=" + serverDirectory_pre + "behavior_sessions.db;Version=3;";
         IDbConnection db_connection;
         db_connection = (IDbConnection) new SqliteConnection(sess_connectionString);
         db_connection.Open();
         IDbCommand db_command = db_connection.CreateCommand();
-       
-        string tmp_date = today.ToString("dd_MM_yyyy");
-        db_command.CommandText = "insert into sessions (MouseName, DateFolder, SessionNumber, Track, RewardCount, Imaging) values ('" + mouse + "', '" + tmp_date + "', " + session + "', " + sceneName + "', " + numRewards + "', " + scanning + ")";
 
-        Debug.Log(db_command.CommandText);
-
+        string tmp_date = today.ToString("yyyy_MM_dd");
+        db_command.CommandText = "insert into sessions (Mouse, Date, Scene, Session, Rewards, Trials, Imaging) values ('" + mouse + "','" + tmp_date + "','" + sceneName + "'," + session + "," + numRewards + "," + numTraversals + "," + scanning + ")";
         db_command.ExecuteNonQuery();
 
+        Debug.Log(db_command.CommandText);
 
         db_command.Dispose();
         db_command = null;
