@@ -169,19 +169,37 @@ public class PC_2DTrack : MonoBehaviour
         {
             Debug.Log("Teleport");
 
-            reward.SetActive(true);
+            if (UnityEngine.Random.value < sp.SkipTrialPcnt)
+            {
+                reward.SetActive(false);
+            }
+            else
+            {
+                reward.SetActive(true);
+            }
+            
             sp.numTraversals += 1;
             tendFlag = 1;
 
             PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, anchor.transform.position);
             Debug.Log("Start angle: " + tb.trialAnglesList[sp.numTraversals]);
 
-            if (UnityEngine.Random.value < sp.autoRewardPercent){
+            //if (UnityEngine.Random.value < sp.autoRewardPercent){
+            //    sp.AutoReward = true;
+            //}
+            //else{
+            //    sp.AutoReward = false;
+            //}
+
+            if (sp.numTraversals < 10)
+            {
                 sp.AutoReward = true;
             }
-            else{
+            else
+            {
                 sp.AutoReward = false;
             }
+
             Debug.Log("Auto reward: " + sp.AutoReward);
 
             bckgndOn = true;
@@ -264,6 +282,7 @@ public class PC_2DTrack : MonoBehaviour
 
         //Calculate end of reward zone
         Vector3 rewardEnd = GetRewardEnd(rewardStart, 50, playerPos);
+        Debug.Log("Calculated reward zone end: " + rewardEnd);
 
         //Calculate reward zone boundaries
         float rewardMinX = Mathf.Min(rewardStart.x, rewardEnd.x);
@@ -280,9 +299,9 @@ public class PC_2DTrack : MonoBehaviour
         float rewardAutoMinZ = Mathf.Min(rewardAuto.z, rewardEnd.z);
         float rewardAutoMaxZ = Mathf.Max(rewardAuto.z, rewardEnd.z);
 
-        while (transform.position.x >= rewardMinX && transform.position.x <= rewardMaxX && transform.position.z >= rewardMinZ && transform.position.z <= rewardMaxZ){
-
-            if((sp.AutoReward) & (transform.position.x >= rewardAutoMinX && transform.position.x <= rewardAutoMaxX && transform.position.z >= rewardAutoMinZ && transform.position.z <= rewardAutoMaxZ)){
+        while (Vector3.Distance(transform.position, rewardStart) < 50)
+        {
+            if((sp.AutoReward) & (Vector3.Distance(transform.position, rewardStart) > 30)){
 
                 Debug.Log("Auto reward on: " + transform.position);
                 cmd = 4;
@@ -293,8 +312,8 @@ public class PC_2DTrack : MonoBehaviour
                 break;
             }
 
-            if (dl.c_1 > 0) {
-                    
+            if (dl.c_1 > 0)
+            {
                 cmd = 4;
                 sp.numRewards += 1;
                 prevReward = 1;
@@ -302,8 +321,32 @@ public class PC_2DTrack : MonoBehaviour
                 break;
             }
             yield return new WaitForEndOfFrame();
-           
+
         }
+        //while (transform.position.x >= rewardMinX && transform.position.x <= rewardMaxX && transform.position.z >= rewardMinZ && transform.position.z <= rewardMaxZ){
+
+        //    if((sp.AutoReward) & (transform.position.x >= rewardAutoMinX && transform.position.x <= rewardAutoMaxX && transform.position.z >= rewardAutoMinZ && transform.position.z <= rewardAutoMaxZ)){
+
+        //        Debug.Log("Auto reward on: " + transform.position);
+        //        cmd = 4;
+        //        StartCoroutine(DeliverReward(1));
+        //        sp.numRewards += 1;
+        //        prevReward = 1;
+        //        yield return new WaitForEndOfFrame();
+        //        break;
+        //    }
+
+        //    if (dl.c_1 > 0) {
+                    
+        //        cmd = 4;
+        //        sp.numRewards += 1;
+        //        prevReward = 1;
+        //        yield return new WaitForEndOfFrame();
+        //        break;
+        //    }
+        //    yield return new WaitForEndOfFrame();
+           
+        //}
         _reward.SetActive(false);
 
         rzoneFlag = 0;
@@ -351,7 +394,7 @@ public class PC_2DTrack : MonoBehaviour
         // Move player to initial posiiton
         float radAngle = angle * Mathf.Deg2Rad;
         playerPos = new Vector3(radius*Mathf.Cos(radAngle), 0.0f, radius*Mathf.Sin(radAngle));
-        Vector3 playerPosInTunnel = new Vector3((radius + 5) * Mathf.Cos(radAngle), 0.0f, (radius + 5) * Mathf.Sin(radAngle));
+        Vector3 playerPosInTunnel = new Vector3((radius + 10) * Mathf.Cos(radAngle), 0.0f, (radius + 10) * Mathf.Sin(radAngle));  // Radius + 10 so that there are 10 cm to traverse in teleport
         transform.position = playerPosInTunnel;
 
         Debug.Log("Current player position in world space: " + transform.position);
