@@ -26,15 +26,7 @@ public class TrialBlocks_2DTrack : MonoBehaviour
         trialAnglesList = new float[sp.numTrialsTotal];
 
         for (int i = 0; i < sp.numTrialsTotal; i++){
-
-            if (i < 50)
-            {
-                randomAngle = UnityEngine.Random.Range(5, 38);
-            }
-            else
-            {
-                randomAngle = UnityEngine.Random.Range(5, 38);
-            }
+            randomAngle = UnityEngine.Random.Range(0, 90);
             trialAnglesList[i] = randomAngle;
             Debug.Log(trialAnglesList[i]);
 
