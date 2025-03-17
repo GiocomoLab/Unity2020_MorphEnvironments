@@ -93,12 +93,14 @@ public class PC_2DTrack : MonoBehaviour
         PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, anchor.transform.position);
         Debug.Log("Start angle: " + tb.trialAnglesList[sp.numTraversals]);
 
-        if (UnityEngine.Random.value < sp.autoRewardPercent){
-            sp.AutoReward = true;
-        }
-        else{
-            sp.AutoReward = false;
-        }
+        //if (UnityEngine.Random.value < sp.autoRewardPercent){
+        //    sp.AutoReward = true;
+        //}
+        //else{
+        //    sp.AutoReward = false;
+        //}
+        sp.AutoReward = true;
+
         Debug.Log("Auto reward: " + sp.AutoReward);
 
         LickHistory = new ArrayList();
@@ -393,7 +395,7 @@ public class PC_2DTrack : MonoBehaviour
 
         // Move player to initial posiiton
         float radAngle = angle * Mathf.Deg2Rad;
-        playerPos = new Vector3(radius*Mathf.Cos(radAngle), 0.0f, radius*Mathf.Sin(radAngle));
+        playerPos = new Vector3(radius*Mathf.Cos(radAngle), 0.0f, radius*Mathf.Sin(radAngle));     
         Vector3 playerPosInTunnel = new Vector3((radius + 10) * Mathf.Cos(radAngle), 0.0f, (radius + 10) * Mathf.Sin(radAngle));  // Radius + 10 so that there are 10 cm to traverse in teleport
         transform.position = playerPosInTunnel;
 
@@ -401,13 +403,14 @@ public class PC_2DTrack : MonoBehaviour
 
         // Calculate end wall position and move end wall to it
         Vector3 distToReward = rewardPos - playerPos;
+        Debug.Log(rewardPos);
+        Debug.Log(playerPos);
         float cosTheta = Vector3.Dot(Vector3.Normalize(-playerPos), Vector3.Normalize(distToReward));
         float theta = Mathf.Acos(cosTheta) * Mathf.Rad2Deg;
         float relativeToWall = 2 * radius * cosTheta;
         Vector3 wallPos = Vector3.Normalize(distToReward) * relativeToWall + playerPos;
         endWall.transform.position = new Vector3(wallPos.x, 0.0f, wallPos.z);
-
-        Debug.Log("Current end wall position in world space: " + endWall.transform.position);
+        Debug.Log("end wall position: " + endWall.transform.position);
 
         // Rotate player to face towards end wall
         float oppAngle = (-angle + 270) % 360;   // Angle so z-axis of player faces arena origin
@@ -423,18 +426,13 @@ public class PC_2DTrack : MonoBehaviour
         }
         transform.eulerAngles = new Vector3(0.0f, thetaP, 0.0f);
 
-        Debug.Log("Current player rotation in world space: " + transform.eulerAngles);
-
         // Rotate end wall
         double wallAngleRad = Math.Atan2(wallPos.z, wallPos.x);
         float wallAngleRadFloat = Convert.ToSingle(wallAngleRad);
         endWall.transform.eulerAngles = new Vector3(0.0f, -wallAngleRadFloat*Mathf.Rad2Deg, 0.0f);
 
-        Debug.Log("Current end wall rotation in world space: " + endWall.transform.eulerAngles);
-
         // Move start objects to initial position
         startObjects.transform.position = playerPos;
-        Debug.Log("moved start objects");
 
         // Rotate start wall to initial position
         startObjects.transform.eulerAngles = new Vector3(0.0f, -angle, 0.0f);
