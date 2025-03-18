@@ -7,10 +7,14 @@ using Mono.Data.Sqlite;
 
 public class GetPositions_2DTask : MonoBehaviour
 {
-    public string path = "C:/Users/thorlabs_vr_rig/VR_Data/Michelle/";
+    public string path = "I:/My Drive/";
 
     private GameObject player;
     private PC_2DTrack pc;
+    int reward_diameter = 50;
+
+    private IDbConnection _connection;
+    private IDbCommand _command;
 
     void Start()
     {
@@ -18,44 +22,43 @@ public class GetPositions_2DTask : MonoBehaviour
         pc = player.GetComponent<PC_2DTrack>();
 
         Vector3 rewardPos = new Vector3(-70.0f, 0.0f, 70.0f);
-        int reward_diameter = 50f
         int[] anglesList = Enumerable.Range(0, 359).ToArray();
         int arrayLength = anglesList.Length;
 
         // Initialize database
-        SqliteConnection.CreateFile(path + "positions.sqlite");
-        string connectionString = "Data Source=" + path + "positions.sqlite;Version=3";
-        IDbConnection conn = (IDbConnection) new SqliteConnection(connectionString);
-        conn.Open();
-        IDbCommand comm = conn.CreateCommand();
-
+        SqliteConnection.CreateFile(path + "positions2.sqlite");
+        string connectionString = "Data Source=" + path + "positions2.sqlite;Version=3;";
+        _connection = (IDbConnection) new SqliteConnection(connectionString);
+        _connection.Open();
+        _command = _connection.CreateCommand();
 
         // Populate metadata table
-        comm.CommandText = "create table metadata (reward_center_x REAL, reward_center_z REAL, reward_diameter REAL, arena_diameter REAL)";
-        comm.ExecuteNonQuery();
+        _command.CommandText = "create table metadata (reward_center_x REAL, reward_center_z REAL, reward_diameter INT, arena_diameter REAL)";
+        _command.ExecuteNonQuery();
 
-        comm.CommandText = "insert into metadata (reward_center_x, reward_center_z, reward_diameter, arena_diameter) values (" + rewardPos.x + "," + rewardPos.z + "," + reward_diameter + "," + pc.radius + ")";
-        comm.ExecuteNonQuery();
+        
+        _command.CommandText = "insert into metadata (reward_center_x, reward_center_z, reward_diameter, arena_diameter) values (" + rewardPos.x + "," + rewardPos.z + "," + reward_diameter + "," + pc.radius + ")";
+        _command.ExecuteNonQuery();
 
         // Initialize positions table
-        comm.CommandText = "create table positions (angle REAL, start_posx REAL, start_posz REAL, end_posx REAL, end_posz REAL, rzone_start_posx REAL, rzone_start_posz REAL, rzone_end_posx REAL, rzone_end_posz REAL)";
+        _command.CommandText = "create table positions (angle REAL, start_posx REAL, start_posz REAL, end_posx REAL, end_posz REAL, rzone_start_posx REAL, rzone_start_posz REAL, rzone_end_posx REAL, rzone_end_posz REAL)";
 
-        comm.ExecuteNonQuery();
+        _command.ExecuteNonQuery();
 
         for (int i = 0; i < arrayLength; i++){
 
             float[] positions_list = CalculatePositions(anglesList[i], rewardPos);
 
-            comm.CommandText = "insert into positions (angle, start_posx, start_posz, end_posx, end_posz, rzone_start_posx, rzone_start_posz, rzone_end_posx, rzone_end_posz) values (" + anglesList[i] + "," + positions_list[0] + "," + positions_list[1] + "," + positions_list[2] + "," + positions_list[3] + "," + positions_list[4] + "," + positions_list[5] +  "," + positions_list[6] + "," + positions_list[7] + ")";
+            _command.CommandText = "insert into positions (angle, start_posx, start_posz, end_posx, end_posz, rzone_start_posx, rzone_start_posz, rzone_end_posx, rzone_end_posz) values (" + anglesList[i] + "," + positions_list[0] + "," + positions_list[1] + "," + positions_list[2] + "," + positions_list[3] + "," + positions_list[4] + "," + positions_list[5] +  "," + positions_list[6] + "," + positions_list[7] + ")";
 
-            comm.ExecuteNonQuery();
+            _command.ExecuteNonQuery();
         }
 
-        comm.Dispose();
-        comm = null;
+        _command.Dispose();
+        _command = null;
 
-        conn.Close();
-        conn = null;
+        _connection.Close();
+        _connection = null;
     }
 
 
@@ -85,7 +88,7 @@ public class GetPositions_2DTask : MonoBehaviour
 
         float distToRewardZoneLen = distToReward.magnitude;
         Vector3 rzone_start = Vector3.Normalize(distToReward) * (distToRewardZoneLen - reward_diameter/2) + start_pos;
-        Vector3 rzone_end = Vector3.Normalize(distToReward) * (distToRewardZone + reward_diameter/2) + start_pos;
+        Vector3 rzone_end = Vector3.Normalize(distToReward) * (distToRewardZoneLen + reward_diameter/2) + start_pos;
 
         float rzone_start_posx = rzone_start.x;
         float rzone_start_posz = rzone_start.z;
