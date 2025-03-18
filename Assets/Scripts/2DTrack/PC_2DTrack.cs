@@ -63,6 +63,7 @@ public class PC_2DTrack : MonoBehaviour
     UdpClient client;
 
     public float radius = 200;
+    public float teleportDistance = 10;
 
 
 
@@ -395,36 +396,44 @@ public class PC_2DTrack : MonoBehaviour
 
         // Move player to initial posiiton
         float radAngle = angle * Mathf.Deg2Rad;
-        playerPos = new Vector3(radius*Mathf.Cos(radAngle), 0.0f, radius*Mathf.Sin(radAngle));     
-        Vector3 playerPosInTunnel = new Vector3((radius + 10) * Mathf.Cos(radAngle), 0.0f, (radius + 10) * Mathf.Sin(radAngle));  // Radius + 10 so that there are 10 cm to traverse in teleport
+        playerPos = new Vector3(radius*Mathf.Cos(radAngle), 0.0f, radius*Mathf.Sin(radAngle));
+
+        Vector3 distToReward = rewardPos - playerPos;
+        Vector3 distToRewardNorm = Vector3.Normalize(-distToReward);
+        Vector3 playerPosInTunnel = playerPos + distToRewardNorm * teleportDistance;
+
+        //Vector3 playerPosInTunnel = new Vector3((radius + teleportDistance) * Mathf.Cos(radAngle), 0.0f, (radius + teleportDistance) * Mathf.Sin(radAngle));
         transform.position = playerPosInTunnel;
 
-        Debug.Log("Current player position in world space: " + transform.position);
+        Debug.Log("Player start position: " + playerPos);
+
+        Debug.Log("Player position in tunnel: " + transform.position);
 
         // Calculate end wall position and move end wall to it
-        Vector3 distToReward = rewardPos - playerPos;
-        Debug.Log(rewardPos);
-        Debug.Log(playerPos);
         float cosTheta = Vector3.Dot(Vector3.Normalize(-playerPos), Vector3.Normalize(distToReward));
         float theta = Mathf.Acos(cosTheta) * Mathf.Rad2Deg;
         float relativeToWall = 2 * radius * cosTheta;
         Vector3 wallPos = Vector3.Normalize(distToReward) * relativeToWall + playerPos;
         endWall.transform.position = new Vector3(wallPos.x, 0.0f, wallPos.z);
-        Debug.Log("end wall position: " + endWall.transform.position);
+        Debug.Log("End wall position: " + endWall.transform.position);
 
         // Rotate player to face towards end wall
-        float oppAngle = (-angle + 270) % 360;   // Angle so z-axis of player faces arena origin
+        //float oppAngle = (-angle + 270) % 360;   // Angle so z-axis of player faces arena origin
 
         //Check sign
-        float tempvalue = rewardPos.x * Mathf.Cos(oppAngle*Mathf.Deg2Rad) - rewardPos.z * Mathf.Sin(oppAngle*Mathf.Deg2Rad);
-        float thetaP;
-        if (tempvalue > 0){
-            thetaP = oppAngle + theta;
-        }
-        else{
-            thetaP = oppAngle - theta;
-        }
-        transform.eulerAngles = new Vector3(0.0f, thetaP, 0.0f);
+        //float tempvalue = rewardPos.x * Mathf.Cos(oppAngle*Mathf.Deg2Rad) - rewardPos.z * Mathf.Sin(oppAngle*Mathf.Deg2Rad);
+        //float thetaP;
+        //if (tempvalue > 0){
+        //    thetaP = oppAngle + theta;
+        //}
+        //else{
+        //    thetaP = oppAngle - theta;
+        //}
+        
+        //transform.eulerAngles = new Vector3(0.0f, thetaP, 0.0f);
+        //Debug.Log("Player rotation: " + thetaP);
+        transform.rotation = Quaternion.LookRotation(distToReward);
+        Debug.Log("Player rotation: " + transform.eulerAngles);
 
         // Rotate end wall
         double wallAngleRad = Math.Atan2(wallPos.z, wallPos.x);
