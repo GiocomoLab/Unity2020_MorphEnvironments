@@ -49,12 +49,13 @@ public class RR_VisibleCues : MonoBehaviour
         tb = player.GetComponent<TrialBlocks_2DTrack>();
 
         // Open sql connection
-        SqliteConnection.CreateFile(sp.serverDirectory_pre + sp.sceneName + "_cues.db");
-        _connection = new SqliteConnection("Data Source=" + sp.serverDirectory_pre + sp.sceneName + "_cues.db;Version=3;");
+        SqliteConnection.CreateFile(sp.localDirectory_pre + sp.sceneName + "_cues.db");
+        _connection = new SqliteConnection("Data Source=" + sp.localDirectory_pre + sp.sceneName + "_cues.db;Version=3;");
         _connection.Open();
         _command = _connection.CreateCommand();
         _command.CommandText = "create table cues (angle INT, posx REAL, posz REAL, star INT, circle INT, diamond INT, triangle INT)";
         _command.ExecuteNonQuery();
+
     }
 
     void LateUpdate(){
@@ -63,10 +64,10 @@ public class RR_VisibleCues : MonoBehaviour
              UnityEditor.EditorApplication.isPlaying = false;
         }
 
-        starVisible = CheckVisibility(star);
+        //starVisible = CheckVisibility(star);
         circleVisible = CheckVisibility(circle);
-        diamondVisible = CheckVisibility(diamond);
-        triangleVisible = CheckVisibility(triangle);
+        //diamondVisible = CheckVisibility(diamond);
+        //triangleVisible = CheckVisibility(triangle);
 
         _command.CommandText = "insert into cues (angle, posx, posz, star, circle, diamond, triangle) values (" + tb.trialAnglesList[sp.numTraversals] + "," + transform.position.x + "," + transform.position.z + ", " + starVisible + ", " + circleVisible + ", " + diamondVisible + ", " + triangleVisible + ")";
         _command.ExecuteNonQuery();
@@ -79,6 +80,7 @@ public class RR_VisibleCues : MonoBehaviour
     {
         int onScreen;
         Vector3 screenPos = panoCamera.GetComponent<Camera>().WorldToScreenPoint(obj.transform.position);
+        Debug.Log(screenPos);
 
         if (screenPos.x > 0f && screenPos.x < Screen.width && screenPos.y > 0f && screenPos.y < Screen.height)
         {
