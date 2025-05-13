@@ -1187,7 +1187,7 @@ MonoBehaviour:
   tstartFlag: 0
   deltaTime: 0
   target: 60
-  norewardSession: 1
+  norewardSession: 0
 --- !u!114 &1722994736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1211,7 +1211,7 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 10
+  numTrialsTotal: 30
   maxRewards: 200
   BlankLaser: 0
   rDur: 2
