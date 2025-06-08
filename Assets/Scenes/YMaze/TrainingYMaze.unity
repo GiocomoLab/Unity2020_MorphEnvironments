@@ -179,7 +179,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 200
-  field of view: 55.951794
+  field of view: 55.51574
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc22a161c5b40614aad08b65bed0b1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM4
+  port: COM7
   trash: 0
   c_1: 0
   r: 0
@@ -1131,18 +1131,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2480c70a3d6756a4fb3498cb9d8651c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: GRABDAmut19
-  AutoReward: 0
+  mouse: SparseKO_12
+  AutoReward: 1
   numRewards: 0
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 30
-  maxRewards: 100
+  numTrialsTotal: 150
+  maxRewards: 150
   LR: -1
-  skipTrialPcnt: 0.15
-  localDirectory_pre: C:/Users/markp/VR_Data/NeuroMods/
-  serverDirectory_pre: G:\My Drive\InVivoDA\VR_Data\
+  skipTrialPcnt: 0.1
+  localDirectory_pre: C:/Users/thorlabs_vr_rig/VR_Data/mari_training/
+  serverDirectory_pre: H:/My Drive/VR_Data/Stx3/
   localDirectory: 
   serverDirectory: 
   localPrefix: 
@@ -1756,7 +1756,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 200
-  field of view: 55.951794
+  field of view: 55.51574
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2781,7 +2781,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 500
-  field of view: 55.951794
+  field of view: 55.51574
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
