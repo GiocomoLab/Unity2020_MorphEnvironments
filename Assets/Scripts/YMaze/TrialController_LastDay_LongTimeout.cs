@@ -27,7 +27,7 @@ public class TrialController_LastDay_LongTimeout: MonoBehaviour
     private float maxBlockTime = 60f * 5f;
     private int maxTrialNum = 20;
     public int numFamBlocks = 7;
-    private float blockTimeout = 70f;
+    private float blockTimeout = 60f;
     public bool blankLaser = true;
     public bool longLastBlock = true;
     private float[] trialOrder;
