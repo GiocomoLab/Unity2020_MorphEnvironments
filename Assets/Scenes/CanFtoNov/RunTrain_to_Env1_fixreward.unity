@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5331
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.33093098, g: 0.369275, b: 0.429602, a: 0.5331}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.5331}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -336,7 +336,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.633385
+  field of view: 55.21546
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -415,7 +415,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 55.633385
+  field of view: 55.21546
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1102,6 +1102,7 @@ MonoBehaviour:
   tstartFlag: 0
   deltaTime: 0
   target: 60
+  norewardSession: 0
 --- !u!114 &1722994736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,7 +1126,7 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 80
+  numTrialsTotal: 200
   maxRewards: 200
   BlankLaser: 0
   rDur: 2
@@ -1253,7 +1254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: CA123-5690-2
+  mouse: 0051-1
   notes: 
   imaging_region: CA123
 --- !u!114 &1722994744
@@ -1295,7 +1296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae3543cde17e1848b4a547944105b2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChangeRewardTrial: 40
+  ChangeRewardTrial: 100
 --- !u!1 &1766657574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,7 +1353,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.633385
+  field of view: 55.21546
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

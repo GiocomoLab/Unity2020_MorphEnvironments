@@ -274,7 +274,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.8843
+  field of view: 55.67359
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -348,7 +348,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 55.8843
+  field of view: 55.67359
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -822,7 +822,7 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 40
+  numTrialsTotal: 20
   maxRewards: 200
   BlankLaser: 0
   rDur: 2
@@ -950,7 +950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: 0043-1
+  mouse: social-0051-1
   notes: 
   imaging_region: CA123
 --- !u!114 &1722994744
@@ -1036,7 +1036,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.8843
+  field of view: 55.67359
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
