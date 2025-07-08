@@ -170,7 +170,7 @@ public class PC_RunTrain : MonoBehaviour
         while (transform.position.z <= pos + 75)
         {
 
-            if ((sp.AutoReward) & (transform.position.z > pos + 30))
+            if ((sp.AutoReward) & (transform.position.z > pos + 50))
             {
                 cmd = 4;
                 if (sp.MultiReward)
