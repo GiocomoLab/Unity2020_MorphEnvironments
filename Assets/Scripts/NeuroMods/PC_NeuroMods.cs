@@ -238,7 +238,7 @@ public class PC_NeuroMods : MonoBehaviour
             if (prevReward == 0) // omission or probe trial 
             {
                 sendString("L0");
-                yield return new WaitForSeconds(5f + UnityEngine.Random.value * 4f);
+                yield return new WaitForSeconds(2f + UnityEngine.Random.value * 3f);
                 sendString("L1");
                 yield return new WaitForSeconds(1f);
 
@@ -246,7 +246,7 @@ public class PC_NeuroMods : MonoBehaviour
             else
             {
                 sendString("L0");
-                yield return new WaitForSeconds(UnityEngine.Random.value * 4f);
+                yield return new WaitForSeconds(UnityEngine.Random.value * 2f);
                 sendString("L1");
                 yield return new WaitForSeconds(1f);
             }
@@ -254,13 +254,13 @@ public class PC_NeuroMods : MonoBehaviour
         {
             if (prevReward == 0) // omission or probe trial 
             {
-                yield return new WaitForSeconds(5f + UnityEngine.Random.value * 4f);
+                yield return new WaitForSeconds(2f + UnityEngine.Random.value * 3f);
                 yield return new WaitForSeconds(1f);
 
             }
             else
             {
-                yield return new WaitForSeconds(UnityEngine.Random.value * 4f);
+                yield return new WaitForSeconds(UnityEngine.Random.value * 2f);
                 yield return new WaitForSeconds(1f);
             }
 
