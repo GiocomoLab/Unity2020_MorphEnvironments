@@ -131,6 +131,7 @@ public class PC_RunTrain : MonoBehaviour
     IEnumerator MoveReward()
     {
         float CurrRewardTime = Time.realtimeSinceStartup;
+        reward.GetComponent<Collider>().enabled = false;
         yield return new WaitForSeconds(.5f);
         if (!sp.fixedRewardSchedule)
         {
@@ -152,6 +153,7 @@ public class PC_RunTrain : MonoBehaviour
         }
         //float zpos = (reward.transform.position.z + sp.mrd +sp.ard) % 330f;
         reward.transform.position = reward.transform.position + new Vector3(0f, 0f, sp.mrd + UnityEngine.Random.value * sp.ard);
+        reward.GetComponent<Collider>().enabled = true;
         LastRewardTime = CurrRewardTime;
         yield return null;
     }
