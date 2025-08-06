@@ -83,7 +83,7 @@ public class PC_2DTrack : MonoBehaviour
 
         StartCoroutine(FlagCheck());
         
-        Debug.Log(sp.sceneName);
+        //Debug.Log(sp.sceneName);
 
         panoCam = GameObject.Find("panoCamera");
         //panoCam.transform.eulerAngles = new Vector3(0.0f, -90.0f, 0.0f);        // Needed?
@@ -92,7 +92,7 @@ public class PC_2DTrack : MonoBehaviour
         anchor = GameObject.Find("Anchor");
 
         PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, anchor.transform.position);
-        Debug.Log("Start angle: " + tb.trialAnglesList[sp.numTraversals]);
+        //Debug.Log("Start angle: " + tb.trialAnglesList[sp.numTraversals]);
 
         //if (UnityEngine.Random.value < sp.autoRewardPercent){
         //    sp.AutoReward = true;
@@ -102,7 +102,7 @@ public class PC_2DTrack : MonoBehaviour
         //}
         sp.AutoReward = true;
 
-        Debug.Log("Auto reward: " + sp.AutoReward);
+        //Debug.Log("Auto reward: " + sp.AutoReward);
 
         LickHistory = new ArrayList();
 
@@ -170,7 +170,7 @@ public class PC_2DTrack : MonoBehaviour
         }
         else if (other.tag == "Teleport")
         {
-            Debug.Log("Teleport");
+            //Debug.Log("Teleport");
 
             if (UnityEngine.Random.value < sp.SkipTrialPcnt)
             {
@@ -185,7 +185,7 @@ public class PC_2DTrack : MonoBehaviour
             tendFlag = 1;
 
             PositionObjects(tb.trialAnglesList[sp.numTraversals], radius, anchor.transform.position);
-            Debug.Log("Start angle: " + tb.trialAnglesList[sp.numTraversals]);
+            //Debug.Log("Start angle: " + tb.trialAnglesList[sp.numTraversals]);
 
             //if (UnityEngine.Random.value < sp.autoRewardPercent){
             //    sp.AutoReward = true;
@@ -203,7 +203,7 @@ public class PC_2DTrack : MonoBehaviour
                 sp.AutoReward = false;
             }
 
-            Debug.Log("Auto reward: " + sp.AutoReward);
+            //Debug.Log("Auto reward: " + sp.AutoReward);
 
             bckgndOn = true;
 
@@ -281,11 +281,11 @@ public class PC_2DTrack : MonoBehaviour
     IEnumerator RewardSequence(Vector3 rewardStart,GameObject _reward)
     {   // water reward
         rzoneFlag = 1;
-        Debug.Log("Entered reward zone: " + rewardStart);
+        //Debug.Log("Entered reward zone: " + rewardStart);
 
         //Calculate end of reward zone
         Vector3 rewardEnd = GetRewardEnd(rewardStart, 50, playerPos);
-        Debug.Log("Calculated reward zone end: " + rewardEnd);
+       // Debug.Log("Calculated reward zone end: " + rewardEnd);
 
         //Calculate reward zone boundaries
         float rewardMinX = Mathf.Min(rewardStart.x, rewardEnd.x);
@@ -306,7 +306,7 @@ public class PC_2DTrack : MonoBehaviour
         {
             if((sp.AutoReward) & (Vector3.Distance(transform.position, rewardStart) > 30)){
 
-                Debug.Log("Auto reward on: " + transform.position);
+                //Debug.Log("Auto reward on: " + transform.position);
                 cmd = 4;
                 StartCoroutine(DeliverReward(1));
                 sp.numRewards += 1;
@@ -353,7 +353,7 @@ public class PC_2DTrack : MonoBehaviour
         _reward.SetActive(false);
 
         rzoneFlag = 0;
-        Debug.Log("Exited reward zone: " + transform.position);
+        //Debug.Log("Exited reward zone: " + transform.position);
         yield return new WaitForEndOfFrame();
         cmd = 2;
         yield return new WaitForEndOfFrame();
@@ -405,9 +405,9 @@ public class PC_2DTrack : MonoBehaviour
         //Vector3 playerPosInTunnel = new Vector3((radius + teleportDistance) * Mathf.Cos(radAngle), 0.0f, (radius + teleportDistance) * Mathf.Sin(radAngle));
         transform.position = playerPosInTunnel;
 
-        Debug.Log("Player start position: " + playerPos);
+        //Debug.Log("Player start position: " + playerPos);
 
-        Debug.Log("Player position in tunnel: " + transform.position);
+        //Debug.Log("Player position in tunnel: " + transform.position);
 
         // Calculate end wall position and move end wall to it
         float cosTheta = Vector3.Dot(Vector3.Normalize(-playerPos), Vector3.Normalize(distToReward));
@@ -415,7 +415,7 @@ public class PC_2DTrack : MonoBehaviour
         float relativeToWall = 2 * radius * cosTheta;
         Vector3 wallPos = Vector3.Normalize(distToReward) * relativeToWall + playerPos;
         endWall.transform.position = new Vector3(wallPos.x, 0.0f, wallPos.z);
-        Debug.Log("End wall position: " + endWall.transform.position);
+        //Debug.Log("End wall position: " + endWall.transform.position);
 
         // Rotate player to face towards end wall
         //float oppAngle = (-angle + 270) % 360;   // Angle so z-axis of player faces arena origin
@@ -433,7 +433,7 @@ public class PC_2DTrack : MonoBehaviour
         //transform.eulerAngles = new Vector3(0.0f, thetaP, 0.0f);
         //Debug.Log("Player rotation: " + thetaP);
         transform.rotation = Quaternion.LookRotation(distToReward);
-        Debug.Log("Player rotation: " + transform.eulerAngles);
+        //Debug.Log("Player rotation: " + transform.eulerAngles);
 
         // Rotate end wall
         double wallAngleRad = Math.Atan2(wallPos.z, wallPos.x);
@@ -476,7 +476,7 @@ public class PC_2DTrack : MonoBehaviour
         float angleTransform = (angle + 180) % 360;
         transform.eulerAngles = new Vector3(0.0f, -angleTransform, 0.0f);
 
-        Debug.Log("Current position in world space: " + transform.position);
+        //Debug.Log("Current position in world space: " + transform.position);
     }
 
     Vector3 GetRewardEnd(Vector3 playerpos, float rewarddist, Vector3 startpos){
