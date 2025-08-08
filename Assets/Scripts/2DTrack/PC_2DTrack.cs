@@ -108,6 +108,10 @@ public class PC_2DTrack : MonoBehaviour
 
         remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), port);
         client = new UdpClient();
+
+        // Set frame rate to 60 HZ
+        QualitySettings.vSyncCount = 0;     // This should be set to 0 so .targetFrameRate is enabled.
+        Application.targetFrameRate = 60;
     }
 
     private void sendString(string message)
@@ -161,7 +165,7 @@ public class PC_2DTrack : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
+        // Debug.Log(other.tag);
 
 
         if (other.tag == "Reward")
