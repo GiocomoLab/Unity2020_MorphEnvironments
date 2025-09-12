@@ -152,9 +152,17 @@ public class PC_RunTrain : MonoBehaviour
             }
         }
         //float zpos = (reward.transform.position.z + sp.mrd +sp.ard) % 330f;
+        float zpos = reward.transform.position.z + sp.mrd + UnityEngine.Random.value * sp.ard;
+
         reward.transform.position = reward.transform.position + new Vector3(0f, 0f, sp.mrd + UnityEngine.Random.value * sp.ard);
         reward.GetComponent<Collider>().enabled = true;
         LastRewardTime = CurrRewardTime;
+
+        if (zpos > 400)
+        {
+            reward.SetActive(false);
+        }
+
         yield return null;
     }
 
