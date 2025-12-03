@@ -39,6 +39,11 @@ public class SP_runtrain_fixreward : MonoBehaviour
     public int TrainingTrack = 1;
 
     public bool MultiReward = false;
+
+    // Track ball
+    public GameObject blackOval;
+    private Transform ballTransform;
+
     // for saving data
     public string localDirectory_pre = "C:/Users/markp/VR_Data/CanD/behavior/";
     public string serverDirectory_pre = "G:\\My Drive\\CA123\\behavior\\";
@@ -76,6 +81,21 @@ public class SP_runtrain_fixreward : MonoBehaviour
         ttls = player.GetComponent<SbxTTLs_runtrain_fixreward>();
         notes = player.GetComponent<Notes>();
         mouse = notes.mouse;
+
+        // find ball 
+        if (blackOval == null)
+        {
+            blackOval = GameObject.Find("BlackOval");
+            if (blackOval ==null)
+            {
+                Debug.LogWarning("BlackOval not found! Ball position not being tracked");
+            }
+        }
+
+        if (blackOval !=null)
+        {
+            ballTransform = blackOval.transform;
+        }
 
         today = DateTime.Today;
         Debug.Log(today.ToString("dd_MM_yyyy"));
@@ -117,7 +137,8 @@ public class SP_runtrain_fixreward : MonoBehaviour
         _connection.Open();
         _command = _connection.CreateCommand();
         _command.CommandText = "create table data (time REAL, morph REAL, trialnum INT, pos REAL, dz REAL, posx REAL, lick INT, reward INT," +
-        "tstart INT, teleport INT, rzone INT, scanning NUMERIC, manrewards INT, autoreward INT, cmd INT, trainingtrack INT, norewardSess INT)";
+        "tstart INT, teleport INT, rzone INT, scanning NUMERIC, manrewards INT, autoreward INT, cmd INT, trainingtrack INT, norewardSess INT," +
+        "ball_x REAL, ball_y REAL, ball_z REAL)";
         _command.ExecuteNonQuery();
     }
 
@@ -133,10 +154,22 @@ public class SP_runtrain_fixreward : MonoBehaviour
             _autoReward = 0;
         }
 
+        // get ball position
+        float ballX = 0f;
+        float ballY = 0f;
+        float ballZ = 0f;
+
+        if (ballTransform != null)
+        {
+            ballX = ballTransform.position.x;
+            ballY = ballTransform.position.y;
+            ballZ = ballTransform.position.z;
+        }
+
         _command.CommandText = "insert into data (time , morph , trainingtrack, trialnum, pos, dz, posx, lick, reward," +
-        "tstart, teleport, rzone , scanning, manrewards, autoreward, cmd, norewardSess) values (" + Time.realtimeSinceStartup + "," + morph + "," + TrainingTrack + "," + numTraversals +
+        "tstart, teleport, rzone , scanning, manrewards, autoreward, cmd, norewardSess, ball_x, ball_y, ball_z) values (" + Time.realtimeSinceStartup + "," + morph + "," + TrainingTrack + "," + numTraversals +
         "," + transform.position.z + "," + rr.true_delta_z + "," + transform.position.x + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," +
-        pc.rzoneFlag + "," + ttls.scanning + "," + pc.mRewardFlag + "," + _autoReward + "," + pc.cmd + ", "+ Convert.ToByte(pc.norewardSession)+ ")";
+        pc.rzoneFlag + "," + ttls.scanning + "," + pc.mRewardFlag + "," + _autoReward + "," + pc.cmd + ", "+ Convert.ToByte(pc.norewardSession)+ "," + ballX + "," + ballY + "," + ballZ + ")";
 
 
         //Debug.Log(_command.CommandText);
