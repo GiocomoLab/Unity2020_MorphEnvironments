@@ -7,14 +7,25 @@ public class OvalTraverser : MonoBehaviour
     [Tooltip("Maximum angle to move left/right from center (in degrees)")]
     public float traverseDistance = 45f;
 
-    [Header("center Pause Settings")]
+    [Header("Center Pause Settings")]
     [Tooltip("Probability 0-1 of pausing when crossing center")]
     [Range(0f, 1f)]
     public float pauseProbability = 0.0f;
-    [Tooltip("minimum pause duration")]
+    [Tooltip("Min pause duration")]
     public float minPauseDuration = 0.0f;
-    [Tooltip("maximum pause duration")]
+    [Tooltip("Max pause duration")]
     public float maxPauseDuration = 1.0f;
+
+    [Header("Random Freeze Settings")]
+    [Tooltip("Probability 0-1 of pausing randomly")]
+    [Range(0f, 1f)]
+    public float randomFreezeProbability = 0.0f;
+    [Tooltip("Min freeze duration")]
+    public float minFreezeDuration = 0.0f;
+    [Tooltip("Max freeze duration")]
+    public float maxFreezeDuration = 1.0f;
+    [Tooltip("Minimum time between random freeze")]
+    public float freezeCheckInterval = 0.5f;
 
     [Header("Position Settings")]
     [Tooltip("Distance in front of player")]
@@ -35,6 +46,14 @@ public class OvalTraverser : MonoBehaviour
     private bool crossedCenterLastFrame = false;
     private float lastAngleOffset = 0f;
     private Vector3 pausePosition;
+
+
+    // random freeze variables
+    private bool isFrozen = false;
+    private float freezeEndTime = 0f;
+    private float nextFreezeCheckTime = 0f;
+    private Vector3 frozenPosition;
+    private float frozenAngleOffset;
 
     void Start()
     {
@@ -79,7 +98,29 @@ public class OvalTraverser : MonoBehaviour
     void UpdatePosition()
     {
         if (followTarget == null) return;
+
+        // Check if currently Frozen
+
+        if(isFrozen)
+        {
+            if (Time.time >= freezeEndTime)
+            {
+                isFrozen = false;
+                Debug.Log("OvalTraverser: Unfreezing from random freeze");
+            }
+            else
+            {
+
+
+                transform.position = frozenPosition;
+                transform.LookAt(followTarget.position + followTarget.up * heightOffset);
+
+                return;
+            }
+        }
+
         // Check if currently paused
+
         if (isPaused)
         {
             if (Time.time >= pauseEndTime)
@@ -96,13 +137,39 @@ public class OvalTraverser : MonoBehaviour
                 return;
             }
         }
+
+        // Check for random freeze 
+        if(Time.time >= nextFreezeCheckTime && randomFreezeProbability > 0)
+        {
+            nextFreezeCheckTime = Time.time + freezeCheckInterval;
+
+            float randomValue = UnityEngine.Random.Range(0f, 1f);
+            if (randomValue < randomFreezeProbability)
+            {
+                isFrozen = true;
+                float freezeDuration = UnityEngine.Random.Range(minFreezeDuration, maxFreezeDuration);
+                freezeEndTime = Time.time + freezeDuration;
+                frozenPosition = transform.position;
+
+                Debug.Log($"OvalTraverser: Random freeze for {freezeDuration: F2} seconds");
+                return;
+            }
+        }
+
+
+
+
         // Update traverse timer (only when not paused)
         traverseTimer += Time.deltaTime * traverseSpeed;
         // Calculate angle using PingPong for linear back-and-forth
         // PingPong creates movement from -traverseDistance to +traverseDistance (in degrees)
         float angleOffset = Mathf.PingPong(traverseTimer, traverseDistance * 2) - traverseDistance;
+
+        float angleRadians = (angleOffset + 90f) * Mathf.Deg2Rad;
+        float lastAngleRadians = (lastAngleOffset + 90f) * Mathf.Deg2Rad;
+
         // Check if we just crossed the center (angle changes from negative to positive or vice versa)
-        bool crossedCenter = (lastAngleOffset < 0 && angleOffset >= 0) || (lastAngleOffset > 0 && angleOffset <= 0);
+        bool crossedCenter = (lastAngleRadians < Mathf.PI/2 && angleRadians >= Mathf.PI/2) || (lastAngleRadians > Mathf.PI/2 && angleRadians <= Mathf.PI/2);
         // If we crossed center and haven't already triggered a pause this crossing
         if (crossedCenter && !crossedCenterLastFrame && !isPaused)
         {
@@ -119,16 +186,14 @@ public class OvalTraverser : MonoBehaviour
                 // Position at center immediately
                 
                 crossedCenterLastFrame = true;
-                lastAngleOffset = angleOffset;
+                lastAngleRadians = angleRadians;
                 return;
             }
         }
         // Update crossing detection
         crossedCenterLastFrame = crossedCenter;
-        lastAngleOffset = angleOffset;
-        // Convert angle to radians for calculation
-        // Add 90 degrees to shift the semi-circle to the front-facing half
-        float angleRadians = (angleOffset + 90f) * Mathf.Deg2Rad;
+        lastAngleRadians = angleRadians;
+
         // Calculate position on semi-circle around panoCamera
         // The semi-circle is in the horizontal plane (X-Z plane in local space)
         // Using Sin for horizontal (right) and Cos for depth (forward)

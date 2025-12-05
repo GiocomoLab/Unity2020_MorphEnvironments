@@ -406,7 +406,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366104543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -958,7 +958,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068599180}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1544,6 +1544,7 @@ MonoBehaviour:
   morph: 0
   TrainingTrack: 1
   MultiReward: 0
+  blackOval: {fileID: 0}
   localDirectory_pre: C:/Users/markp/VR_Data/CanD/behavior/
   serverDirectory_pre: G:\My Drive\CA123\behavior\
   localDirectory: 
@@ -2183,6 +2184,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traverseSpeed: 100
   traverseDistance: 90
+  pauseProbability: 0.502
+  minPauseDuration: 0
+  maxPauseDuration: 2
+  randomFreezeProbability: 0.34
+  minFreezeDuration: 0
+  maxFreezeDuration: 2
+  freezeCheckInterval: 1
   distanceFromPlayer: 50
   heightOffset: 10
   player: {fileID: 0}
