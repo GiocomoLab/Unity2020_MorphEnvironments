@@ -2,214 +2,169 @@ using UnityEngine;
 public class OvalTraverser : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [Tooltip("Speed of left-right movement")]
     public float traverseSpeed = 2f;
-    [Tooltip("Maximum angle to move left/right from center (in degrees)")]
-    public float traverseDistance = 45f;
-
+    public float traverseDistance = 45f; // degrees from center to each side (center at 0 offset)
     [Header("Center Pause Settings")]
-    [Tooltip("Probability 0-1 of pausing when crossing center")]
-    [Range(0f, 1f)]
-    public float pauseProbability = 0.0f;
-    [Tooltip("Min pause duration")]
+    [Range(0f, 1f)] public float pauseProbability = 0.0f;
     public float minPauseDuration = 0.0f;
-    [Tooltip("Max pause duration")]
     public float maxPauseDuration = 1.0f;
-
     [Header("Random Freeze Settings")]
-    [Tooltip("Probability 0-1 of pausing randomly")]
-    [Range(0f, 1f)]
-    public float randomFreezeProbability = 0.0f;
-    [Tooltip("Min freeze duration")]
+    [Range(0f, 1f)] public float randomFreezeProbability = 0.0f;
     public float minFreezeDuration = 0.0f;
-    [Tooltip("Max freeze duration")]
     public float maxFreezeDuration = 1.0f;
-    [Tooltip("Minimum time between random freeze")]
     public float freezeCheckInterval = 0.5f;
-
     [Header("Position Settings")]
-    [Tooltip("Distance in front of player")]
     public float distanceFromPlayer = 3f;
-    [Tooltip("Height offset relative to player")]
     public float heightOffset = 0f;
     [Header("References")]
-    [Tooltip("The player/camera to follow")]
     public Transform player;
-    [Tooltip("Use the camera instead of player transform (recommended)")]
     public bool useCamera = true;
-    private float traverseTimer = 0f;
     private Transform followTarget;
-    // Pause state variables
-
+    private float traverseTimer = 0f;      // drives PingPong
+    private float lastAngleOffset = 0f;   // degrees, in range [-traverseDistance, +traverseDistance]
+    // Freeze/Pause state
     private bool isPaused = false;
     private float pauseEndTime = 0f;
-    private bool crossedCenterLastFrame = false;
-    private float lastAngleOffset = 0f;
-    private Vector3 pausePosition;
-
-
-    // random freeze variables
     private bool isFrozen = false;
     private float freezeEndTime = 0f;
     private float nextFreezeCheckTime = 0f;
-    private Vector3 frozenPosition;
-    private float frozenAngleOffset;
-
+    private float frozenAngleRadians = 0f;
+    private bool crossedCenterLastFrame = false;
+    // Tolerance (degrees) to help robust center detection
+    private const float centerTolerance = 0.001f;
     void Start()
     {
-        // If no player assigned, try to find the main camera
         if (player == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null)
-            {
                 player = playerObj.transform;
-            }
-            else
-            {
-                Camera mainCam = Camera.main;
-                if (mainCam != null)
-                {
-                    player = mainCam.transform;
-                }
-            }
+            else if (Camera.main != null)
+                player = Camera.main.transform;
         }
         if (player == null)
         {
             Debug.LogError("OvalTraverser: No player transform found!");
             return;
         }
-        // Find the panoCamera specifically (not the subcameras)
         Transform panoCamera = player.transform.Find("panoCamera");
-        if (panoCamera != null)
-        {
-            followTarget = panoCamera;
-            Debug.Log("OvalTraverser: Using panoCamera as center");
-        }
-        else
-        {
-            // Fallback to player if panoCamera not found
-            followTarget = player;
-            Debug.LogWarning("OvalTraverser: panoCamera not found, using player transform");
-        }
-        // Initialize position in front of camera/player immediately
+        followTarget = panoCamera != null ? panoCamera : player;
+        lastAngleOffset = Mathf.PingPong(traverseTimer, traverseDistance * 2f) - traverseDistance;
+        nextFreezeCheckTime = Time.time + freezeCheckInterval;
+        UpdatePosition(); // position at start
+    }
+    void Update()
+    {
         UpdatePosition();
     }
     void UpdatePosition()
     {
         if (followTarget == null) return;
-
-        // Check if currently Frozen
-
-        if(isFrozen)
+        // If currently frozen, check expiration first
+        if (isFrozen)
         {
             if (Time.time >= freezeEndTime)
             {
                 isFrozen = false;
-                Debug.Log("OvalTraverser: Unfreezing from random freeze");
             }
             else
             {
-
-
-                transform.position = frozenPosition;
-                transform.LookAt(followTarget.position + followTarget.up * heightOffset);
-
+                ApplyFrozenAnglePosition();
                 return;
             }
         }
-
-        // Check if currently paused
-
+        // If currently paused at center, check expiration
         if (isPaused)
         {
             if (Time.time >= pauseEndTime)
             {
                 isPaused = false;
-                Debug.Log("OvalTraverser: Resuming movement");
             }
             else
             {
-                // Stay at center position while paused
-                
-                transform.position = pausePosition;
-                transform.LookAt(followTarget.position + followTarget.up * heightOffset);
+                ApplyFrozenAnglePosition();
                 return;
             }
         }
-
-        // Check for random freeze 
-        if(Time.time >= nextFreezeCheckTime && randomFreezeProbability > 0)
+        // --- Compute current (pre-move) angle from current traverseTimer ---
+        float preMoveAngleOffset = Mathf.PingPong(traverseTimer, traverseDistance * 2f) - traverseDistance; // degrees
+        float preMoveAngleRadians = (preMoveAngleOffset + 90f) * Mathf.Deg2Rad;
+        // --- RANDOM FREEZE CHECK (uses pre-move angle) ---
+        if (Time.time >= nextFreezeCheckTime && randomFreezeProbability > 0f)
         {
+            // schedule next check now (regardless of result) so checks are spaced
             nextFreezeCheckTime = Time.time + freezeCheckInterval;
-
-            float randomValue = UnityEngine.Random.Range(0f, 1f);
-            if (randomValue < randomFreezeProbability)
+            if (Random.value < randomFreezeProbability)
             {
+                // Trigger freeze at the current visual angle (preMove)
                 isFrozen = true;
-                float freezeDuration = UnityEngine.Random.Range(minFreezeDuration, maxFreezeDuration);
-                freezeEndTime = Time.time + freezeDuration;
-                frozenPosition = transform.position;
-
-                Debug.Log($"OvalTraverser: Random freeze for {freezeDuration: F2} seconds");
+                freezeEndTime = Time.time + Random.Range(minFreezeDuration, maxFreezeDuration);
+                frozenAngleRadians = preMoveAngleRadians; // lock the current visual angle
+                ApplyFrozenAnglePosition();
+                // do not advance traverseTimer this frame; remain frozen
                 return;
             }
         }
-
-
-
-
-        // Update traverse timer (only when not paused)
+        // --- ADVANCE traverseTimer for movement (only when not paused/frozen) ---
         traverseTimer += Time.deltaTime * traverseSpeed;
-        // Calculate angle using PingPong for linear back-and-forth
-        // PingPong creates movement from -traverseDistance to +traverseDistance (in degrees)
-        float angleOffset = Mathf.PingPong(traverseTimer, traverseDistance * 2) - traverseDistance;
-
-        float angleRadians = (angleOffset + 90f) * Mathf.Deg2Rad;
-        float lastAngleRadians = (lastAngleOffset + 90f) * Mathf.Deg2Rad;
-
-        // Check if we just crossed the center (angle changes from negative to positive or vice versa)
-        bool crossedCenter = (lastAngleRadians < Mathf.PI/2 && angleRadians >= Mathf.PI/2) || (lastAngleRadians > Mathf.PI/2 && angleRadians <= Mathf.PI/2);
-        // If we crossed center and haven't already triggered a pause this crossing
+        // Compute post-move angle (this is the ball's new intended position this frame)
+        float postMoveAngleOffset = Mathf.PingPong(traverseTimer, traverseDistance * 2f) - traverseDistance;
+        float postMoveAngleRadians = (postMoveAngleOffset + 90f) * Mathf.Deg2Rad;
+        // --- CENTER CROSSING DETECTION (detect crossing of angleOffset == 0) ---
+        bool crossedCenter = false;
+        // Only consider crossing if there was actual motion across zero between pre and post offsets
+        if (!Mathf.Approximately(preMoveAngleOffset, postMoveAngleOffset))
+        {
+            crossedCenter = (preMoveAngleOffset < 0f && postMoveAngleOffset >= 0f)
+                            || (preMoveAngleOffset > 0f && postMoveAngleOffset <= 0f);
+        }
         if (crossedCenter && !crossedCenterLastFrame && !isPaused)
         {
-            // Roll the dice - should we pause?
-            float randomValue = UnityEngine.Random.Range(0f, 1f);
-            if (randomValue <= pauseProbability)
+            if (Random.value <= pauseProbability)
             {
-                // Initiate pause
+                // Pause at the post-move angle (this represents the center or immediately after crossing)
                 isPaused = true;
-                float pauseDuration = UnityEngine.Random.Range(minPauseDuration, maxPauseDuration);
-                pauseEndTime = Time.time + pauseDuration;
-                pausePosition = transform.position;
-                Debug.Log($"OvalTraverser: Pausing at center for {pauseDuration:F2} seconds");
-                // Position at center immediately
-                
+                pauseEndTime = Time.time + Random.Range(minPauseDuration, maxPauseDuration);
+                frozenAngleRadians = postMoveAngleRadians;
+                ApplyFrozenAnglePosition();
+                lastAngleOffset = postMoveAngleOffset;
                 crossedCenterLastFrame = true;
-                lastAngleRadians = angleRadians;
                 return;
             }
         }
-        // Update crossing detection
         crossedCenterLastFrame = crossedCenter;
-        lastAngleRadians = angleRadians;
-
-        // Calculate position on semi-circle around panoCamera
-        // The semi-circle is in the horizontal plane (X-Z plane in local space)
-        // Using Sin for horizontal (right) and Cos for depth (forward)
-        Vector3 horizontalComponent = followTarget.right * Mathf.Sin(angleRadians) * distanceFromPlayer;
-        Vector3 depthComponent = followTarget.forward * Mathf.Cos(angleRadians) * distanceFromPlayer;
-        // Combine components - this creates a true semi-circle in the horizontal plane
-        Vector3 targetPosition = followTarget.position
-            + horizontalComponent      // Left-right movement
-            + depthComponent          // Forward-backward movement (creates the arc)
-            + followTarget.up * heightOffset;
-        transform.position = targetPosition;
-        // Make the oval always face toward the panoCamera center
+        // --- NORMAL MOVEMENT: apply computed post-move position ---
+        ApplyAnglePosition(postMoveAngleRadians);
+        // Save for next frame
+        lastAngleOffset = postMoveAngleOffset;
+    }
+    // Apply the normal (moving) position for a given angleRadians
+    void ApplyAnglePosition(float angleRadians)
+    {
+        Vector3 horizontal = followTarget.right * Mathf.Sin(angleRadians) * distanceFromPlayer;
+        Vector3 depth = followTarget.forward * Mathf.Cos(angleRadians) * distanceFromPlayer;
+        transform.position =
+            followTarget.position +
+            horizontal +
+            depth +
+            followTarget.up * heightOffset;
         transform.LookAt(followTarget.position + followTarget.up * heightOffset);
     }
-    void Update()
+    // Apply frozen angle (angle locked) but player movement still affects world position
+    void ApplyFrozenAnglePosition()
     {
-        UpdatePosition();
+        Vector3 horizontal = followTarget.right * Mathf.Sin(frozenAngleRadians) * distanceFromPlayer;
+        Vector3 depth = followTarget.forward * Mathf.Cos(frozenAngleRadians) * distanceFromPlayer;
+        transform.position =
+            followTarget.position +
+            horizontal +
+            depth +
+            followTarget.up * heightOffset;
+        transform.LookAt(followTarget.position + followTarget.up * heightOffset);
+    }
+    // Optional helper for debugging / external queries
+    public float GetCurrentAngleOffsetDegrees()
+    {
+        return Mathf.PingPong(traverseTimer, traverseDistance * 2f) - traverseDistance;
     }
 }
