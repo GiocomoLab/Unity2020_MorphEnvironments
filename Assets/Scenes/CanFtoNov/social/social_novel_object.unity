@@ -179,7 +179,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.816956
+  field of view: 115.559685
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -518,7 +518,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 55.816956
+  field of view: 115.559685
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1439,12 +1439,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1722994745}
   - component: {fileID: 1722994743}
-  - component: {fileID: 1722994736}
-  - component: {fileID: 1722994737}
-  - component: {fileID: 1722994733}
-  - component: {fileID: 1722994734}
-  - component: {fileID: 1722994735}
   - component: {fileID: 1722994744}
+  - component: {fileID: 1722994737}
+  - component: {fileID: 1722994736}
+  - component: {fileID: 1722994735}
+  - component: {fileID: 1722994734}
+  - component: {fileID: 1722994733}
   - component: {fileID: 1722994742}
   - component: {fileID: 1722994741}
   - component: {fileID: 1722994740}
@@ -1466,14 +1466,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722994732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65973aa257b281f419c77d6385885d28, type: 3}
+  m_Script: {fileID: 11500000, guid: aed68576ffa68c94f859104341703f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM4
-  trash: 0
-  c_1: 0
-  r: 0
-  rflag: 1
 --- !u!114 &1722994734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1483,24 +1478,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722994732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 214cf927cecaae1438d02064d93230c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  port: COM3
-  delta_z: 0
-  true_delta_z: 0
-  speedBool: 0
-  toutBool: 1
---- !u!114 &1722994735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722994732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ed7cbdfc89b3146a0c579cfd0ad6d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 06f1c1fd42d4af84d82c4745c5760df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cmd: 2
@@ -1514,6 +1492,23 @@ MonoBehaviour:
   deltaTime: 0
   target: 60
   norewardSession: 0
+--- !u!114 &1722994735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722994732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 970a81aaffbd2454d94b081dca201907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  port: COM3
+  delta_z: 0
+  true_delta_z: 0
+  speedBool: 0
+  toutBool: 1
 --- !u!114 &1722994736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1523,38 +1518,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722994732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 457bec9805690ba46a6f459ff6cd4448, type: 3}
+  m_Script: {fileID: 11500000, guid: 5765b980ffb434a4e9df022656a82c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkipTrialPcnt: 0
-  AutoReward: 0
-  mrd: 300
-  ard: 10
-  fixedRewardSchedule: 1
-  MinTrainingDist: 10
-  MaxTrainingDist: 300
-  numRewards: 0
-  numRewards_manual: 0
-  rewardFlag: 0
-  numTraversals: 0
-  numTrialsTotal: 200
-  maxRewards: 200
-  BlankLaser: 0
-  rDur: 2
-  morph: 0
-  TrainingTrack: 1
-  MultiReward: 0
-  blackOval: {fileID: 0}
-  localDirectory_pre: C:/Users/markp/VR_Data/CanD/behavior/
-  serverDirectory_pre: G:\My Drive\CA123\behavior\
-  localDirectory: 
-  serverDirectory: 
-  localPrefix: 
-  serverPrefix: 
-  sceneName: 
-  session: 1
-  scanning: 0
-  dirCheck: 0
+  port: COM4
+  trash: 0
+  c_1: 0
+  r: 0
+  rflag: 1
 --- !u!114 &1722994737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1564,7 +1535,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722994732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ab2b45c470b17458ff09e9c15ae808, type: 3}
+  m_Script: {fileID: 11500000, guid: f19bd46162fe74042bf6316cc1019542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scanning: 0
@@ -1678,9 +1649,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722994732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b2568f8adb24ce41bc034f900ce1829, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b0ff120c43200f449eead09d06e00cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SkipTrialPcnt: 0
+  AutoReward: 0
+  mrd: 30
+  ard: 10
+  fixedRewardSchedule: 0
+  MinTrainingDist: 10
+  MaxTrainingDist: 300
+  numRewards: 0
+  numRewards_manual: 0
+  rewardFlag: 0
+  numTraversals: 0
+  numTrialsTotal: 40
+  maxRewards: 100
+  BlankLaser: 0
+  rDur: 2
+  morph: 0
+  TrainingTrack: 1
+  MultiReward: 0
+  blackOval: {fileID: 0}
+  localDirectory_pre: C:/Users/markp/VR_Data/CanD/behavior/
+  serverDirectory_pre: G:\My Drive\CA123\behavior\
+  localDirectory: 
+  serverDirectory: 
+  localPrefix: 
+  serverPrefix: 
+  sceneName: 
+  session: 1
+  scanning: 0
+  dirCheck: 0
 --- !u!4 &1722994745
 Transform:
   m_ObjectHideFlags: 0
@@ -1752,7 +1752,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.816956
+  field of view: 115.559685
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2182,14 +2182,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f3ef7f6272363439d57ca6e0adfba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  traverseSpeed: 100
+  traverseSpeed: 10
   traverseDistance: 90
-  pauseProbability: 0.8
-  minPauseDuration: 5
+  pauseProbability: 0.4
+  minPauseDuration: 2
   maxPauseDuration: 10
-  randomFreezeProbability: 0.75
+  randomFreezeProbability: 0.05
   minFreezeDuration: 2
-  maxFreezeDuration: 10
+  maxFreezeDuration: 5
   freezeCheckInterval: 2
   distanceFromPlayer: 50
   heightOffset: 10
