@@ -80,7 +80,7 @@ public class PC_LickportTraining : MonoBehaviour
         if (r == 4) // reward
         {
             cmd = 4;
-            yield return new WaitForSeconds(.05f);
+            yield return new WaitForSeconds(.01f);
             cmd = 3;
             ///cmd = 10;
         }
