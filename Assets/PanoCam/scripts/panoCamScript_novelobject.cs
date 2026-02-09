@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class panoCamScript : MonoBehaviour {
+public class panoCamScript_novelobject : MonoBehaviour {
 	
 	public int camCount = 3;
 
@@ -13,8 +13,12 @@ public class panoCamScript : MonoBehaviour {
 				go.transform.parent = transform;
 				go.transform.localPosition = new Vector3(0,0,0);
 				go.name = "subCam"+i;
-				go.AddComponent<Camera> ();
+				
 
+				Camera cam = go.AddComponent<Camera>();
+
+				cam.clearFlags = CameraClearFlags.SolidColor;
+				cam.backgroundColor = Color.blue;
 			}
 		} else if (transform.childCount != camCount) {
 			Debug.LogError ("In order to re-creating all child cameras, please manually delete all the child game objects of panoCam.");
@@ -37,12 +41,14 @@ public class panoCamScript : MonoBehaviour {
 	void prepSubCameras() {
 		float hwratio = (float)Screen.height/(float)Screen.width*(float)transform.childCount;
 
-		for(int i = 0; i < transform.childCount; i++) {
+		for (int i = 0; i < transform.childCount; i++)
+		{
 			Transform child = transform.GetChild(i);
-            float onepart = 1.0f/ transform.childCount; // 1.0f/transform.childCount;
-			child.GetComponent<Camera>().fieldOfView = 2*Mathf.Atan(hwratio*Mathf.Tan (135.0f*Mathf.Deg2Rad/transform.childCount))*Mathf.Rad2Deg;
+			float onepart = 1.0f / transform.childCount; // 1.0f/transform.childCount;
+			child.GetComponent<Camera>().fieldOfView = 2 * Mathf.Atan(hwratio * Mathf.Tan(135.0f * Mathf.Deg2Rad / transform.childCount)) * Mathf.Rad2Deg;
 			child.localEulerAngles = new Vector3(0, 270.0f / transform.childCount * i, 0);//new Vector3(0, 360.0f/transform.childCount * i, 0);
-            child.GetComponent<Camera>().rect = new Rect(onepart * i, 0, onepart, 1);
+			child.GetComponent<Camera>().rect = new Rect(onepart * i, 0, onepart, 1);
+
 		}
 	}
 }
