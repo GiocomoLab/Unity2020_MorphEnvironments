@@ -68,12 +68,12 @@ public class SP_2DTrack : MonoBehaviour
 
     public void Awake()
     {
-       
+
         player = GameObject.Find("Player");
         sceneName = SceneManager.GetActiveScene().name;
         Debug.Log(sceneName);
 
-        
+
         rr = player.GetComponent<RR_2DTrack>();
         dl = player.GetComponent<DL_2DTrack>();
         pc = player.GetComponent<PC_2DTrack>();
@@ -84,16 +84,46 @@ public class SP_2DTrack : MonoBehaviour
         Debug.Log(today.ToString("yyyy_MM_dd"));
 
 
-        
+
         localDirectory = localDirectory_pre + mouse + '/' + today.ToString("yyyy_MM_dd") + '/';
         serverDirectory = serverDirectory_pre + mouse + '/' + today.ToString("yyyy_MM_dd") + '/';
-        if (!Directory.Exists(localDirectory))
+
+        try
         {
-            Directory.CreateDirectory(localDirectory);
+            if (!Directory.Exists(localDirectory))
+            {
+                Directory.CreateDirectory(localDirectory);
+            }
         }
-        if (!Directory.Exists(serverDirectory))
+        catch (DirectoryNotFoundException ex)
         {
-            Directory.CreateDirectory(serverDirectory);
+            Debug.LogError("CRITICAL ERROR: Local directory path not found: " + localDirectory);
+            Debug.LogError("Exception: " + ex.Message);
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
+            return;
+        }
+
+        try
+        {
+            if (!Directory.Exists(serverDirectory))
+            {
+                Directory.CreateDirectory(serverDirectory);
+            }
+        }
+        catch (DirectoryNotFoundException ex)
+        {
+            Debug.LogError("CRITICAL ERROR: Server directory path not found: " + serverDirectory);
+            Debug.LogError("Exception: " + ex.Message);
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
+            return;
         }
 
 
