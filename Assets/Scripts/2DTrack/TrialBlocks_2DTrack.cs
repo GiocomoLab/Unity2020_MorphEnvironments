@@ -26,7 +26,7 @@ public class TrialBlocks_2DTrack : MonoBehaviour
         trialAnglesList = new float[sp.numTrialsTotal];
 
         for (int i = 0; i < sp.numTrialsTotal; i++){
-            randomAngle = UnityEngine.Random.Range(0, 45);
+            randomAngle = UnityEngine.Random.Range(0, 180);
             trialAnglesList[i] = randomAngle;
 
             // int tempInd = 0;

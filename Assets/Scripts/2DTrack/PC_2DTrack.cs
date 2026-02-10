@@ -45,6 +45,7 @@ public class PC_2DTrack : MonoBehaviour
 
     public ArrayList LickHistory;
     public bool bckgndOn = true;
+    public bool firstTenAutoRewarded = true;
 
 
 
@@ -100,7 +101,15 @@ public class PC_2DTrack : MonoBehaviour
         //else{
         //    sp.AutoReward = false;
         //}
-        sp.AutoReward = true;
+        if (firstTenAutoRewarded == true)
+        {
+            sp.AutoReward = true;
+        }
+        else
+        {
+            sp.AutoReward = false;
+        }
+        
 
         //Debug.Log("Auto reward: " + sp.AutoReward);
 
@@ -198,8 +207,7 @@ public class PC_2DTrack : MonoBehaviour
             //    sp.AutoReward = false;
             //}
 
-            if (sp.numTraversals < 10)
-            {
+            if ((firstTenAutoRewarded == true) & (sp.numTraversals < 10)){
                 sp.AutoReward = true;
             }
             else

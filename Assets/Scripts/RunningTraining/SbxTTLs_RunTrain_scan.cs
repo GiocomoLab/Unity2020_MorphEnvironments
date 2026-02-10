@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-public class SbxTTLs_2DTrack : MonoBehaviour
+public class SbxTTLs_RunTrain_scan : MonoBehaviour
 {
 
     private static int localPort;
@@ -22,11 +22,11 @@ public class SbxTTLs_2DTrack : MonoBehaviour
     UdpClient client;
 
 
-    private PC_2DTrack pc;
+    private PC_RunTrain pc;
     private int numTraversals_local = -1;
     //private int numTraversals;
 
-    private SP_2DTrack sp;
+    private SP_RunTrain sp;
     private Notes notes;
     public int scanning = 0;
 
@@ -35,7 +35,7 @@ public class SbxTTLs_2DTrack : MonoBehaviour
         remoteEndPoint = new IPEndPoint(IPAddress.Parse(IP), port);
         client = new UdpClient();
 
-        
+
     }
 
     void Start()
@@ -43,8 +43,8 @@ public class SbxTTLs_2DTrack : MonoBehaviour
 
         // for saving data
         GameObject player = GameObject.Find("Player");
-        sp = player.GetComponent<SP_2DTrack>();
-        pc = player.GetComponent<PC_2DTrack>();
+        sp = player.GetComponent<SP_RunTrain>();
+        pc = player.GetComponent<PC_RunTrain>();
         //notes = player.GetComponent<Notes>();
         Debug.Log(sp.numTraversals);
 
@@ -74,35 +74,35 @@ public class SbxTTLs_2DTrack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N) & (scanning==0))
+        if (Input.GetKeyDown(KeyCode.N) & (scanning == 0))
         {
             StartCoroutine(set_filenames());
         }
 
-        if (Input.GetKeyDown(KeyCode.S) & (scanning==0))
+        if (Input.GetKeyDown(KeyCode.S) & (scanning == 0))
         {
-            
+
             StartCoroutine(ScannerStart());
             Debug.Log("start");
         };
 
 
 
-        if (Input.GetKeyDown(KeyCode.T) & (scanning==0))
+        if (Input.GetKeyDown(KeyCode.T) & (scanning == 0))
         {
             StartCoroutine(ScannerToggle());
             Debug.Log("toggle");
 
         };
 
-        
+
     }
 
     void OnApplicationQuit()
     {
         pc.cmd = 13;
-//        yield return new WaitForSeconds(.01f);
-//       pc.cmd = 0;
+        //        yield return new WaitForSeconds(.01f);
+        //       pc.cmd = 0;
 
     }
 
