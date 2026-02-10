@@ -11,32 +11,41 @@ public class TrialBlocks_2DTrack : MonoBehaviour
     private SP_2DTrack sp;
     private GameObject player;
 
-    public float[] startAngles = {0, 45, 90, 180};
-    public int[] blockChanges = {0, 4, 8, 12};
-    int[] trialIndexList;       // Not sure if needed, keeping for now
+    public int maxAngle = 180;
     public float[] trialAnglesList;
-    int randomAngle;
+
+    //public float[] startAngles = {0, 45, 90, 180};
+    //public int[] blockChanges = {0, 4, 8, 12};
+    //int[] trialIndexList;       // Not sure if needed, keeping for now
     
     void Awake()
     {
         player = GameObject.Find("Player");
         sp = player.GetComponent<SP_2DTrack>();
 
-        trialIndexList = new int[sp.numTrialsTotal];
         trialAnglesList = new float[sp.numTrialsTotal];
 
-        for (int i = 0; i < sp.numTrialsTotal; i++){
-            randomAngle = UnityEngine.Random.Range(0, 180);
-            trialAnglesList[i] = randomAngle;
+        // Create a list of all possible angles (0 to maxAngle, inclusive)
+        List<int> availableAngles = new List<int>();
+        for (int j = 0; j <= maxAngle; j++){
+            availableAngles.Add(j);
+        }
 
-            // int tempInd = 0;
-            // for (int j = 0; j < blockChanges.Length; j++){
-            //     if (i >= blockChanges[j]){
-            //         tempInd = j;
-            //     }
-            // }
-            // trialIndexList[i] = tempInd;
-            // trialAnglesList[i] = startAngles[tempInd];
+        // Shuffle and fill trials
+        int angleIndex = 0;
+        for (int i = 0; i < sp.numTrialsTotal; i++){
+            // If we've used all angles, reshuffle
+            if (angleIndex == 0){
+                for (int j = availableAngles.Count - 1; j > 0; j--){
+                    int k = UnityEngine.Random.Range(0, j + 1);
+                    int temp = availableAngles[j];
+                    availableAngles[j] = availableAngles[k];
+                    availableAngles[k] = temp;
+                }
+            }
+
+            trialAnglesList[i] = availableAngles[angleIndex];
+            angleIndex = (angleIndex + 1) % (maxAngle + 1);  // Wrap around to 0 after maxAngle
         }
 
     }
