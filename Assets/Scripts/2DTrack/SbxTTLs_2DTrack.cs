@@ -100,9 +100,9 @@ public class SbxTTLs_2DTrack : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        pc.cmd = 13;
-//        yield return new WaitForSeconds(.01f);
-//       pc.cmd = 0;
+        //pc.cmd = 13;
+//      yield return new WaitForSeconds(.01f);
+//      pc.cmd = 0;
 
     }
 
@@ -139,7 +139,7 @@ public class SbxTTLs_2DTrack : MonoBehaviour
     {
         DateTime today = DateTime.Today;
         // set base directory
-        sendString("D" + "F:/M&M/" + notes.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
+        sendString("D" + "F:/Michelle/m4/" + today.ToString("yyyy_MM_dd") + '/');
         yield return new WaitForSeconds(1.5f);
         // set first field/final directory
         sendString("A" + sp.sceneName);
