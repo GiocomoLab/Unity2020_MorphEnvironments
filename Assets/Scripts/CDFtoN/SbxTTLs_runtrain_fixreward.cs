@@ -13,7 +13,7 @@ public class SbxTTLs_runtrain_fixreward : MonoBehaviour
 
     // prefs 
 
-    private static string IP = "10.124.53.26";  // define in init
+    private static string IP = "10.124.52.114";  // define in init 10.124.53.26 old i[
     private static int port = 7000;  // define in init
 
     // "connection" things
