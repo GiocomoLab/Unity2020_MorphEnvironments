@@ -14,7 +14,7 @@ public class SbxTTLs_RunTrain_scan : MonoBehaviour
 
     // prefs 
 
-    private static string IP = "10.124.53.26";  // define in init
+    private static string IP = "10.124.52.114"; //"10.124.53.26";  // define in init
     private static int port = 7000;  // define in init
 
     // "connection" things
@@ -136,7 +136,8 @@ public class SbxTTLs_RunTrain_scan : MonoBehaviour
     {
         DateTime today = DateTime.Today;
         // set base directory
-        sendString("D" + "F:/M&M/" + notes.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
+        sendString("D" + "F:/CanDong/" + notes.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
+        //sendString("D" + "F:/M&M/" + notes.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
         yield return new WaitForSeconds(1.5f);
         // set first field/final directory
         sendString("A" + sp.sceneName);
