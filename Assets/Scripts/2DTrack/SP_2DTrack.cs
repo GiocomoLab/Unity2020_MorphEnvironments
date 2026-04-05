@@ -37,8 +37,8 @@ public class SP_2DTrack : MonoBehaviour
     public float rDur = 2;
 
     // for saving data
-    public string localDirectory_pre = 'C:\Users\markp\VR_Data\Michelle\";  
-    public string serverDirectory_pre = "I:\My Drive\VR_Data\";
+    public string localDirectory_pre = "C:/Users/markp/VR_Data/Michelle/";
+    public string serverDirectory_pre = "I:/My Drive/VR_Data/";
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;
