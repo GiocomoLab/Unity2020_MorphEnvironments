@@ -11,7 +11,7 @@ public class SP_2DTrack : MonoBehaviour
 {
 
 
-    public string mouse;
+    private string mouse;
 
     public float SkipTrialPcnt = 0.0f;
 
@@ -37,8 +37,8 @@ public class SP_2DTrack : MonoBehaviour
     public float rDur = 2;
 
     // for saving data
-    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/Michelle/";
-    public string serverDirectory_pre = "J:/My Drive/VR_Data/";
+    public string localDirectory_pre = 'C:\Users\markp\VR_Data\Michelle\";  
+    public string serverDirectory_pre = "I:\My Drive\VR_Data\";
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;
@@ -56,6 +56,7 @@ public class SP_2DTrack : MonoBehaviour
     private DL_2DTrack dl;
     private PC_2DTrack pc;
     private SbxTTLs_2DTrack ttls;
+    private Notes notes;
     private TrialBlocks_2DTrack tb;
 
 
@@ -78,6 +79,8 @@ public class SP_2DTrack : MonoBehaviour
         dl = player.GetComponent<DL_2DTrack>();
         pc = player.GetComponent<PC_2DTrack>();
         ttls = player.GetComponent<SbxTTLs_2DTrack>();
+        notes = player.GetComponent<Notes>();
+        mouse = notes.mouse;
         tb = player.GetComponent<TrialBlocks_2DTrack>();
 
         today = DateTime.Today;
