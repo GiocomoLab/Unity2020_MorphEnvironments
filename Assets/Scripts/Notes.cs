@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Note : MonoBehaviour {
+public class Notes : MonoBehaviour {
 
     public string mouse;
     public string notes;
