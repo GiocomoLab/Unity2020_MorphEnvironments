@@ -100,7 +100,7 @@ public class SbxTTLs_2DTrack : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        //pc.cmd = 13;
+        pc.cmd = 13;
 //      yield return new WaitForSeconds(.01f);
 //      pc.cmd = 0;
 

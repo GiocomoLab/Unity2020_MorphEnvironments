@@ -45,7 +45,7 @@ public class SbxTTLs_RunTrain_scan : MonoBehaviour
         GameObject player = GameObject.Find("Player");
         sp = player.GetComponent<SP_RunTrain>();
         pc = player.GetComponent<PC_RunTrain>();
-        //notes = player.GetComponent<Notes>();
+        notes = player.GetComponent<Notes>();
         Debug.Log(sp.numTraversals);
 
     }
@@ -139,7 +139,7 @@ public class SbxTTLs_RunTrain_scan : MonoBehaviour
     {
         DateTime today = DateTime.Today;
         // set base directory
-        sendString("D" + "F:/M&M/" + notes.mouse + "/" + today.ToString("dd_MM_yyyy") + '/');
+        sendString("D" + "F:/M&M/" + notes.mouse + "/" + today.ToString("yyyy_MM_dd") + '/');
         yield return new WaitForSeconds(1.5f);
         // set first field/final directory
         sendString("A" + sp.sceneName);
