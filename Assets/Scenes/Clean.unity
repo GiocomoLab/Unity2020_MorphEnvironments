@@ -242,7 +242,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200776141}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1200776143
 Camera:
   m_ObjectHideFlags: 0
@@ -312,4 +312,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603517a8d5509834daafba22363b9ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: COM7
+  port: COM4

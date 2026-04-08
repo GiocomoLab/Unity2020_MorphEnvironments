@@ -32,8 +32,8 @@ public class SP_RunTrain : MonoBehaviour
 
     public bool MultiReward = true;
     // for saving data
-    public string localDirectory_pre = "C:/Users/thorlabs_vr_rig/VR_Data/Michelle/";
-    public string serverDirectory_pre = "J:/My Drive/VR_Data/";
+    public string localDirectory_pre = "C:/Users/markp/VR_Data/Michelle/";
+    public string serverDirectory_pre = "I:/My Drive/VR_Data/";
     public string localDirectory;
     public string serverDirectory;
     public string localPrefix;
