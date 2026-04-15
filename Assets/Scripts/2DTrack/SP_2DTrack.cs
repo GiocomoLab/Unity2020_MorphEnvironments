@@ -11,7 +11,7 @@ public class SP_2DTrack : MonoBehaviour
 {
 
 
-    public string mouse;
+    private string mouse;
 
     public float SkipTrialPcnt = 0.0f;
 
@@ -56,6 +56,7 @@ public class SP_2DTrack : MonoBehaviour
     private DL_2DTrack dl;
     private PC_2DTrack pc;
     private SbxTTLs_2DTrack ttls;
+    private Notes notes;
     private TrialBlocks_2DTrack tb;
 
 
@@ -78,7 +79,9 @@ public class SP_2DTrack : MonoBehaviour
         dl = player.GetComponent<DL_2DTrack>();
         pc = player.GetComponent<PC_2DTrack>();
         ttls = player.GetComponent<SbxTTLs_2DTrack>();
+        notes = player.GetComponent<Notes>();
         tb = player.GetComponent<TrialBlocks_2DTrack>();
+        mouse = notes.mouse;
 
         today = DateTime.Today;
         Debug.Log(today.ToString("yyyy_MM_dd"));
