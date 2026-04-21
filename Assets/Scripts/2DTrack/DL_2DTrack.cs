@@ -10,7 +10,7 @@ public class DL_2DTrack : MonoBehaviour
 {
 
 
-    public string port = "COM7";
+    public string port = "COM4";
     private SerialPort _serialPort;
     private int delay;
     private string lick_raw;
