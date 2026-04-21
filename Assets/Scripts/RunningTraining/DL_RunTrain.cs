@@ -10,7 +10,7 @@ public class DL_RunTrain : MonoBehaviour
 {
 
 
-    public string port = "COM7";
+    public string port = "COM4";
     private SerialPort _serialPort;
     private int delay;
     private string lick_raw;
@@ -68,7 +68,7 @@ public class DL_RunTrain : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        _serialPort.Write("13,");   // set scope TTL low; 8 toggles on NLW
+        _serialPort.Write("8,");   // set scope TTL low; 8 toggles on NLW
     }
 
     private void connect(string serialPortName, Int32 baudRate, bool autoStart, int delay)
