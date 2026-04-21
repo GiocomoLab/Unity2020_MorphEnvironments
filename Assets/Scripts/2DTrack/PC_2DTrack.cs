@@ -119,8 +119,8 @@ public class PC_2DTrack : MonoBehaviour
         client = new UdpClient();
 
         // Set frame rate to 60 HZ
-        QualitySettings.vSyncCount = 0;     // This should be set to 0 so .targetFrameRate is enabled.
-        Application.targetFrameRate = 60;
+        //QualitySettings.vSyncCount = 0;     // This should be set to 0 so .targetFrameRate is enabled.
+        //Application.targetFrameRate = 60;
     }
 
     private void sendString(string message)
