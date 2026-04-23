@@ -115,6 +115,8 @@ public class SP_RunTrain : MonoBehaviour
 
     void LateUpdate()
     {
+        if (pc.isQuitting) return;
+        
         if (AutoReward){
             _autoReward = 1;
         }

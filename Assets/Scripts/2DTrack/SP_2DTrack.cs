@@ -166,6 +166,9 @@ public class SP_2DTrack : MonoBehaviour
     }
 
     void LateUpdate() {
+
+        if (pc.isQuitting) return;
+
         if (AutoReward)
         {
             _autoReward = 1;

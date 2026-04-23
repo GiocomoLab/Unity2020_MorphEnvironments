@@ -37,6 +37,8 @@ public class PC_RunTrain : MonoBehaviour
     public int tendFlag = 0;
     public int tstartFlag = 0;
 
+    public bool isQuitting = false;
+
     public void Awake()
     {
         GameObject player = GameObject.Find("Player");
@@ -67,6 +69,7 @@ public class PC_RunTrain : MonoBehaviour
         // end game after appropriate number of trials
         if (sp.numTraversals >= sp.numTrialsTotal | sp.numRewards >= sp.maxRewards)
         {
+            isQuitting = true;
             UnityEditor.EditorApplication.isPlaying = false;
 
 

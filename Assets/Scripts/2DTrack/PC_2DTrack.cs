@@ -66,6 +66,8 @@ public class PC_2DTrack : MonoBehaviour
     public float radius = 200;
     public float teleportDistance = 10;
 
+    public bool isQuitting = false;
+
 
 
 
@@ -152,6 +154,7 @@ public class PC_2DTrack : MonoBehaviour
         // end game after appropriate number of trials
         if ((sp.numTraversals >= sp.numTrialsTotal) | (sp.numRewards >= sp.maxRewards & transform.position.z < 0f))
         {
+            isQuitting = true;
             UnityEditor.EditorApplication.isPlaying = false;
 
         }
