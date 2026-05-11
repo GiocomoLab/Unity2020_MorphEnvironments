@@ -796,7 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: social-4062-2
+  mouse: social-8564-2
   notes: 
   imaging_region: CA123
 --- !u!114 &1722994744
