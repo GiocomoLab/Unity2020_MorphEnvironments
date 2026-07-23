@@ -53,14 +53,14 @@ public class TrialBlocks_2DTrack : MonoBehaviour
                 List<int> blockOrder = ShuffleList(CreateRange(blocks.Count));
 
                 // Assign i val in each block to overall angle list
-                foreach(int blockIdx in blockOrder){
+                foreach (int blockIdx in blockOrder){
                     if (angleIdx >= numTrialsInit) break;
                     trialAnglesList[angleIdx++] = blocks[blockIdx][i];
                 }
                 if (angleIdx >= numTrialsInit) break;
 
             }
-        }   
+        }
     }
     
     List<List<int>> CreateBlocks(int maxAngle)

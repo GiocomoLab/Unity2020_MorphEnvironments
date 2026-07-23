@@ -44,7 +44,7 @@ public class SP_RunTrain : MonoBehaviour
     private RR_RunTrain rr;
     private DL_RunTrain dl;
     private PC_RunTrain pc;
-    private SbxTTLs_RunTrain ttls;
+    private SbxTTLs_RunTrain_scan ttls;
     private Notes notes;
 
 
@@ -65,7 +65,7 @@ public class SP_RunTrain : MonoBehaviour
         rr = player.GetComponent<RR_RunTrain>();
         dl = player.GetComponent<DL_RunTrain>();
         pc = player.GetComponent<PC_RunTrain>();
-        ttls = player.GetComponent<SbxTTLs_RunTrain>();
+        ttls = player.GetComponent<SbxTTLs_RunTrain_scan>();
         notes = player.GetComponent<Notes>();
         mouse = notes.mouse;
 
