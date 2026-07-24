@@ -274,7 +274,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 56.11632
+  field of view: 56.88586
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -613,7 +613,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 56.11632
+  field of view: 56.88586
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2285,7 +2285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: f5
+  mouse: 1954_1
   notes: 
   imaging_region: Null
 --- !u!4 &1722994745
@@ -2359,7 +2359,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 56.11632
+  field of view: 56.88586
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

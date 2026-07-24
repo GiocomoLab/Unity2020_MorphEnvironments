@@ -124,7 +124,7 @@ public class SP_RunTrain : MonoBehaviour
             _autoReward = 0;
         }
 
-        _command.CommandText = "insert into data (time , trialnum, pos, dz, lick, reward," +
+        _command.CommandText = "insert into data (time, trialnum, pos, dz, lick, reward," +
         "tstart, teleport, scanning, manrewards, autoreward, cmd) values (" + Time.realtimeSinceStartup + "," + numTraversals + "," + transform.position.z + "," + rr.true_delta_z + "," + dl.c_1 + "," + dl.r + "," + pc.tstartFlag + "," + pc.tendFlag + "," + ttls.scanning + "," + pc.mRewardFlag + "," + _autoReward + "," + pc.cmd + ")";
 
         //Debug.Log(_command.CommandText);
