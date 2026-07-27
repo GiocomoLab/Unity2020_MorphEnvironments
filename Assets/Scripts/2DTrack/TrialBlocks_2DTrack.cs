@@ -25,9 +25,9 @@ public class TrialBlocks_2DTrack : MonoBehaviour
 
         trialAnglesList = new float[sp.numTrialsTotal];
 
-        // Create a list of all possible angles (1 to maxAngle, inclusive)
+        // Create a list of all possible angles (0 to maxAngle)
         List<int> availableAngles = new List<int>();
-        for (int j = 1; j <= maxAngle; j++){
+        for (int j = 0; j < maxAngle; j++){
             availableAngles.Add(j);
         }
 
