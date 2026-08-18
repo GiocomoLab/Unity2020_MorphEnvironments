@@ -974,7 +974,7 @@ MonoBehaviour:
   AutoReward: 1
   mrd: 50
   ard: 0
-  fixedRewardSchedule: 1
+  fixedRewardSchedule: 0
   MinTrainingDist: 50
   MaxTrainingDist: 300
   numRewards: 0
