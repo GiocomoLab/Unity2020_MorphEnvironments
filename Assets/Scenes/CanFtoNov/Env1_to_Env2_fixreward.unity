@@ -279,7 +279,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.969254
+  field of view: 55.713856
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -718,7 +718,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1200
-  field of view: 55.969254
+  field of view: 55.713856
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -2194,7 +2194,7 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 40
+  numTrialsTotal: 200
   maxRewards: 200
   BlankLaser: 0
   rDur: 2
@@ -2322,7 +2322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: 4062-1
+  mouse: 9418_2
   notes: 
   imaging_region: CA123
 --- !u!114 &1722994744
@@ -2364,7 +2364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47eb211bf0bc13d438f3d2cdf6a00e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChangeRewardTrial: 20
+  ChangeRewardTrial: 50
 --- !u!1 &1766657574
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,7 +2421,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 50
-  field of view: 55.969254
+  field of view: 55.713856
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
