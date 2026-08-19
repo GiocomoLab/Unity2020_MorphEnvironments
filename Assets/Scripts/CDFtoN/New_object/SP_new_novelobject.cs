@@ -157,7 +157,9 @@ public class SP_new_novelobject : MonoBehaviour
             "randomFreezeProbability REAL, " +
             "minFreezeDuration REAL, " +
             "maxFreezeDuration REAL, " +
-            "freezeCheckInterval REAL)";
+            "freezeCheckInterval REAL, " +
+            "centerTurnBackProbability REAL, " +
+            "nonCenterTurnBackProbability REAL)";
         _command.ExecuteNonQuery();
 
         SaveTraversalParameters();
@@ -171,7 +173,8 @@ public class SP_new_novelobject : MonoBehaviour
         _command.CommandText =
             "insert into parameters (" +
             "conditionID, traverseSpeed, pauseProbability, minPauseDuration, maxPauseDuration, " +
-            "randomFreezeProbability, minFreezeDuration, maxFreezeDuration, freezeCheckInterval) values (" +
+            "randomFreezeProbability, minFreezeDuration, maxFreezeDuration, freezeCheckInterval, " +
+            "centerTurnBackProbability, nonCenterTurnBackProbability) values (" +
             ovalTraverser.conditionID + "," +
             ovalTraverser.traverseSpeed + "," +
             ovalTraverser.pauseProbability + "," +
@@ -180,7 +183,9 @@ public class SP_new_novelobject : MonoBehaviour
             ovalTraverser.randomFreezeProbability + "," +
             ovalTraverser.minFreezeDuration + "," +
             ovalTraverser.maxFreezeDuration + "," +
-            ovalTraverser.freezeCheckInterval + ")";
+            ovalTraverser.freezeCheckInterval + "," +
+            ovalTraverser.centerTurnBackProbability + "," +
+            ovalTraverser.nonCenterTurnBackProbability + ")";
 
         _command.ExecuteNonQuery();
 
@@ -188,7 +193,9 @@ public class SP_new_novelobject : MonoBehaviour
             "Saved OvalTraverser condition " + ovalTraverser.conditionID +
             " | speed=" + ovalTraverser.traverseSpeed +
             " | center probability=" + ovalTraverser.pauseProbability +
-            " | non-center/random probability=" + ovalTraverser.randomFreezeProbability
+            " | non-center/random probability=" + ovalTraverser.randomFreezeProbability +
+            " | center turn-back probability=" + ovalTraverser.centerTurnBackProbability +
+            " | non-center turn-back probability=" + ovalTraverser.nonCenterTurnBackProbability
         );
     }
 

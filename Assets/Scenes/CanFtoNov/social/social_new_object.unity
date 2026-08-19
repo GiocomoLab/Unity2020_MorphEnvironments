@@ -2182,7 +2182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393878138a110a0439e1ba289689a9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditionID: 1
+  conditionID: 2
   traverseSpeed: 10
   traverseDistance: 90
   pauseProbability: 0
@@ -2192,6 +2192,8 @@ MonoBehaviour:
   minFreezeDuration: 0
   maxFreezeDuration: 1
   freezeCheckInterval: 0.5
+  centerTurnBackProbability: 1
+  nonCenterTurnBackProbability: 0
   distanceFromPlayer: 50
   heightOffset: 10
   player: {fileID: 0}

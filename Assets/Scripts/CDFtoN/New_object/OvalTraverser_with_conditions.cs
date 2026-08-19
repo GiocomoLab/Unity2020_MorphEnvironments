@@ -29,6 +29,10 @@ public class OvalTraverser_with_conditions : MonoBehaviour
     public float maxFreezeDuration = 1.0f;
     public float freezeCheckInterval = 0.5f;
 
+    [Header("Turn Back Settings")]
+    [Range(0f, 1f)] public float centerTurnBackProbability = 0.0f;
+    [Range(0f, 1f)] public float nonCenterTurnBackProbability = 0.0f;
+
     [Header("Position Settings")]
     public float distanceFromPlayer = 50f;
     public float heightOffset = 10f;
@@ -40,6 +44,7 @@ public class OvalTraverser_with_conditions : MonoBehaviour
     private Transform followTarget;
     private float traverseTimer = 0f;
     private float lastAngleOffset = 0f;
+    private float moveDirection = 1f;
 
     // Freeze/Pause state
     private bool isPaused = false;
@@ -180,6 +185,13 @@ public class OvalTraverser_with_conditions : MonoBehaviour
                 isFrozen = true;
                 freezeEndTime = Time.time + Random.Range(minFreezeDuration, maxFreezeDuration);
                 frozenAngleRadians = preMoveAngleRadians;
+
+                // Decide once, when this non-center pause begins, whether to turn back.
+                if (Random.value < nonCenterTurnBackProbability)
+                {
+                    moveDirection *= -1f;
+                }
+
                 ApplyFrozenAnglePosition();
 
                 // do not advance traverseTimer this frame; remain frozen
@@ -188,7 +200,7 @@ public class OvalTraverser_with_conditions : MonoBehaviour
         }
 
         // --- ADVANCE traverseTimer for movement (only when not paused/frozen) ---
-        traverseTimer += Time.deltaTime * traverseSpeed;
+        traverseTimer += Time.deltaTime * traverseSpeed * moveDirection;
 
         // Compute post-move angle
         float postMoveAngleOffset =
@@ -212,6 +224,13 @@ public class OvalTraverser_with_conditions : MonoBehaviour
                 isPaused = true;
                 pauseEndTime = Time.time + Random.Range(minPauseDuration, maxPauseDuration);
                 frozenAngleRadians = postMoveAngleRadians;
+
+                // Decide once, when this center pause begins, whether to turn back.
+                if (Random.value < centerTurnBackProbability)
+                {
+                    moveDirection *= -1f;
+                }
+
                 ApplyFrozenAnglePosition();
                 lastAngleOffset = postMoveAngleOffset;
                 crossedCenterLastFrame = true;
