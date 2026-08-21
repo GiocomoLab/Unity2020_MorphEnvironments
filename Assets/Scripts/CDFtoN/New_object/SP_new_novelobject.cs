@@ -152,15 +152,27 @@ public class SP_new_novelobject : MonoBehaviour
             "conditionID INT, " +
             "traverseSpeed REAL, " +
             "pauseProbability REAL, " +
+            "centerRange REAL, " +
             "minPauseDuration REAL, " +
             "maxPauseDuration REAL, " +
+            "centerGammaShape REAL, " +
+            "centerGammaScale REAL, " +
             "randomFreezeProbability REAL, " +
             "minFreezeDuration REAL, " +
             "maxFreezeDuration REAL, " +
+            "outsideGammaShape REAL, " +
+            "outsideGammaScale REAL, " +
             "freezeCheckInterval REAL, " +
+            "centerLambda REAL, " +
+            "outsideLambda REAL, " +
             "centerTurnBackProbability REAL, " +
             "nonCenterTurnBackProbability REAL)";
         _command.ExecuteNonQuery();
+
+        if (ovalTraverser != null)
+        {
+            ovalTraverser.ApplyCondition();
+        }
 
         SaveTraversalParameters();
     }
@@ -172,18 +184,25 @@ public class SP_new_novelobject : MonoBehaviour
 
         _command.CommandText =
             "insert into parameters (" +
-            "conditionID, traverseSpeed, pauseProbability, minPauseDuration, maxPauseDuration, " +
-            "randomFreezeProbability, minFreezeDuration, maxFreezeDuration, freezeCheckInterval, " +
-            "centerTurnBackProbability, nonCenterTurnBackProbability) values (" +
+            "conditionID, traverseSpeed, pauseProbability, centerRange, minPauseDuration, maxPauseDuration, centerGammaShape, centerGammaScale, " +
+            "randomFreezeProbability, minFreezeDuration, maxFreezeDuration, outsideGammaShape, outsideGammaScale, freezeCheckInterval, " +
+            "centerLambda, outsideLambda, centerTurnBackProbability, nonCenterTurnBackProbability) values (" +
             ovalTraverser.conditionID + "," +
             ovalTraverser.traverseSpeed + "," +
             ovalTraverser.pauseProbability + "," +
+            ovalTraverser.centerRange + "," +
             ovalTraverser.minPauseDuration + "," +
             ovalTraverser.maxPauseDuration + "," +
+            ovalTraverser.centerGammaShape + "," +
+            ovalTraverser.centerGammaScale + "," +
             ovalTraverser.randomFreezeProbability + "," +
             ovalTraverser.minFreezeDuration + "," +
             ovalTraverser.maxFreezeDuration + "," +
+            ovalTraverser.outsideGammaShape + "," +
+            ovalTraverser.outsideGammaScale + "," +
             ovalTraverser.freezeCheckInterval + "," +
+            ovalTraverser.centerLambda + "," +
+            ovalTraverser.outsideLambda + "," +
             ovalTraverser.centerTurnBackProbability + "," +
             ovalTraverser.nonCenterTurnBackProbability + ")";
 
@@ -192,8 +211,13 @@ public class SP_new_novelobject : MonoBehaviour
         Debug.Log(
             "Saved OvalTraverser condition " + ovalTraverser.conditionID +
             " | speed=" + ovalTraverser.traverseSpeed +
-            " | center probability=" + ovalTraverser.pauseProbability +
-            " | non-center/random probability=" + ovalTraverser.randomFreezeProbability +
+            " | center probability/check=" + ovalTraverser.pauseProbability +
+            " | center range=+/-" + ovalTraverser.centerRange + " deg" +
+            " | non-center probability/check=" + ovalTraverser.randomFreezeProbability +
+            " | center lambda=" + ovalTraverser.centerLambda +
+            " | outside lambda=" + ovalTraverser.outsideLambda +
+            " | center gamma=(shape " + ovalTraverser.centerGammaShape + ", scale " + ovalTraverser.centerGammaScale + ", max " + ovalTraverser.maxPauseDuration + ")" +
+            " | outside gamma=(shape " + ovalTraverser.outsideGammaShape + ", scale " + ovalTraverser.outsideGammaScale + ", max " + ovalTraverser.maxFreezeDuration + ")" +
             " | center turn-back probability=" + ovalTraverser.centerTurnBackProbability +
             " | non-center turn-back probability=" + ovalTraverser.nonCenterTurnBackProbability
         );

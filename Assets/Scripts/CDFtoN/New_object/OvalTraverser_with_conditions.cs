@@ -14,32 +14,37 @@ public class OvalTraverser_with_conditions : MonoBehaviour
     [Range(1, 3)]
     public int conditionID = 1;
 
-    [Header("Movement Settings")]
-    public float traverseSpeed = 10f;
-    public float traverseDistance = 90f; // degrees from center to each side (center at 0 offset)
+    // Fixed experimental parameters.
+    // These are public read-only properties so other scripts (including SP_new_novelobject)
+    // can save them, but Unity will not expose them as editable Inspector fields.
+    public float traverseSpeed { get; private set; } = 11.7f;
+    public float traverseDistance { get; } = 90f; // degrees from center to each side
 
-    [Header("Center Pause Settings")]
-    [Range(0f, 1f)] public float pauseProbability = 0.0f;
-    public float minPauseDuration = 0.0f;
-    public float maxPauseDuration = 1.0f;
+    public float pauseProbability { get; private set; } = 0.0f; // derived from lambda and check interval
+    public float minPauseDuration { get; } = 0.0f; // retained for SP compatibility
+    public float maxPauseDuration { get; } = 18.0f;
+    public float centerRange { get; } = 15.0f;
+    public float centerGammaShape { get; } = 0.745f;
+    public float centerGammaScale { get; } = 6.789f;
 
-    [Header("Random Freeze Settings")]
-    [Range(0f, 1f)] public float randomFreezeProbability = 0.0f;
-    public float minFreezeDuration = 0.0f;
-    public float maxFreezeDuration = 1.0f;
-    public float freezeCheckInterval = 0.5f;
+    public float randomFreezeProbability { get; private set; } = 0.0f; // derived from lambda and check interval
+    public float minFreezeDuration { get; } = 0.0f; // retained for SP compatibility
+    public float maxFreezeDuration { get; } = 10.0f;
+    public float freezeCheckInterval { get; } = 0.5f;
+    public float centerLambda { get; } = 0.702f;  // high event rate (events/sec)
+    public float outsideLambda { get; } = 0.363f; // low event rate (events/sec)
+    public float outsideGammaShape { get; } = 0.722f;
+    public float outsideGammaScale { get; } = 3.806f;
 
-    [Header("Turn Back Settings")]
-    [Range(0f, 1f)] public float centerTurnBackProbability = 0.0f;
-    [Range(0f, 1f)] public float nonCenterTurnBackProbability = 0.0f;
+    public float centerTurnBackProbability { get; } = 0.395f;
+    public float nonCenterTurnBackProbability { get; } = 0.307f;
 
-    [Header("Position Settings")]
-    public float distanceFromPlayer = 50f;
-    public float heightOffset = 10f;
+    private const float distanceFromPlayer = 50f;
+    private const float heightOffset = 10f;
+    public bool useCamera { get; } = true;
 
     [Header("References")]
     public Transform player;
-    public bool useCamera = true;
 
     private Transform followTarget;
     private float traverseTimer = 0f;
@@ -53,11 +58,6 @@ public class OvalTraverser_with_conditions : MonoBehaviour
     private float freezeEndTime = 0f;
     private float nextFreezeCheckTime = 0f;
     private float frozenAngleRadians = 0f;
-    private bool crossedCenterLastFrame = false;
-
-    // Tolerance (degrees) to help robust center detection
-    private const float centerTolerance = 0.001f;
-
     void Awake()
     {
         ApplyCondition();
@@ -95,17 +95,21 @@ public class OvalTraverser_with_conditions : MonoBehaviour
 
     /// <summary>
     /// Applies one of the three predefined experimental conditions.
-    /// The movement speed is currently 2 deg/sec for all three conditions.
-    /// High probability = 0.40, low probability = 0.05.
-    /// Duration ranges are left at their existing Inspector values for now.
+    /// The movement speed is currently 11.7 deg/sec for all three conditions.
+    /// centerLambda is the high event rate and outsideLambda is the low event rate.
+    /// Per-check probability is calculated as p = 1 - exp(-lambda * freezeCheckInterval).
+    /// Condition 1 = high center + high non-center.
+    /// Condition 2 = high center + low non-center.
+    /// Condition 3 = low center + low non-center.
     /// </summary>
     public void ApplyCondition()
     {
-        const float highProbability = 0.40f;
-        const float lowProbability = 0.05f;
-        const float conditionSpeed = 10.0f;
+        const float conditionSpeed = 11.7f;
 
         traverseSpeed = conditionSpeed;
+
+        float highProbability = LambdaToProbability(centerLambda);
+        float lowProbability = LambdaToProbability(outsideLambda);
 
         switch (conditionID)
         {
@@ -136,6 +140,14 @@ public class OvalTraverser_with_conditions : MonoBehaviour
         }
     }
 
+    float LambdaToProbability(float lambda)
+    {
+        if (lambda <= 0f || freezeCheckInterval <= 0f)
+            return 0f;
+
+        return 1f - Mathf.Exp(-lambda * freezeCheckInterval);
+    }
+
     void UpdatePosition()
     {
         if (followTarget == null) return;
@@ -146,6 +158,8 @@ public class OvalTraverser_with_conditions : MonoBehaviour
             if (Time.time >= freezeEndTime)
             {
                 isFrozen = false;
+                // Wait one full check interval after movement resumes before checking again.
+                nextFreezeCheckTime = Time.time + freezeCheckInterval;
             }
             else
             {
@@ -160,6 +174,8 @@ public class OvalTraverser_with_conditions : MonoBehaviour
             if (Time.time >= pauseEndTime)
             {
                 isPaused = false;
+                // Wait one full check interval after movement resumes before checking again.
+                nextFreezeCheckTime = Time.time + freezeCheckInterval;
             }
             else
             {
@@ -173,29 +189,53 @@ public class OvalTraverser_with_conditions : MonoBehaviour
             Mathf.PingPong(traverseTimer, traverseDistance * 2f) - traverseDistance;
         float preMoveAngleRadians = (preMoveAngleOffset + 90f) * Mathf.Deg2Rad;
 
-        // --- RANDOM FREEZE CHECK (uses pre-move angle) ---
-        if (Time.time >= nextFreezeCheckTime && randomFreezeProbability > 0f)
+        // --- PAUSE/FREEZE CHECK ---
+        // Both center and non-center probabilities are checked on the same schedule.
+        // Center is defined as the range -centerRange to +centerRange degrees.
+        if (Time.time >= nextFreezeCheckTime)
         {
-            // schedule next check now (regardless of result) so checks are spaced
+            // Schedule the next check now, regardless of whether a pause/freeze occurs.
             nextFreezeCheckTime = Time.time + freezeCheckInterval;
 
-            if (Random.value < randomFreezeProbability)
+            bool isInCenter = Mathf.Abs(preMoveAngleOffset) <= centerRange;
+
+            if (isInCenter)
             {
-                // Trigger freeze at the current visual angle (preMove)
-                isFrozen = true;
-                freezeEndTime = Time.time + Random.Range(minFreezeDuration, maxFreezeDuration);
-                frozenAngleRadians = preMoveAngleRadians;
-
-                // Decide once, when this non-center pause begins, whether to turn back.
-                if (Random.value < nonCenterTurnBackProbability)
+                // CENTER: check pauseProbability once per freezeCheckInterval.
+                if (pauseProbability > 0f && Random.value < pauseProbability)
                 {
-                    moveDirection *= -1f;
+                    isPaused = true;
+                    pauseEndTime = Time.time + SampleTruncatedGamma(centerGammaShape, centerGammaScale, maxPauseDuration);
+                    frozenAngleRadians = preMoveAngleRadians;
+
+                    // Decide once, when this center pause begins, whether to turn back.
+                    if (Random.value < centerTurnBackProbability)
+                    {
+                        moveDirection *= -1f;
+                    }
+
+                    ApplyFrozenAnglePosition();
+                    return;
                 }
+            }
+            else
+            {
+                // NON-CENTER: check randomFreezeProbability once per freezeCheckInterval.
+                if (randomFreezeProbability > 0f && Random.value < randomFreezeProbability)
+                {
+                    isFrozen = true;
+                    freezeEndTime = Time.time + SampleTruncatedGamma(outsideGammaShape, outsideGammaScale, maxFreezeDuration);
+                    frozenAngleRadians = preMoveAngleRadians;
 
-                ApplyFrozenAnglePosition();
+                    // Decide once, when this non-center pause begins, whether to turn back.
+                    if (Random.value < nonCenterTurnBackProbability)
+                    {
+                        moveDirection *= -1f;
+                    }
 
-                // do not advance traverseTimer this frame; remain frozen
-                return;
+                    ApplyFrozenAnglePosition();
+                    return;
+                }
             }
         }
 
@@ -207,44 +247,72 @@ public class OvalTraverser_with_conditions : MonoBehaviour
             Mathf.PingPong(traverseTimer, traverseDistance * 2f) - traverseDistance;
         float postMoveAngleRadians = (postMoveAngleOffset + 90f) * Mathf.Deg2Rad;
 
-        // --- CENTER CROSSING DETECTION ---
-        bool crossedCenter = false;
-
-        if (!Mathf.Approximately(preMoveAngleOffset, postMoveAngleOffset))
-        {
-            crossedCenter = (preMoveAngleOffset < 0f && postMoveAngleOffset >= 0f)
-                            || (preMoveAngleOffset > 0f && postMoveAngleOffset <= 0f);
-        }
-
-        if (crossedCenter && !crossedCenterLastFrame && !isPaused)
-        {
-            if (Random.value <= pauseProbability)
-            {
-                // Pause at the post-move angle
-                isPaused = true;
-                pauseEndTime = Time.time + Random.Range(minPauseDuration, maxPauseDuration);
-                frozenAngleRadians = postMoveAngleRadians;
-
-                // Decide once, when this center pause begins, whether to turn back.
-                if (Random.value < centerTurnBackProbability)
-                {
-                    moveDirection *= -1f;
-                }
-
-                ApplyFrozenAnglePosition();
-                lastAngleOffset = postMoveAngleOffset;
-                crossedCenterLastFrame = true;
-                return;
-            }
-        }
-
-        crossedCenterLastFrame = crossedCenter;
-
         // --- NORMAL MOVEMENT ---
         ApplyAnglePosition(postMoveAngleRadians);
 
         // Save for next frame
         lastAngleOffset = postMoveAngleOffset;
+    }
+
+    // Draw from a gamma distribution using the Marsaglia-Tsang method.
+    float SampleGamma(float shape, float scale)
+    {
+        if (shape <= 0f || scale <= 0f)
+            return 0f;
+
+        // For shape < 1, transform a draw from Gamma(shape + 1, scale).
+        if (shape < 1f)
+        {
+            float u = Mathf.Max(Random.value, 0.0000001f);
+            return SampleGamma(shape + 1f, scale) * Mathf.Pow(u, 1f / shape);
+        }
+
+        float d = shape - 1f / 3f;
+        float c = 1f / Mathf.Sqrt(9f * d);
+
+        while (true)
+        {
+            float x = SampleStandardNormal();
+            float v = 1f + c * x;
+
+            if (v <= 0f)
+                continue;
+
+            v = v * v * v;
+            float u = Mathf.Max(Random.value, 0.0000001f);
+            float x2 = x * x;
+
+            if (u < 1f - 0.0331f * x2 * x2)
+                return scale * d * v;
+
+            if (Mathf.Log(u) < 0.5f * x2 + d * (1f - v + Mathf.Log(v)))
+                return scale * d * v;
+        }
+    }
+
+    // Box-Muller transform for a standard normal draw.
+    float SampleStandardNormal()
+    {
+        float u1 = Mathf.Max(Random.value, 0.0000001f);
+        float u2 = Random.value;
+        return Mathf.Sqrt(-2f * Mathf.Log(u1)) * Mathf.Cos(2f * Mathf.PI * u2);
+    }
+
+    // Rejection-sample the gamma distribution so durations never exceed maxDuration.
+    float SampleTruncatedGamma(float shape, float scale, float maxDuration)
+    {
+        if (maxDuration <= 0f)
+            return 0f;
+
+        for (int i = 0; i < 1000; i++)
+        {
+            float sample = SampleGamma(shape, scale);
+            if (sample <= maxDuration)
+                return sample;
+        }
+
+        // Extremely unlikely fallback if 1000 rejected draws occur.
+        return maxDuration;
     }
 
     // Apply the normal (moving) position for a given angleRadians

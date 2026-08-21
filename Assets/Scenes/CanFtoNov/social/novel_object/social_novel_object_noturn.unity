@@ -796,7 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: test_novel_object
+  mouse: social-8564-2
   notes: 
   imaging_region: CA123
 --- !u!114 &1722994744
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f3ef7f6272363439d57ca6e0adfba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  traverseSpeed: 11.7
+  traverseSpeed: 20
   traverseDistance: 90
   pauseProbability: 0.4
   minPauseDuration: 2

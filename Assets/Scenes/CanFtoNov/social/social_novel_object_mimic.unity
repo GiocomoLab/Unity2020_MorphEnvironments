@@ -603,12 +603,12 @@ GameObject:
   - component: {fileID: 1722994736}
   - component: {fileID: 1722994735}
   - component: {fileID: 1722994734}
-  - component: {fileID: 1722994733}
   - component: {fileID: 1722994742}
   - component: {fileID: 1722994741}
   - component: {fileID: 1722994740}
   - component: {fileID: 1722994739}
   - component: {fileID: 1722994738}
+  - component: {fileID: 1722994733}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -625,7 +625,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722994732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aed68576ffa68c94f859104341703f85, type: 3}
+  m_Script: {fileID: 11500000, guid: b63dd4d4002fc554ea026b7f472e7a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1722994734
@@ -637,7 +637,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722994732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06f1c1fd42d4af84d82c4745c5760df1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8208068963e0e6f4a958ae00b4128ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cmd: 2
@@ -660,7 +660,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722994732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 970a81aaffbd2454d94b081dca201907, type: 3}
+  m_Script: {fileID: 11500000, guid: 03ac5d4e8fcd90a4cb99c17332442e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   port: COM3
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722994732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5765b980ffb434a4e9df022656a82c5c, type: 3}
+  m_Script: {fileID: 11500000, guid: e9b1838fb33f6264589bf59bccdbdb26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   port: COM4
@@ -694,7 +694,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722994732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f19bd46162fe74042bf6316cc1019542, type: 3}
+  m_Script: {fileID: 11500000, guid: c92aad9aeb9ee4342aff950539862e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scanning: 0
@@ -808,7 +808,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1722994732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b0ff120c43200f449eead09d06e00cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 6514049e09fec35419f138cd2a5a8321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SkipTrialPcnt: 0
@@ -822,7 +822,7 @@ MonoBehaviour:
   numRewards_manual: 0
   rewardFlag: 0
   numTraversals: 0
-  numTrialsTotal: 200
+  numTrialsTotal: 40
   maxRewards: 100
   BlankLaser: 0
   rDur: 2
@@ -1338,18 +1338,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 2057265742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32f3ef7f6272363439d57ca6e0adfba9, type: 3}
+  m_Script: {fileID: 11500000, guid: 393878138a110a0439e1ba289689a9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  conditionID: 2
   traverseSpeed: 11.7
   traverseDistance: 90
-  pauseProbability: 0.4
-  minPauseDuration: 2
-  maxPauseDuration: 10
-  randomFreezeProbability: 0.05
-  minFreezeDuration: 2
-  maxFreezeDuration: 5
-  freezeCheckInterval: 2
+  pauseProbability: 0
+  minPauseDuration: 0
+  maxPauseDuration: 18
+  centerRange: 15
+  centerGammaShape: 0.745
+  centerGammaScale: 6.789
+  randomFreezeProbability: 0
+  minFreezeDuration: 0
+  maxFreezeDuration: 10
+  freezeCheckInterval: 0.5
+  centerLambda: 0.702
+  outsideLambda: 0.363
+  outsideGammaShape: 0.722
+  outsideGammaScale: 3.806
+  centerTurnBackProbability: 0.395
+  nonCenterTurnBackProbability: 0.307
   distanceFromPlayer: 50
   heightOffset: 10
   player: {fileID: 0}
