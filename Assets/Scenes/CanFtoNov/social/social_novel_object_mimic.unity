@@ -796,7 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d235ebba95fb38a4e84d47b08a48ab6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: test_novel_object
+  mouse: social-9426-3
   notes: 
   imaging_region: CA123
 --- !u!114 &1722994744
@@ -1342,28 +1342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conditionID: 2
-  traverseSpeed: 11.7
-  traverseDistance: 90
-  pauseProbability: 0
-  minPauseDuration: 0
-  maxPauseDuration: 18
-  centerRange: 15
-  centerGammaShape: 0.745
-  centerGammaScale: 6.789
-  randomFreezeProbability: 0
-  minFreezeDuration: 0
-  maxFreezeDuration: 10
-  freezeCheckInterval: 0.5
-  centerLambda: 0.702
-  outsideLambda: 0.363
-  outsideGammaShape: 0.722
-  outsideGammaScale: 3.806
-  centerTurnBackProbability: 0.395
-  nonCenterTurnBackProbability: 0.307
-  distanceFromPlayer: 50
-  heightOffset: 10
   player: {fileID: 0}
-  useCamera: 1
 --- !u!4 &2066808597 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3414835446204428337, guid: 95772cf4b864769418ae236f2ef76175, type: 3}
